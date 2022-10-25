@@ -23,15 +23,27 @@ curl -sSL WORK IN PROGRESS WORK IN PROGRESS
 
 - In Retropie
 
-- Go to Retropie/Config
+            Go to Retropie/Config
 
-- Launch Mouse Gun Setup Menu 
+            Launch Mouse Gun Setup Menu 
 
-- Select system/console
+            Select system/console
 
-- Press A/Enter
+            Press A/Enter
 
-- Menu will give you instructions from thier
+            Menu will give you instructions from thier
+            
+- From Command Line/Terminal
+
+            Type "Mouse-Gun-Setup" 
+            
+            Press Enter
+            
+            Select system/console
+
+            Press A/Enter
+
+            Menu will give you instructions from thier
 
 ## FAQ
 
