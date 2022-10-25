@@ -21,7 +21,11 @@ curl -sSL WORK IN PROGRESS WORK IN PROGRESS
 
 ## HOW TO USE?
 
-- Open 
+- In Retropie
+
+- Go to Retropie/Config
+
+- Launch Mouse Gun Setup Menu 
 
 - Select system/console
 
