@@ -1,6 +1,8 @@
 # RPI-Mouse-Gun-Setup
 WORK IN PROGRESS
 
+This is a tool to make using Lightguns (with mous input) as easy as possible.
+
 ## MAIN FEATURES 
 
 - Grabs a pre setup retroarch config file for Retroarch systems.
@@ -13,6 +15,19 @@ WORK IN PROGRESS
 
 - Make new folders for gun games. 
 
+## INSTALLATION
+
+curl -sSL WORK IN PROGRESS WORK IN PROGRESS
+
+## HOW TO USE?
+
+- Open 
+
+- Select system/console
+
+- Press A/Enter
+
+- Menu will give you instructions from thier
 
 ## FAQ
 
