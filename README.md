@@ -9,7 +9,7 @@ WORK IN PROGRESS
 
 ## OPTIONAL FEATURES
 
-- Edit es_systems.cfg to 
+- Edit es_systems.cfg to add gun systems
 
 - Make new folders for gun games. 
 
