@@ -25,9 +25,9 @@ curl -sSL WORK IN PROGRESS WORK IN PROGRESS
 
             Go to Retropie/Config
             
-            Select Gun Type
-
             Launch RPI Lightgun Tool 
+            
+            Select Gun Type
 
             Select system/console
 
@@ -39,10 +39,10 @@ curl -sSL WORK IN PROGRESS WORK IN PROGRESS
 - From Command Line/Terminal
 
             Type "RPI-Lightgun-Tool" 
+                        
+            Press Enter
             
             Select Gun Type
-            
-            Press Enter
             
             Select system/console
 
