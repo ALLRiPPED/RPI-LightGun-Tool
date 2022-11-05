@@ -22,6 +22,8 @@ curl -sSL WORK IN PROGRESS WORK IN PROGRESS
 - In Retropie
 
             Go to Retropie/Config
+            
+            Select Gun Type
 
             Launch Mouse Gun Setup Menu 
 
@@ -29,11 +31,14 @@ curl -sSL WORK IN PROGRESS WORK IN PROGRESS
 
             Press A/Enter
 
-            Menu will give you instructions from thier
+            Select From The Options 
+            
             
 - From Command Line/Terminal
 
             Type "Mouse-Gun-Setup" 
+            
+            Select Gun Type
             
             Press Enter
             
@@ -41,8 +46,7 @@ curl -sSL WORK IN PROGRESS WORK IN PROGRESS
 
             Press A/Enter
 
-            Menu will give you instructions from thier
-
+            Select from the options
 ## FAQ
 
 - Where does it make new folder for gun games ?
