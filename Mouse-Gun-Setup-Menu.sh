@@ -1,37 +1,53 @@
 #!/bin/bash
 export NCURSES_NO_UTF8_ACS=1
-BACKTITLE="<-----RPI MOUSE GUN SETUP MENU----->"
-
-dialog  --sleep 1 --title "MOUSE GUN SETUP MENU INFO" --msgbox "
-----------ATTENTION!!!!!!----------
------------------------------------
-THIS IS FOR MOUSE INPUT GUNS ONLY.
-THIS WILL NOT WORK WITH SINDEN GUNS.
-
-EXAMPLE GUNS FOR THIS SCRIPT:
-- GUN4IR
-- WII MOTE WITH DOLPHIN BAR
-- AIMTRACK (UNTESTED, UNLIKELY)
-- ACTUAL MOUSE LOL" 0 0
+BACKTITLE="<-----RPI LIGHTGUN SETUP MENU----->V1.0"
 
 function gun-menu() {
+local choice
+  while true; do
+    choice=$(dialog --backtitle "$BACKTITLE" --title "RPI LIGHTGUN SETUP MENU " \
+      --ok-label Install --cancel-label Exit \
+      --menu "WHAT KIND OF GUN DO YOU HAVE?" 40 60 40 \
+      1 "DOLPHIN BAR + WII MOTE" \
+      2 "GUN4IR" \
+      3 "MOUSE INPUT GUN" \
+      4 "SINDEN" \
+       + "<                                     >" \
+       + "<---RPI LIGHTGUN SETUP TOOLS --->" \
+       + "<                                     >" \
+      T1 "-SETUP INFO/HELP         " \   
+      T2 "-UPDATE SETUP MENU       " \
+      T3 "-UNINSTALL SETUP MENU    " \                
+      2>&1 >/dev/tty)
+
+    case "$choice" in
+    1) mouse-gun  ;;
+    2) mouse-gun  ;;
+    3) mouse-gun ;;
+    4) sinden-menu ;;
+    T1) gun-help ;;
+    T2) update-script ;;
+    T3) remove-script ;;
+    -) no ;;
+     *) break ;;
+    esac
+   done
+}
+
+####------------------------MOUSE INPUT--------------------------------####
+
+function mouse-gun() {
   local choice
   while true; do
     choice=$(dialog --backtitle "$BACKTITLE" --title "RPI MOUSE GUN SETUP MENU " \
-      --ok-label Install --cancel-label Exit \
+      --ok-label Select --cancel-label Back \
       --menu "PRESS A/ENTER TO SETUP CONSOLE" 40 60 40 \
       1 "Arcade Setup" \
       2 "Atari800 Setup" \
       3 "Atari2600 Setup" \
       4 "NES Setup" \
       5 "SNES Setup" \
-      6 "Mastersystem Setup" \
-       + "<                                     >" \
-       + "<---Mouse Lightgun Setup Menu Tools--->" \
-       + "<                                     >" \
-      T1 "-SETUP INFO/HELP         " \   
-      T2 "-UPDATE SETUP MENU       " \
-      T3 "-UNINSTALL SETUP MENU    " \                
+      6 "Mastersystem Setup" \               
       2>&1 >/dev/tty)
 
     case "$choice" in
@@ -41,30 +57,28 @@ function gun-menu() {
     4) ra-gun "nes" "fceeum" ;;
     5) ra-gun "snes"   ;;
     6) ra-gun "mastersystem" ;;
-    T1) update-script ;;
-    T2) remove-script ;;
     -) no ;;
      *) break ;;
     esac
    done
 }
 
+
 function ra-gun() {
-if [ -f "RETROARCH CONFIG PATH" ]; then sudo rm RETROARCH CONFIG PATH; fi
   local choice
   while true; do
-    choice=$(dialog --backtitle "$BACKTITLE" --title "EXIT MESSAGE" \
+    choice=$(dialog --backtitle "$BACKTITLE" --title " "$1" RETROARCH SETUP MENU " \
       --ok-label Install --cancel-label Exit \
       --menu "WHAT OPTIONS DO YOU WANT FOR  "$1"?" 40 60 40 \
-      1 "APPLY CONFIG" \
-      2 "APPLY CONFIG & EDIT ES SYSTEMS " \ 
-      3 "DOWNLOAD & APPLY RETROARCH CONFIG" \
-      4 " " \
+      1 "MAKE DIRECTORY & EDIT ES SYSTEMS  " \ 
+      2 "DOWNLOAD & APPLY RETROARCH CONFIG " \
+      3 "APPLY ALL " \
       2>&1 >/dev/tty)
 
     case "$choice" in
     1) es-edit-gun "$1"  ;;
-    2) no  ;;
+    2) retroarch-config  ;;
+    3) apply-all-gun  ;;
     -) no ;;
      *) break ;;
     esac
@@ -72,33 +86,24 @@ if [ -f "RETROARCH CONFIG PATH" ]; then sudo rm RETROARCH CONFIG PATH; fi
 }
 
 function sa-gun() {
-if [ -f "RETROARCH CONFIG PATH" ]; then sudo rm RETROARCH CONFIG PATH; fi
   local choice
   while true; do
-    choice=$(dialog --backtitle "$BACKTITLE" --title "EXIT MESSAGE" \
-      --ok-label Install --cancel-label Exit \
+    choice=$(dialog --backtitle "$BACKTITLE" --title " "$1" STANDALONE SETUP MENU " \
+      --ok-label Select --cancel-label Back \
       --menu "WHAT OPTIONS DO YOU WANT FOR  "$1"?" 40 60 40 \
-      1 "MAKE GUN DIRECTORY FOR "$1"       " \
-      2 "MAKE DIRECTORY & EDIT ES SYSTEMS  " \ 
-      3 "DOWNLOAD & APPLY RETROARCH CONFIG " \
+      1 "MAKE DIRECTORY & EDIT ES SYSTEMS  " \ 
+      2 "DOWNLOAD & APPLY RETROARCH CONFIG " \
       4 "APPLY ALL " \
       2>&1 >/dev/tty)
 
     case "$choice" in
-    1) make-directory "$1"  ;;
-    2) es-edit-gun "$1"  ;;
-    3) retroarch-config  ;;
-    4) apply-all-gun  ;;
+    1) es-edit-gun "$1"  ;;
+    2) retroarch-config  ;;
+    3) apply-all-gun  ;;
     -) no ;;
      *) break ;;
     esac
    done
-}
-
-function make-directory() {
-mkdir "$HOME"/RetroPie/roms/gun-games/"$1"
-dialog  --sleep 1 --title "MAKE DIRECTORY EXIT MESSAGE" --msgbox "
-- A FOLDER HAS BEEN MADE UNDER Home/Pi/RetroPie/roms/gun-games/"$1" " 0 0
 }
 
 
@@ -122,12 +127,30 @@ dialog  --sleep 1 --title "MAKE DIRECTORY & EDIT ES EXIT MESSAGE" --msgbox "
 }
 
 function retroarch-config() {
-sudo wget retroarch---config--path -P coming---soon
+if [ ! -s "opt/retropie/configs/"$1"-gun" ]; then sudo wget retroarch---config--path -P /opt/retropie/configs/"$1"-gun/
+else
+sudo cp /opt/retropie/configs/"$1" -P /opt/retropie/configs/"$1"-gun
+sudo wget retroarch---config--path -P /opt/retropie/configs/"$1"-gun/
+dialog  --sleep 1 --title "RETROARCH CONFIG EXIT MESSAGE" --msgbox "
+- Your config folder for "$1" has been copied as "$1"-gun
+- You will need to manually edit es-systems.cfg to reflect this 
+OR go back and press Make Directory & Edit ES Systems" 0 0
+}
+fi
 }
 
 function apply-all-gun() {
 es-edit-gun 
 retroarch-config
 }
+
+
+
+####------------------------SINDEN--------------------------------####
+
+function sinden-menu() {
+
+}
+
 
 gun-menu
