@@ -1,4 +1,4 @@
-# RPI-Light-Gun-Setup
+# RPI-LightGun-Tool
 WORK IN PROGRESS
 
 This is a tool to make using Lightguns as easy as possible.
