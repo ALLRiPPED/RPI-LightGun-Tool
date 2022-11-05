@@ -1,7 +1,7 @@
 # RPI-LightGun-Tool
 WORK IN PROGRESS
 
-This is a tool to make using Lightguns as easy as possible.
+This is a tool to make using Lightguns on Retropie as easy as possible.
 
 ## FEATURES 
 
