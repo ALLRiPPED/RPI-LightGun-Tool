@@ -55,9 +55,9 @@ curl -sSL WORK IN PROGRESS WORK IN PROGRESS
        
 - What gun(s) is this for ?
       
-      This is made for guns that are mouse input. 
       - Gun4IR
       - Wii Mote Guns
       - Actual mouse
       - Aimtrack(untested, Unlikely)
+      - Sinden (adding soon)
 
