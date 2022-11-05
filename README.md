@@ -1,4 +1,4 @@
-# RPI-Mouse-Gun-Setup
+# RPI-Light-Gun-Setup
 WORK IN PROGRESS
 
 This is a tool to make using Lightguns (with mouse input) as easy as possible.
