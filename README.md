@@ -54,6 +54,22 @@ curl -sSL WORK IN PROGRESS WORK IN PROGRESS
 - Where does it make new folder for gun games ?
       
       home/pi/RetroPie/roms/gun-games/"systemname"
+      
+- What is new config called? Where is it?
+
+      The new config is located at /opt/retropie/configs/systemname-gun . It is a config with just mouse setup . 
+      
+- Whats this edit in es_systems.cfg?
+
+      This makes new systems for gun games.
+      
+      Example for nes-gun system (not exact do NOT copy)
+      <system>
+      <name>nes-gun<name> 
+      <fullname>NES Gun Games<fullname>
+      <launch> ................../nes-gun<launch>
+      <path>home/pi/RetroPie/roms/gun-games/nes/<path>
+      <system>
        
 - What gun(s) is this for ?
       
