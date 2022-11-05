@@ -3,13 +3,11 @@ WORK IN PROGRESS
 
 This is a tool to make using Lightguns (with mouse input) as easy as possible.
 
-## MAIN FEATURES 
+## FEATURES 
 
 - Grabs a pre setup retroarch config file for Retroarch systems.
 
 - Grabs or edits files on standalone emus .
-
-## OPTIONAL FEATURES
 
 - Edit es_systems.cfg to add gun systems
 
