@@ -1,7 +1,7 @@
 # RPI-Light-Gun-Setup
 WORK IN PROGRESS
 
-This is a tool to make using Lightguns (with mouse input) as easy as possible.
+This is a tool to make using Lightguns as easy as possible.
 
 ## FEATURES 
 
@@ -12,6 +12,8 @@ This is a tool to make using Lightguns (with mouse input) as easy as possible.
 - Edit es_systems.cfg to add gun systems
 
 - Make new folders for gun games. 
+
+- Ask what type of gun your using, and loads different menus for different gun types.
 
 ## INSTALLATION
 
