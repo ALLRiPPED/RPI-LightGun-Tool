@@ -25,7 +25,7 @@ curl -sSL WORK IN PROGRESS WORK IN PROGRESS
             
             Select Gun Type
 
-            Launch Mouse Gun Setup Menu 
+            Launch RPI Lightgun Tool 
 
             Select system/console
 
@@ -36,7 +36,7 @@ curl -sSL WORK IN PROGRESS WORK IN PROGRESS
             
 - From Command Line/Terminal
 
-            Type "Mouse-Gun-Setup" 
+            Type "RPI-Lightgun-Tool" 
             
             Select Gun Type
             
