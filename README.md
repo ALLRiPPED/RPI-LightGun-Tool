@@ -57,7 +57,8 @@ curl -sSL WORK IN PROGRESS WORK IN PROGRESS
       
 - What is new config called? Where is it?
 
-      The new config is located at /opt/retropie/configs/systemname-gun . It is a config with just mouse setup . 
+      The new config is located at /opt/retropie/configs/systemname-gun . 
+      It is a config with just gun setup . 
       
 - Whats this edit in es_systems.cfg?
 
