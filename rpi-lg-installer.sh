@@ -14,7 +14,7 @@ function gun-install-menu() {
     while true; do
         choice=$(dialog --backtitle "$BACKTITLE" --title " RPI LIGHTGUN TOOL V--1.00---UPDATED 11/5/22 " \
             --ok-label Select --cancel-label Exit-Installer \
-            --menu "RPI LIGHTGUN TOOL INSTALLER" 25 50 30 \
+            --menu "----RPI LIGHTGUN TOOL INSTALLER----" 25 50 30 \
             1 "Install/Update RPI LightGun Tool " \
             2 "RPI LightGun Tool Info   " \
             2>&1 > /dev/tty)
