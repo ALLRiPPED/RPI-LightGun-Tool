@@ -53,7 +53,7 @@ function gun4ir() {
   while true; do
     choice=$(dialog --backtitle "$BACKTITLE" --title "RPI GUN4IR SETUP MENU " \
       --ok-label Select --cancel-label Back \
-      --menu "PRESS A/ENTER TO SETUP CONSOLE" 40 60 40 \
+      --menu "PRESS A/ENTER TO LOAD CONSOLE MENU" 40 60 40 \
       1 "Gun4IR Offical Tools" \
       2 "Console Selection" \
       2>&1 >/dev/tty)
@@ -93,7 +93,7 @@ function gun4ir-consoles() {
   while true; do
     choice=$(dialog --backtitle "$BACKTITLE" --title "RPI GUN4IR CONSOLES MENU " \
       --ok-label Select --cancel-label Back \
-      --menu "PRESS A/ENTER TO SETUP CONSOLE" 40 60 40 \
+      --menu "PRESS A/ENTER TO LOAD CONSOLE MENU" 40 60 40 \
       1 "Arcade Setup" \
       2 "Atari800 Setup" \
       3 "Atari2600 Setup" \
@@ -196,7 +196,7 @@ function dolphin-bar() {
   while true; do
     choice=$(dialog --backtitle "$BACKTITLE" --title "DOLPHIN BAR/WII MOTE MENU " \
       --ok-label Select --cancel-label Back \
-      --menu "PRESS A/ENTER TO SETUP CONSOLE" 40 60 40 \
+      --menu "PRESS A/ENTER TO LOAD CONSOLE MENU" 40 60 40 \
       1 "Arcade Setup" \
       2 "Atari800 Setup" \
       3 "Atari2600 Setup" \
@@ -225,7 +225,7 @@ function mouse-gun() {
   while true; do
     choice=$(dialog --backtitle "$BACKTITLE" --title "MOUSE GUN MENU " \
       --ok-label Select --cancel-label Back \
-      --menu "PRESS A/ENTER TO SETUP CONSOLE" 40 60 40 \
+      --menu "PRESS A/ENTER TO LOAD CONSOLE MENU" 40 60 40 \
       1 "Arcade Setup" \
       2 "Atari800 Setup" \
       3 "Atari2600 Setup" \
