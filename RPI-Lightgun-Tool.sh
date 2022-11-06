@@ -159,7 +159,12 @@ retroarch-config
 ####------------------------SINDEN--------------------------------####
 
 function sinden-menu() {
-
+sleep 2 
+echo "working"
+sleep 1
+echo "on"
+sleep 1
+echo "it"
 }
 
 
