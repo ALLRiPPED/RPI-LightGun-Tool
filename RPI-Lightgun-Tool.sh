@@ -38,11 +38,19 @@ echo "blah"
 
 
 function remove-script() {
-echo "blah"
+sudo rm $HOME/RetroPie/retropiemenu/RPI-Lightgun-Tool.sh
+sudo rm /usr/local/bin/RPI-Lightgun-Tool
 }
 
 function update-script() {
-echo "blah"
+if [ -f "$HOME/RetroPie/retropiemenu/RPI-Lightgun-Tool.sh" ]; then sudo rm $HOME/RetroPie/retropiemenu/RPI-Lightgun-Tool.sh; fi
+if [ -f "/usr/local/bin/RPI-Lightgun-Tool" ]; then sudo rm /usr/local/bin/RPI-Lightgun-Tool; fi
+wget https://raw.githubusercontent.com/Retro-Devils/RPI-LightGun-Tool/main/RPI-Lightgun-Tool.sh -P $HOME/RetroPie/retropiemenu/
+sleep 1
+sudo cp $HOME/RetroPie/retropiemenu/RPI-Lightgun-Tool.sh -f /usr/local/bin/RPI-Lightgun-Tool
+sleep 1
+chmod 755 $HOME/RetroPie/retropiemenu/RPI-Lightgun-Tool.sh
+sudo chmod 755 /usr/local/bin/RPI-Lightgun-Tool
 }
 
 ####------------------------MOUSE INPUTS--------------------------------####
