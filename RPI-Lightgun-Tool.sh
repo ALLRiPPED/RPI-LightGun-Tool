@@ -385,8 +385,10 @@ echo "it"
 ###------------------STANDALONES-----------------###
 
 function model3-gun() {
-wget https://raw.githubusercontent.com/Retro-Devils/RPI-LightGun-Tool/main/sa-configs/wii-mote/model3-gun/supermodel.ini -P ????????
+wget https://raw.githubusercontent.com/Retro-Devils/RPI-LightGun-Tool/main/sa-configs/all/model3-gun/supermodel.ini -P 
 }
+
+
 
 
 gun-menu
