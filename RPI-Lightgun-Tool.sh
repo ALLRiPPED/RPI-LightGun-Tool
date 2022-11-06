@@ -214,18 +214,63 @@ function dolphin-bar() {
       2>&1 >/dev/tty)
 
     case "$choice" in
-    1) ra-gun "arcade"  ;;
-    2) ra-gun "atari800"  ;;
-    3) ra-gun "atari2600" ;;
-    4) ra-gun "nes" ".7z" ".nes" ".zip" ".7Z" ".NES" ".ZIP" ;;
-    5) ra-gun "snes"   ;;
-    6) ra-gun "mastersystem" ;;
+    1) ra-wii "arcade"  ;;
+    2) ra-wii "atari800"  ;;
+    3) ra-wii "atari2600" ;;
+    4) ra-wii "nes" ".7z" ".nes" ".zip" ".7Z" ".NES" ".ZIP" ;;
+    5) ra-wii "snes"   ;;
+    6) ra-wii "mastersystem" ;;
     -) no ;;
      *) break ;;
     esac
    done
 }
 
+function ra-wii() {
+  local choice
+  while true; do
+    choice=$(dialog --backtitle "$BACKTITLE" --title " "$1" RETROARCH SETUP MENU " \
+      --ok-label Select --cancel-label Back \
+      --menu "WHAT OPTIONS DO YOU WANT FOR  "$1" ?" 40 60 40 \
+      1 "COPY CONFIGS, MAKE DIRECTORIES " \
+      2 "OPTION 1(ABOVE) & EDIT ES SYSTEMS  " \
+      3 "DOWNLOAD & APPLY RETROARCH CONFIG " \
+      4 "APPLY ALL " \
+      2>&1 >/dev/tty)
+
+    case "$choice" in
+    1) copy-configs "$1" "$2" "$3" "$4" "$5" "$6" "$7" "$8" ;;
+    1) es-edit-gun "$1" "$2" "$3" "$4" "$5" "$6" "$7" "$8" ;;
+    2) ra-config-wii  "$1" "$2" "$3" "$4" "$5" "$6" "$7" "$8" ;;
+    3) apply-all-ra  ;;
+    -) no ;;
+     *) break ;;
+    esac
+   done
+}
+
+function ra-config-wii() {
+if [ ! -s "opt/retropie/configs/"$1"-gun" ]; then 
+sudo rm -R /opt/retropie/configs/"$1"-gun/
+sudo mkdir /opt/retropie/configs/"$1"-gun
+sudo wget https://raw.githubusercontent.com/Retro-Devils/RPI-LightGun-Tool/main/ra-configs/wii-mote/"$1"-gun/retroarch.cfg -P /opt/retropie/configs/"$1"-gun/
+sudo wget https://raw.githubusercontent.com/Retro-Devils/RPI-LightGun-Tool/main/ra-configs/wii-mote/"$1"-gun/emulators.cfg -P /opt/retropie/configs/"$1"-gun/
+sudo chmod -R 755 /opt/retropie/configs/"$1"-gun
+dialog  --sleep 1 --title "RETROARCH CONFIG EXIT MESSAGE" --msgbox "
+- Your config folder for "$1" has been copied as "$1"-gun
+- You will need to manually edit es-systems.cfg to reflect this
+OR go back and press Make Directory & Edit ES Systems" 0 0
+else
+sudo mkdir /opt/retropie/configs/"$1"-gun
+sudo chmod -R 755 /opt/retropie/configs/"$1"-gun
+sudo wget https://raw.githubusercontent.com/Retro-Devils/RPI-LightGun-Tool/main/ra-configs/wii-mote/"$1"-gun/retroarch.cfg -P /opt/retropie/configs/"$1"-gun/
+sudo wget https://raw.githubusercontent.com/Retro-Devils/RPI-LightGun-Tool/main/ra-configs/wii-mote/"$1"-gun/emulators.cfg -P /opt/retropie/configs/"$1"-gun/
+dialog  --sleep 1 --title "RETROARCH CONFIG EXIT MESSAGE" --msgbox "
+- Your config folder for "$1" has been copied as "$1"-gun
+- You will need to manually edit es-systems.cfg to reflect this
+OR go back and press Make Directory & Edit ES Systems" 0 0
+fi
+}
 #----Mouse Gun---#
 
 function mouse-gun() {
@@ -327,11 +372,21 @@ dialog  --sleep 1 --title "MAKE DIRECTORY & EDIT ES EXIT MESSAGE" --msgbox "
 }
 
 function retroarch-config() {
-if [ ! -s "opt/retropie/configs/"$1"-gun" ]; then sudo wget https://github.com/Retro-Devils/RPI-LightGun-Tool/blob/main/ra-configs/"$1"-gun/retroarch.cfg -P /opt/retropie/configs/"$1"-gun/
-else
-sudo cp /opt/retropie/configs/"$1" -P /opt/retropie/configs/"$1"-gun
+if [ ! -s "opt/retropie/configs/"$1"-gun" ]; then 
+sudo rm -R /opt/retropie/configs/"$1"-gun/
+sudo mkdir /opt/retropie/configs/"$1"-gun/
+sudo wget https://raw.githubusercontent.com/Retro-Devils/RPI-LightGun-Tool/main/ra-configs/mouse-gun/nes-gun/retroarch.cfg -P /opt/retropie/configs/"$1"-gun/
+sudo wget https://raw.githubusercontent.com/Retro-Devils/RPI-LightGun-Tool/main/ra-configs/mouse-gun/nes-gun/emulators.cfg -P /opt/retropie/configs/"$1"-gun/sudo chmod -R 755 /opt/retropie/configs/"$1"-gun
 sudo chmod -R 755 /opt/retropie/configs/"$1"-gun
-sudo wget https://github.com/Retro-Devils/RPI-LightGun-Tool/blob/main/ra-configs/"$1"-gun/retroarch.cfg -P /opt/retropie/configs/"$1"-gun/
+dialog  --sleep 1 --title "RETROARCH CONFIG EXIT MESSAGE" --msgbox "
+- Your config folder for "$1" has been copied as "$1"-gun
+- You will need to manually edit es-systems.cfg to reflect this
+OR go back and press Make Directory & Edit ES Systems" 0 0
+else
+sudo mkdir /opt/retropie/configs/"$1"-gun
+sudo wget https://raw.githubusercontent.com/Retro-Devils/RPI-LightGun-Tool/main/ra-configs/mouse-gun/nes-gun/retroarch.cfg -P /opt/retropie/configs/"$1"-gun/
+sudo wget https://raw.githubusercontent.com/Retro-Devils/RPI-LightGun-Tool/main/ra-configs/mouse-gun/nes-gun/emulators.cfg -P /opt/retropie/configs/"$1"-gun/
+sudo chmod -R 755 /opt/retropie/configs/"$1"-gun
 dialog  --sleep 1 --title "RETROARCH CONFIG EXIT MESSAGE" --msgbox "
 - Your config folder for "$1" has been copied as "$1"-gun
 - You will need to manually edit es-systems.cfg to reflect this
