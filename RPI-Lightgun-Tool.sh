@@ -62,7 +62,7 @@ function gun4ir() {
     choice=$(dialog --backtitle "$BACKTITLE" --title "RPI GUN4IR SETUP MENU " \
       --ok-label Select --cancel-label Back \
       --menu "PRESS A/ENTER TO LOAD CONSOLE MENU" 40 60 40 \
-      1 "Gun4IR Offical Tools" \
+      1 "Gun4IR Offical Firmware" \
       2 "Console Selection" \
       2>&1 >/dev/tty)
 
@@ -101,13 +101,14 @@ function gun4ir-consoles() {
   while true; do
     choice=$(dialog --backtitle "$BACKTITLE" --title "RPI GUN4IR CONSOLES MENU " \
       --ok-label Select --cancel-label Back \
-      --menu "PRESS A/ENTER TO LOAD CONSOLE MENU" 40 60 40 \
-      1 "Arcade Setup" \
-      2 "Atari800 Setup" \
-      3 "Atari2600 Setup" \
-      4 "NES Setup" \
-      5 "SNES Setup" \
-      6 "Mastersystem Setup" \
+      --menu "PRESS A/ENTER TO LOAD MENU/SETUP" 40 60 40 \
+      1 "RA--Arcade Menu" \
+      2 "RA--Atari800 Menu" \
+      3 "RA--Atari2600 Menu" \
+      4 "RA--NES Menu" \
+      5 "RA--SNES Menu" \
+      6 "RA--Mastersystem Menu" \
+      7 "SA--Model 3 Setup "
       2>&1 >/dev/tty)
 
     case "$choice" in
@@ -117,6 +118,7 @@ function gun4ir-consoles() {
     4) ra-gun "nes" ".7z" ".nes" ".zip" ".7Z" ".NES" ".ZIP" ;;
     5) ra-gun "snes"   ;;
     6) ra-gun "mastersystem" ;;
+    7) model3-gun ;;
     -) no ;;
      *) break ;;
     esac
@@ -151,28 +153,6 @@ function ra-gun4ir() {
    done
 }
 
-function sa-gun4ir() {
-  local choice
-  while true; do
-    choice=$(dialog --backtitle "$BACKTITLE" --title " "$1" STANDALONE SETUP MENU " \
-      --ok-label Select --cancel-label Back \
-      --menu "WHAT OPTIONS DO YOU WANT FOR  "$1" ?" 40 60 40 \
-      1 "COPY CONFIGS, MAKE DIRECTORIES " \
-      2 "OPTION 1(ABOVE) & EDIT ES SYSTEMS  " \ 
-      3 "DOWNLOAD & APPLY STANDALONE CONFIG " \
-      4 "APPLY ALL " \
-      2>&1 >/dev/tty)
-
-    case "$choice" in
-    1) copy-configs "$1" "$2" "$3" "$4" "$5" "$6" "$7" "$8" ;;
-    1) es-edit-gun "$1" "$2" "$3" "$4" "$5" "$6" "$7" "$8" ;;
-    2) sa-config-gun4ir  "$1" "$2" "$3" "$4" "$5" "$6" "$7" "$8";;
-    3) apply-all-gun4ir  ;;
-    -) no ;;
-     *) break ;;
-    esac
-   done
-}
 
 function retroarch-config-gun4ir() {
 if [ ! -s "opt/retropie/configs/"$1"-gun" ]; then sudo wget https://github.com/Retro-Devils/RPI-LightGun-Tool/blob/main/ra-configs/"$1"-gun/retroarch.cfg -P /opt/retropie/configs/"$1"-gun/
@@ -187,9 +167,6 @@ OR go back and press Make Directory & Edit ES Systems" 0 0
 fi
 }
 
-function sa-config-gun4ir() {
-echo "WAIT FOR IT"
-}
 
 function apply-all-gun4ir() {
 es-edit-gun 
@@ -204,13 +181,14 @@ function dolphin-bar() {
   while true; do
     choice=$(dialog --backtitle "$BACKTITLE" --title "DOLPHIN BAR/WII MOTE MENU " \
       --ok-label Select --cancel-label Back \
-      --menu "PRESS A/ENTER TO LOAD CONSOLE MENU" 40 60 40 \
-      1 "Arcade Setup" \
-      2 "Atari800 Setup" \
-      3 "Atari2600 Setup" \
-      4 "NES Setup" \
-      5 "SNES Setup" \
-      6 "Mastersystem Setup" \
+      --menu "PRESS A/ENTER TO LOAD MENU/SETUP" 40 60 40 \
+      1 "RA--Arcade Menu" \
+      2 "RA--Atari800 Menu" \
+      3 "RA--Atari2600 Menu" \
+      4 "RA--NES Menu" \
+      5 "RA--SNES Menu" \
+      6 "RA--Mastersystem Menu" \
+      7 "SA--Model 3 Setup "
       2>&1 >/dev/tty)
 
     case "$choice" in
@@ -220,6 +198,7 @@ function dolphin-bar() {
     4) ra-wii "nes" ".7z" ".nes" ".zip" ".7Z" ".NES" ".ZIP" ;;
     5) ra-wii "snes"   ;;
     6) ra-wii "mastersystem" ;;
+    7) model3-gun ;;
     -) no ;;
      *) break ;;
     esac
@@ -240,37 +219,16 @@ function ra-wii() {
 
     case "$choice" in
     1) copy-configs "$1" "$2" "$3" "$4" "$5" "$6" "$7" "$8" ;;
-    1) es-edit-gun "$1" "$2" "$3" "$4" "$5" "$6" "$7" "$8" ;;
-    2) ra-config-wii  "$1" "$2" "$3" "$4" "$5" "$6" "$7" "$8" ;;
-    3) apply-all-wii  ;;
+    2) es-edit-gun "$1" "$2" "$3" "$4" "$5" "$6" "$7" "$8" ;;
+    3) ra-config-wii  "$1" "$2" "$3" "$4" "$5" "$6" "$7" "$8" ;;
+    4) apply-all-wii  ;;
     -) no ;;
      *) break ;;
     esac
    done
 }
 
-function sa-wii() {
-  local choice
-  while true; do
-    choice=$(dialog --backtitle "$BACKTITLE" --title " "$1" STANDALONE SETUP MENU " \
-      --ok-label Select --cancel-label Back \
-      --menu "WHAT OPTIONS DO YOU WANT FOR  "$1" ?" 40 60 40 \
-      1 "COPY CONFIGS, MAKE DIRECTORIES " \
-      2 "OPTION 1(ABOVE) & EDIT ES SYSTEMS  " \ 
-      3 "DOWNLOAD & APPLY STANDALONE CONFIG " \
-      4 "APPLY ALL " \
-      2>&1 >/dev/tty)
 
-    case "$choice" in
-    1) copy-configs "$1" "$2" "$3" "$4" "$5" "$6" "$7" "$8" ;;
-    1) es-edit-gun "$1" "$2" "$3" "$4" "$5" "$6" "$7" "$8" ;;
-    2) sa-config-wii  "$1" "$2" "$3" "$4" "$5" "$6" "$7" "$8";;
-    3) apply-all-wii  ;;
-    -) no ;;
-     *) break ;;
-    esac
-   done
-}
 
 function ra-config-wii() {
 if [ ! -s "opt/retropie/configs/"$1"-gun" ]; then 
@@ -296,10 +254,6 @@ fi
 }
 
 
-function sa-config-wii() {
-echo "WAIT FOR IT"
-}
-
 function apply-all-wii() {
 es-edit-gun 
 ra-config-wii
@@ -313,13 +267,14 @@ function mouse-gun() {
   while true; do
     choice=$(dialog --backtitle "$BACKTITLE" --title "MOUSE GUN MENU " \
       --ok-label Select --cancel-label Back \
-      --menu "PRESS A/ENTER TO LOAD CONSOLE MENU" 40 60 40 \
-      1 "Arcade Setup" \
-      2 "Atari800 Setup" \
-      3 "Atari2600 Setup" \
-      4 "NES Setup" \
-      5 "SNES Setup" \
-      6 "Mastersystem Setup" \
+      --menu "PRESS A/ENTER TO LOAD MENU/SETUP" 40 60 40 \
+      1 "RA--Arcade Menu" \
+      2 "RA--Atari800 Menu" \
+      3 "RA--Atari2600 Menu" \
+      4 "RA--NES Menu" \
+      5 "RA--SNES Menu" \
+      6 "RA--Mastersystem Menu" \
+      7 "SA--Model 3 Setup "
       2>&1 >/dev/tty)
 
     case "$choice" in
@@ -329,6 +284,7 @@ function mouse-gun() {
     4) ra-gun "nes" ".7z" ".nes" ".zip" ".7Z" ".NES" ".ZIP" ;;
     5) ra-gun "snes"   ;;
     6) ra-gun "mastersystem" ;;
+    7) model3-gun ;;
     -) no ;;
      *) break ;;
     esac
@@ -352,29 +308,6 @@ function ra-gun() {
     1) es-edit-gun "$1" "$2" "$3" "$4" "$5" "$6" "$7" "$8" ;;
     2) retroarch-config  "$1" "$2" "$3" "$4" "$5" "$6" "$7" "$8" ;;
     3) apply-all-ra  ;;
-    -) no ;;
-     *) break ;;
-    esac
-   done
-}
-
-function sa-gun() {
-  local choice
-  while true; do
-    choice=$(dialog --backtitle "$BACKTITLE" --title " "$1" STANDALONE SETUP MENU " \
-      --ok-label Select --cancel-label Back \
-      --menu "WHAT OPTIONS DO YOU WANT FOR  "$1" ?" 40 60 40 \
-      1 "COPY CONFIGS, MAKE DIRECTORIES " \
-      2 "OPTION 1(ABOVE) & EDIT ES SYSTEMS  " \ 
-      3 "DOWNLOAD & APPLY RETROARCH CONFIG " \
-      4 "APPLY ALL " \
-      2>&1 >/dev/tty)
-
-    case "$choice" in
-    1) copy-configs "$1" "$2" "$3" "$4" "$5" "$6" "$7" "$8" ;;
-    1) es-edit-gun "$1" "$2" "$3" "$4" "$5" "$6" "$7" "$8" ;;
-    2) sa-config  "$1" "$2" "$3" "$4" "$5" "$6" "$7" "$8";;
-    3) apply-all-sa  ;;
     -) no ;;
      *) break ;;
     esac
@@ -430,17 +363,8 @@ fi
 }
 
 
-function sa-config() {
-echo "WAIT FOR IT"
-}
-
 
 function apply-all-ra() {
-es-edit-gun "$1" "$2" "$3" "$4" "$5" "$6" "$7" "$8"
-retroarch-config "$1" "$2" "$3" "$4" "$5" "$6" "$7" "$8"
-}
-
-function apply-all-sa() {
 es-edit-gun "$1" "$2" "$3" "$4" "$5" "$6" "$7" "$8"
 retroarch-config "$1" "$2" "$3" "$4" "$5" "$6" "$7" "$8"
 }
@@ -456,6 +380,12 @@ sleep 1
 echo "on"
 sleep 1
 echo "it"
+}
+
+###------------------STANDALONES-----------------###
+
+function model3-gun() {
+wget https://raw.githubusercontent.com/Retro-Devils/RPI-LightGun-Tool/main/sa-configs/wii-mote/model3-gun/supermodel.ini -P ????????
 }
 
 
