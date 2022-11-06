@@ -54,7 +54,7 @@ function mouse-gun() {
     1) ra-gun "arcade"  ;;
     2) ra-gun "atari800"  ;;
     3) ra-gun "atari2600" ;;
-    4) ra-gun "nes" "fceumm" ;;
+    4) ra-gun "nes" ".7z" ".nes" ".zip" ".7Z" ".NES" ".ZIP" ;;
     5) ra-gun "snes"   ;;
     6) ra-gun "mastersystem" ;;
     -) no ;;
@@ -67,17 +67,19 @@ function mouse-gun() {
 function ra-gun() {
   local choice
   while true; do
-    choice=$(dialog --backtitle "$BACKTITLE" --title " "$1" RETROARCH SETUP MENU " \
-      --ok-label Install --cancel-label Exit \
+    choice=$(dialog --backtitle "$BACKTITLE" --title " "$1" STANDALONE SETUP MENU " \
+      --ok-label Select --cancel-label Back \
       --menu "WHAT OPTIONS DO YOU WANT FOR  "$1"?" 40 60 40 \
-      1 "MAKE DIRECTORY & EDIT ES SYSTEMS  " \ 
-      2 "DOWNLOAD & APPLY RETROARCH CONFIG " \
-      3 "APPLY ALL " \
+      1 "COPY CONFIGS, MAKE DIRECTORIES " \
+      2 "OPTION 1(ABOVE) & EDIT ES SYSTEMS  " \ 
+      3 "DOWNLOAD & APPLY RETROARCH CONFIG " \
+      4 "APPLY ALL " \
       2>&1 >/dev/tty)
 
     case "$choice" in
-    1) es-edit-gun "$1" "$2" "$3" ;;
-    2) retroarch-config "$1" ;;
+    1) copy-configs "$1" "$2" "$3" "$4" "$5" "$6" "$7" "$8" ;;
+    1) es-edit-gun "$1" "$2" "$3" "$4" "$5" "$6" "$7" "$8" ;;
+    2) retroarch-config  "$1" "$2" "$3" "$4" "$5" "$6" "$7" "$8" ;;
     3) apply-all-gun  ;;
     -) no ;;
      *) break ;;
@@ -91,14 +93,16 @@ function sa-gun() {
     choice=$(dialog --backtitle "$BACKTITLE" --title " "$1" STANDALONE SETUP MENU " \
       --ok-label Select --cancel-label Back \
       --menu "WHAT OPTIONS DO YOU WANT FOR  "$1"?" 40 60 40 \
-      1 "MAKE DIRECTORY & EDIT ES SYSTEMS  " \ 
-      2 "DOWNLOAD & APPLY RETROARCH CONFIG " \
+      1 "COPY CONFIGS, MAKE DIRECTORIES " \
+      2 "OPTION 1(ABOVE) & EDIT ES SYSTEMS  " \ 
+      3 "DOWNLOAD & APPLY RETROARCH CONFIG " \
       4 "APPLY ALL " \
       2>&1 >/dev/tty)
 
     case "$choice" in
-    1) es-edit-gun "$1"  ;;
-    2) retroarch-config  ;;
+    1) copy-configs "$1" "$2" "$3" "$4" "$5" "$6" "$7" "$8" ;;
+    1) es-edit-gun "$1" "$2" "$3" "$4" "$5" "$6" "$7" "$8" ;;
+    2) retroarch-config  "$1" "$2" "$3" "$4" "$5" "$6" "$7" "$8";;
     3) apply-all-gun  ;;
     -) no ;;
      *) break ;;
@@ -106,13 +110,18 @@ function sa-gun() {
    done
 }
 
+function copy-configs() {
+sudo cp /opt/retropie/configs/"$1" -P /opt/retropie/configs/"$1"-gun
+mkdir "$HOME"/RetroPie/roms/gun-games/"$1"
+}
+
 
 function es-edit-gun() {
-sudo cp "$1" config-----path -P "$1"
+sudo cp /opt/retropie/configs/"$1" -P /opt/retropie/configs/"$1"-gun
 mkdir "$HOME"/RetroPie/roms/gun-games/"$1"
 if [ ! -s "$HOME/.emulationstation/es_systems.cfg" ]; then sudo rm -f $HOME/.emulationstation/es_systems.cfg; fi
 if [ ! -f "$HOME/.emulationstation/es_systems.cfg" ]; then cp $HOME/.emulationstation/es_systems.cfg $HOME/RetroPie/retropiemenu/gamelist.xml; fi
-CONTENT1="\t<system>\n\t\t  <name>"$1"-guns</name>\n\t\t  <fullname>"$1" Gun Games</fullname> \n\t\t  <path>/home/pi/RetroPie/roms/gun-games/"$1"</path> \n\t\t  <extension>.zip .ZIP</extension> \n\t\t<command>/opt/retropie/supplementary/runcommand/runcommand.sh 0 _SYS_ m "$1"-guns %ROM%</command> \n\t\t  <platform>"$1"-guns</platform> \n\t\t  <theme>"$1"</theme> \n\t\t</system>"
+CONTENT1="\t<system>\n\t\t  <name>"$1"-guns</name>\n\t\t  <fullname>"$1" Gun Games</fullname> \n\t\t  <path>/home/pi/RetroPie/roms/gun-games/"$1"</path> \n\t\t  <extension>"$2" "$3" "$4" "$5" "$6" "$7" "$8"</extension> \n\t\t<command>/opt/retropie/supplementary/runcommand/runcommand.sh 0 _SYS_ m "$1"-guns %ROM%</command> \n\t\t  <platform>"$1"</platform> \n\t\t  <theme>"$1"</theme> \n\t\t</system>"
 C1=$(echo $CONTENT1 | sed 's/\//\\\//g')
 if grep -q "$1" "$HOME/.emulationstation/es_systems.cfg"; then echo "es_systems.cfg entry confirmed"
 else
