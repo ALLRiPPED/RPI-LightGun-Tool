@@ -82,9 +82,9 @@ WORK IN PROGRESS
        
 - What gun(s) is this for ?
       
-      - Gun4IR
+      - Gun4IR 
       - Wii Mote Guns
       - Actual mouse
       - Aimtrack(untested, Unlikely)
-      - Sinden (adding soon)
+      - Sinden
 
