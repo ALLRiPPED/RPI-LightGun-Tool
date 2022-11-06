@@ -8,7 +8,7 @@ export NCURSES_NO_UTF8_ACS=1
 ###----------------------------###
 ### INSTALLER MENU FUNCTIONS   ###
 ###----------------------------###
-function main_menu() {
+function gun-install-menu() {
     local choice
 
     while true; do
@@ -44,3 +44,6 @@ function info() {
 echo "blah blah blah "
 sleep 5
 }
+
+
+gun-install-menu
