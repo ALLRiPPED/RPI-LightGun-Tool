@@ -1,7 +1,7 @@
 # RPI-LightGun-Tool
 WORK IN PROGRESS
 
-#Info 
+## Info 
 
          This is a tool to make using Lightguns on Retropie as easy as possible.
          
@@ -23,7 +23,7 @@ WORK IN PROGRESS
 
 ## INSTALLATION
 
-curl -sSL WORK IN PROGRESS WORK IN PROGRESS
+          curl -sSL WORK IN PROGRESS WORK IN PROGRESS
 
 ## HOW TO USE?
 
