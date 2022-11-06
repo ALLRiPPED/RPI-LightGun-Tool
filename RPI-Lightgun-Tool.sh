@@ -15,9 +15,9 @@ local choice
        + "<                         >" \
        + "<RPI LIGHTGUN SETUP TOOLS >" \
        + "<                         >" \
-      T1 "-SETUP INFO/HELP         " \   
+      T1 "-SETUP INFO/HELP         " \
       T2 "-UPDATE SETUP MENU       " \
-      T3 "-UNINSTALL SETUP MENU    " \                
+      T3 "-UNINSTALL SETUP MENU    " \
       2>&1 >/dev/tty)
 
     case "$choice" in
@@ -34,6 +34,18 @@ local choice
    done
 }
 
+######----------------------SCRIPT TOOLS-------------------------------#####
+
+function gun-help() {
+echo "blah"
+}
+
+function update-script() {
+echo "blah"
+}
+function remove-script() {
+echo "blah"
+}
 ####------------------------MOUSE INPUT--------------------------------####
 
 function mouse-gun() {
