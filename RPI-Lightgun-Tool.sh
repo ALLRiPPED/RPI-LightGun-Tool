@@ -242,7 +242,30 @@ function ra-wii() {
     1) copy-configs "$1" "$2" "$3" "$4" "$5" "$6" "$7" "$8" ;;
     1) es-edit-gun "$1" "$2" "$3" "$4" "$5" "$6" "$7" "$8" ;;
     2) ra-config-wii  "$1" "$2" "$3" "$4" "$5" "$6" "$7" "$8" ;;
-    3) apply-all-ra  ;;
+    3) apply-all-wii  ;;
+    -) no ;;
+     *) break ;;
+    esac
+   done
+}
+
+function sa-wii() {
+  local choice
+  while true; do
+    choice=$(dialog --backtitle "$BACKTITLE" --title " "$1" STANDALONE SETUP MENU " \
+      --ok-label Select --cancel-label Back \
+      --menu "WHAT OPTIONS DO YOU WANT FOR  "$1" ?" 40 60 40 \
+      1 "COPY CONFIGS, MAKE DIRECTORIES " \
+      2 "OPTION 1(ABOVE) & EDIT ES SYSTEMS  " \ 
+      3 "DOWNLOAD & APPLY STANDALONE CONFIG " \
+      4 "APPLY ALL " \
+      2>&1 >/dev/tty)
+
+    case "$choice" in
+    1) copy-configs "$1" "$2" "$3" "$4" "$5" "$6" "$7" "$8" ;;
+    1) es-edit-gun "$1" "$2" "$3" "$4" "$5" "$6" "$7" "$8" ;;
+    2) sa-config-wii  "$1" "$2" "$3" "$4" "$5" "$6" "$7" "$8";;
+    3) apply-all-wii  ;;
     -) no ;;
      *) break ;;
     esac
@@ -271,6 +294,18 @@ dialog  --sleep 1 --title "RETROARCH CONFIG EXIT MESSAGE" --msgbox "
 OR go back and press Make Directory & Edit ES Systems" 0 0
 fi
 }
+
+
+function sa-config-wii() {
+echo "WAIT FOR IT"
+}
+
+function apply-all-wii() {
+es-edit-gun 
+ra-config-wii
+}
+
+
 #----Mouse Gun---#
 
 function mouse-gun() {
