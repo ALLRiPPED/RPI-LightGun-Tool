@@ -3,6 +3,8 @@ WORK IN PROGRESS
 
 This is a tool to make using Lightguns on Retropie as easy as possible.
 
+Last Update:            11/5/22
+
 ## FEATURES 
 
 - Grabs a pre setup retroarch config file for Retroarch systems.
