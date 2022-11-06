@@ -1,34 +1,30 @@
 #!/bin/bash
 export NCURSES_NO_UTF8_ACS=1
-BACKTITLE="<-----RPI LIGHTGUN SETUP MENU----->V1.0"
+BACKTITLE="<-----RPI LIGHTGUN TOOL -----><->Version<->1.00"
 
 function gun-menu() {
 local choice
   while true; do
-    choice=$(dialog --backtitle "$BACKTITLE" --title "RPI LIGHTGUN SETUP MENU " \
-      --ok-label Install --cancel-label Exit \
+    choice=$(dialog --backtitle "$BACKTITLE" --title "RPI LIGHTGUN TOOL MENU " \
+      --ok-label Select --cancel-label Exit \
       --menu "WHAT KIND OF GUN DO YOU HAVE?" 40 60 40 \
-      1 "DOLPHIN BAR + WII MOTE" \
-      2 "GUN4IR" \
-      3 "MOUSE INPUT GUN" \
-      4 "SINDEN" \
-       + "<                         >" \
-       + "<RPI LIGHTGUN SETUP TOOLS >" \
-       + "<                         >" \
-      T1 "-SETUP INFO/HELP         " \
-      T2 "-UPDATE SETUP MENU       " \
-      T3 "-UNINSTALL SETUP MENU    " \
+      1 "Dolphin/WII Mote" \
+      2 "Gun4IR Lightgun" \
+      3 "Mouse Input Gun" \
+      4 "Sinden Lightgun" \
+      T1 "---ABOUT  RPI-LG-TOOL---" \
+      T2 "---REMOVE RPI-LG-TOOL---" \
+      T3 "---UPDATE RPI-LG-TOOL---" \
       2>&1 >/dev/tty)
 
     case "$choice" in
-    1) mouse-gun  ;;
-    2) mouse-gun  ;;
+    1) dolphin-bar  ;;
+    2) gun4ir  ;;
     3) mouse-gun ;;
     4) sinden-menu ;;
     T1) gun-help ;;
-    T2) update-script ;;
-    T3) remove-script ;;
-    -) no ;;
+    T2) remove-script ;;
+    T3) update-script ;;
      *) break ;;
     esac
    done
@@ -40,18 +36,62 @@ function gun-help() {
 echo "blah"
 }
 
-function update-script() {
-echo "blah"
-}
+
 function remove-script() {
 echo "blah"
 }
-####------------------------MOUSE INPUT--------------------------------####
 
-function mouse-gun() {
+function update-script() {
+echo "blah"
+}
+
+####------------------------MOUSE INPUTS--------------------------------####
+
+#---GUN4IR---#
+function gun4ir() {
   local choice
   while true; do
-    choice=$(dialog --backtitle "$BACKTITLE" --title "RPI MOUSE GUN SETUP MENU " \
+    choice=$(dialog --backtitle "$BACKTITLE" --title "RPI GUN4IR SETUP MENU " \
+      --ok-label Select --cancel-label Back \
+      --menu "PRESS A/ENTER TO SETUP CONSOLE" 40 60 40 \
+      1 "Gun4IR Offical Tools" \
+      2 "Console Selection" \
+      2>&1 >/dev/tty)
+
+    case "$choice" in
+    1) offical-gun4ir ;;
+    2) ra-gun "atari800"  ;;
+    -) no ;;
+     *) break ;;
+    esac
+   done
+}
+
+function offical-gun4ir() {
+dialog  --sleep 1 --title "ATTENTION MESSAGE" --msgbox "
+- This is a gui for windows not linux(retropie).
+- You might be able to run through wine, untested thus far.
+- To our knowledge you do NOT need it for pi." 0 0
+  local choice
+  while true; do
+    choice=$(dialog --backtitle "$BACKTITLE" --title "RPI GUN4IR SETUP MENU " \
+      --ok-label Select --cancel-label Back \
+      --menu "PRESS A/ENTER TO SELECT" 40 60 40 \
+      1 "Download Firmware and GUI" \
+      2>&1 >/dev/tty)
+
+    case "$choice" in
+    1) gun4ir-firm  ;;
+    -) no ;;
+     *) break ;;
+    esac
+   done
+}
+
+function gin4ir-consoles() {
+  local choice
+  while true; do
+    choice=$(dialog --backtitle "$BACKTITLE" --title "RPI GUN4IR CONSOLES MENU " \
       --ok-label Select --cancel-label Back \
       --menu "PRESS A/ENTER TO SETUP CONSOLE" 40 60 40 \
       1 "Arcade Setup" \
@@ -59,7 +99,7 @@ function mouse-gun() {
       3 "Atari2600 Setup" \
       4 "NES Setup" \
       5 "SNES Setup" \
-      6 "Mastersystem Setup" \               
+      6 "Mastersystem Setup" \
       2>&1 >/dev/tty)
 
     case "$choice" in
@@ -75,8 +115,35 @@ function mouse-gun() {
    done
 }
 
+function gun-firm() {
+wget https://github.com/gobozgz/GUN4IR/archive/refs/tags/2.16.zip -P "$HOME"
+unzip 2.16.zip
+}
 
-function ra-gun() {
+function ra-gun4ir() {
+  local choice
+  while true; do
+    choice=$(dialog --backtitle "$BACKTITLE" --title " "$1" RETROARCH SETUP MENU " \
+      --ok-label Select --cancel-label Back \
+      --menu "WHAT OPTIONS DO YOU WANT FOR  "$1" ?" 40 60 40 \
+      1 "COPY CONFIGS, MAKE DIRECTORIES " \
+      2 "OPTION 1(ABOVE) & EDIT ES SYSTEMS  " \
+      3 "DOWNLOAD & APPLY RETROARCH CONFIG " \
+      4 "APPLY ALL " \
+      2>&1 >/dev/tty)
+
+    case "$choice" in
+    1) copy-configs "$1" "$2" "$3" "$4" "$5" "$6" "$7" "$8" ;;
+    1) es-edit-gun "$1" "$2" "$3" "$4" "$5" "$6" "$7" "$8" ;;
+    2) retroarch-config-gun4ir  "$1" "$2" "$3" "$4" "$5" "$6" "$7" "$8" ;;
+    3) apply-all-gun4ir  ;;
+    -) no ;;
+     *) break ;;
+    esac
+   done
+}
+
+function sa-gun4ir() {
   local choice
   while true; do
     choice=$(dialog --backtitle "$BACKTITLE" --title " "$1" STANDALONE SETUP MENU " \
@@ -84,6 +151,110 @@ function ra-gun() {
       --menu "WHAT OPTIONS DO YOU WANT FOR  "$1" ?" 40 60 40 \
       1 "COPY CONFIGS, MAKE DIRECTORIES " \
       2 "OPTION 1(ABOVE) & EDIT ES SYSTEMS  " \ 
+      3 "DOWNLOAD & APPLY STANDALONE CONFIG " \
+      4 "APPLY ALL " \
+      2>&1 >/dev/tty)
+
+    case "$choice" in
+    1) copy-configs "$1" "$2" "$3" "$4" "$5" "$6" "$7" "$8" ;;
+    1) es-edit-gun "$1" "$2" "$3" "$4" "$5" "$6" "$7" "$8" ;;
+    2) sa-config-gun4ir  "$1" "$2" "$3" "$4" "$5" "$6" "$7" "$8";;
+    3) apply-all-gun4ir  ;;
+    -) no ;;
+     *) break ;;
+    esac
+   done
+}
+
+function retroarch-config-gun4ir() {
+if [ ! -s "opt/retropie/configs/"$1"-gun" ]; then sudo wget https://github.com/Retro-Devils/RPI-LightGun-Tool/blob/main/ra-configs/"$1"-gun/retroarch.cfg -P /opt/retropie/configs/"$1"-gun/
+else
+sudo cp /opt/retropie/configs/"$1" -P /opt/retropie/configs/"$1"-gun
+sudo chmod -R 755 /opt/retropie/configs/"$1"-gun
+sudo wget https://github.com/Retro-Devils/RPI-LightGun-Tool/blob/main/ra-configs/"$1"-gun/retroarch.cfg -P /opt/retropie/configs/"$1"-gun/
+dialog  --sleep 1 --title "RETROARCH CONFIG EXIT MESSAGE" --msgbox "
+- Your config folder for "$1" has been copied as "$1"-gun
+- You will need to manually edit es-systems.cfg to reflect this 
+OR go back and press Make Directory & Edit ES Systems" 0 0
+fi
+}
+
+function sa-config-gun4ir() {
+echo "WAIT FOR IT"
+}
+
+function apply-all-gun4ir() {
+es-edit-gun 
+retroarch-config-gun4ir
+}
+
+
+#--Dolphin/Wii---#
+
+function dolphin-bar() {
+  local choice
+  while true; do
+    choice=$(dialog --backtitle "$BACKTITLE" --title "DOLPHIN BAR/WII MOTE MENU " \
+      --ok-label Select --cancel-label Back \
+      --menu "PRESS A/ENTER TO SETUP CONSOLE" 40 60 40 \
+      1 "Arcade Setup" \
+      2 "Atari800 Setup" \
+      3 "Atari2600 Setup" \
+      4 "NES Setup" \
+      5 "SNES Setup" \
+      6 "Mastersystem Setup" \
+      2>&1 >/dev/tty)
+
+    case "$choice" in
+    1) ra-gun "arcade"  ;;
+    2) ra-gun "atari800"  ;;
+    3) ra-gun "atari2600" ;;
+    4) ra-gun "nes" ".7z" ".nes" ".zip" ".7Z" ".NES" ".ZIP" ;;
+    5) ra-gun "snes"   ;;
+    6) ra-gun "mastersystem" ;;
+    -) no ;;
+     *) break ;;
+    esac
+   done
+}
+
+#----Mouse Gun---#
+
+function mouse-gun() {
+  local choice
+  while true; do
+    choice=$(dialog --backtitle "$BACKTITLE" --title "MOUSE GUN MENU " \
+      --ok-label Select --cancel-label Back \
+      --menu "PRESS A/ENTER TO SETUP CONSOLE" 40 60 40 \
+      1 "Arcade Setup" \
+      2 "Atari800 Setup" \
+      3 "Atari2600 Setup" \
+      4 "NES Setup" \
+      5 "SNES Setup" \
+      6 "Mastersystem Setup" \
+      2>&1 >/dev/tty)
+
+    case "$choice" in
+    1) ra-gun "arcade"  ;;
+    2) ra-gun "atari800"  ;;
+    3) ra-gun "atari2600" ;;
+    4) ra-gun "nes" ".7z" ".nes" ".zip" ".7Z" ".NES" ".ZIP" ;;
+    5) ra-gun "snes"   ;;
+    6) ra-gun "mastersystem" ;;
+    -) no ;;
+     *) break ;;
+    esac
+   done
+}
+
+function ra-gun() {
+  local choice
+  while true; do
+    choice=$(dialog --backtitle "$BACKTITLE" --title " "$1" RETROARCH SETUP MENU " \
+      --ok-label Select --cancel-label Back \
+      --menu "WHAT OPTIONS DO YOU WANT FOR  "$1" ?" 40 60 40 \
+      1 "COPY CONFIGS, MAKE DIRECTORIES " \
+      2 "OPTION 1(ABOVE) & EDIT ES SYSTEMS  " \
       3 "DOWNLOAD & APPLY RETROARCH CONFIG " \
       4 "APPLY ALL " \
       2>&1 >/dev/tty)
@@ -92,7 +263,7 @@ function ra-gun() {
     1) copy-configs "$1" "$2" "$3" "$4" "$5" "$6" "$7" "$8" ;;
     1) es-edit-gun "$1" "$2" "$3" "$4" "$5" "$6" "$7" "$8" ;;
     2) retroarch-config  "$1" "$2" "$3" "$4" "$5" "$6" "$7" "$8" ;;
-    3) apply-all-gun  ;;
+    3) apply-all-ra  ;;
     -) no ;;
      *) break ;;
     esac
@@ -114,8 +285,8 @@ function sa-gun() {
     case "$choice" in
     1) copy-configs "$1" "$2" "$3" "$4" "$5" "$6" "$7" "$8" ;;
     1) es-edit-gun "$1" "$2" "$3" "$4" "$5" "$6" "$7" "$8" ;;
-    2) retroarch-config  "$1" "$2" "$3" "$4" "$5" "$6" "$7" "$8";;
-    3) apply-all-gun  ;;
+    2) sa-config  "$1" "$2" "$3" "$4" "$5" "$6" "$7" "$8";;
+    3) apply-all-sa  ;;
     -) no ;;
      *) break ;;
     esac
@@ -155,15 +326,25 @@ sudo chmod -R 755 /opt/retropie/configs/"$1"-gun
 sudo wget https://github.com/Retro-Devils/RPI-LightGun-Tool/blob/main/ra-configs/"$1"-gun/retroarch.cfg -P /opt/retropie/configs/"$1"-gun/
 dialog  --sleep 1 --title "RETROARCH CONFIG EXIT MESSAGE" --msgbox "
 - Your config folder for "$1" has been copied as "$1"-gun
-- You will need to manually edit es-systems.cfg to reflect this 
+- You will need to manually edit es-systems.cfg to reflect this
 OR go back and press Make Directory & Edit ES Systems" 0 0
-}
 fi
 }
 
-function apply-all-gun() {
-es-edit-gun 
-retroarch-config
+
+function sa-config() {
+echo "WAIT FOR IT"
+}
+
+
+function apply-all-ra() {
+es-edit-gun "$1" "$2" "$3" "$4" "$5" "$6" "$7" "$8"
+retroarch-config "$1" "$2" "$3" "$4" "$5" "$6" "$7" "$8"
+}
+
+function apply-all-sa() {
+es-edit-gun "$1" "$2" "$3" "$4" "$5" "$6" "$7" "$8"
+retroarch-config "$1" "$2" "$3" "$4" "$5" "$6" "$7" "$8"
 }
 
 
