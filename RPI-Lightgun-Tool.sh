@@ -54,7 +54,7 @@ function mouse-gun() {
     1) ra-gun "arcade"  ;;
     2) ra-gun "atari800"  ;;
     3) ra-gun "atari2600" ;;
-    4) ra-gun "nes" "fceeum" ;;
+    4) ra-gun "nes" "fceumm" ;;
     5) ra-gun "snes"   ;;
     6) ra-gun "mastersystem" ;;
     -) no ;;
@@ -76,8 +76,8 @@ function ra-gun() {
       2>&1 >/dev/tty)
 
     case "$choice" in
-    1) es-edit-gun "$1"  ;;
-    2) retroarch-config  ;;
+    1) es-edit-gun "$1" "$2" "$3" ;;
+    2) retroarch-config "$1" ;;
     3) apply-all-gun  ;;
     -) no ;;
      *) break ;;
@@ -127,10 +127,11 @@ dialog  --sleep 1 --title "MAKE DIRECTORY & EDIT ES EXIT MESSAGE" --msgbox "
 }
 
 function retroarch-config() {
-if [ ! -s "opt/retropie/configs/"$1"-gun" ]; then sudo wget retroarch---config--path -P /opt/retropie/configs/"$1"-gun/
+if [ ! -s "opt/retropie/configs/"$1"-gun" ]; then sudo wget https://github.com/Retro-Devils/RPI-LightGun-Tool/blob/main/ra-configs/"$1"-gun/retroarch.cfg -P /opt/retropie/configs/"$1"-gun/
 else
 sudo cp /opt/retropie/configs/"$1" -P /opt/retropie/configs/"$1"-gun
-sudo wget retroarch---config--path -P /opt/retropie/configs/"$1"-gun/
+sudo chmod -R 755 /opt/retropie/configs/"$1"-gun
+sudo wget https://github.com/Retro-Devils/RPI-LightGun-Tool/blob/main/ra-configs/"$1"-gun/retroarch.cfg -P /opt/retropie/configs/"$1"-gun/
 dialog  --sleep 1 --title "RETROARCH CONFIG EXIT MESSAGE" --msgbox "
 - Your config folder for "$1" has been copied as "$1"-gun
 - You will need to manually edit es-systems.cfg to reflect this 
