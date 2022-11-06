@@ -305,9 +305,9 @@ function ra-gun() {
 
     case "$choice" in
     1) copy-configs "$1" "$2" "$3" "$4" "$5" "$6" "$7" "$8" ;;
-    1) es-edit-gun "$1" "$2" "$3" "$4" "$5" "$6" "$7" "$8" ;;
-    2) retroarch-config  "$1" "$2" "$3" "$4" "$5" "$6" "$7" "$8" ;;
-    3) apply-all-ra  ;;
+    2) es-edit-gun "$1" "$2" "$3" "$4" "$5" "$6" "$7" "$8" ;;
+    3) retroarch-config  "$1" "$2" "$3" "$4" "$5" "$6" "$7" "$8" ;;
+    4) apply-all-ra  ;;
     -) no ;;
      *) break ;;
     esac
@@ -374,18 +374,67 @@ retroarch-config "$1" "$2" "$3" "$4" "$5" "$6" "$7" "$8"
 ####------------------------SINDEN--------------------------------####
 
 function sinden-menu() {
-sleep 2 
-echo "working"
-sleep 1
-echo "on"
-sleep 1
-echo "it"
+dialog  --sleep 1 --title "CREDITS" --msgbox "
+- ALL CREDIT GOES TO 
+https://github.com/SindenLightgun/SindenLightgunLinux
+- WE JUST ADDED THOSE SCRIPTS IN UI" 0 0
+  local choice
+  while true; do
+    choice=$(dialog --backtitle "$BACKTITLE" --title "SINDEN SETUP MENU " \
+      --ok-label Select --cancel-label Back \
+      --menu "PLEASE SELECT A OPTION" 40 60 40 \
+      1 "INSTALL SINDEN DRIVERS " \
+      2 "CONFIGURE SINDEN GUN" \
+      2>&1 >/dev/tty)
+
+    case "$choice" in
+    1) sinden-install ;;
+    2) sinden-config ;;
+    -) no ;;
+     *) break ;;
+    esac
+   done
+}
+
+function sinden-config() {
+if [ ! -d "$HOME/SindenLightgunLinux" ]; then
+cd /home/pi/SindenLightgunLinux; \
+chmod 755 *.sh; \
+./setup-lightgun.sh; \
+./setup-retropie.sh; \
+else
+dialog  --sleep 1 --title "MISSING SINDEN DRIVERS" --msgbox "
+- SINDEN DRIVERS/SOFTWARE NOT INSTALLED
+- CANT CREATE GUN CONFIG WITHOUT DRIVERS 
+- EXTING " 0 0
+fi
+}
+
+
+function sinden-install() {
+if [ ! -d "$HOME/SindenLightgunLinux" ]; then
+cd /home/pi; \
+git clone https://github.com/SindenLightgun/SindenLightgunLinux.git; \
+cd SindenLightgunLinux; \
+echo ""; \
+VERSION=$(git symbolic-ref --short -q HEAD); echo "Current Version ${VERSION}"
+else
+cd /home/pi/SindenLightgunLinux
+git pull
+fi
 }
 
 ###------------------STANDALONES-----------------###
 
 function model3-gun() {
-wget https://raw.githubusercontent.com/Retro-Devils/RPI-LightGun-Tool/main/sa-configs/all/model3-gun/supermodel.ini -P 
+if [ ! -s "opt/retropie/configs/model3" ]; then
+dialog  --sleep 1 --title "MISSING EMU ERROR" --msgbox "
+- SUPER MODEL 3 IS NOT INSTALLED 
+- CANT CREATE GUN CONFIG WITHOUT EMU 
+- EXTING " 0 0
+else
+wget https://raw.githubusercontent.com/Retro-Devils/RPI-LightGun-Tool/main/sa-configs/all/model3-gun/supermodel.ini -P
+fi
 }
 
 
