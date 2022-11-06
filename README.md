@@ -23,7 +23,9 @@ WORK IN PROGRESS
 
 ## INSTALLATION
 
-          curl -sSL WORK IN PROGRESS WORK IN PROGRESS
+          WARNING BETA FOR DEV ONLY ATM. AGAIN WARNING BETA 
+
+          curl -sSL bit.ly/Install-RPI-LG-Tool | bash
 
 ## HOW TO USE?
 
