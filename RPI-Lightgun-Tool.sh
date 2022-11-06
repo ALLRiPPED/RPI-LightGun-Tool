@@ -12,9 +12,9 @@ local choice
       2 "GUN4IR" \
       3 "MOUSE INPUT GUN" \
       4 "SINDEN" \
-       + "<                                     >" \
-       + "<---RPI LIGHTGUN SETUP TOOLS --->" \
-       + "<                                     >" \
+       + "<                         >" \
+       + "<RPI LIGHTGUN SETUP TOOLS >" \
+       + "<                         >" \
       T1 "-SETUP INFO/HELP         " \   
       T2 "-UPDATE SETUP MENU       " \
       T3 "-UNINSTALL SETUP MENU    " \                
@@ -69,7 +69,7 @@ function ra-gun() {
   while true; do
     choice=$(dialog --backtitle "$BACKTITLE" --title " "$1" STANDALONE SETUP MENU " \
       --ok-label Select --cancel-label Back \
-      --menu "WHAT OPTIONS DO YOU WANT FOR  "$1"?" 40 60 40 \
+      --menu "WHAT OPTIONS DO YOU WANT FOR  "$1" ?" 40 60 40 \
       1 "COPY CONFIGS, MAKE DIRECTORIES " \
       2 "OPTION 1(ABOVE) & EDIT ES SYSTEMS  " \ 
       3 "DOWNLOAD & APPLY RETROARCH CONFIG " \
@@ -92,7 +92,7 @@ function sa-gun() {
   while true; do
     choice=$(dialog --backtitle "$BACKTITLE" --title " "$1" STANDALONE SETUP MENU " \
       --ok-label Select --cancel-label Back \
-      --menu "WHAT OPTIONS DO YOU WANT FOR  "$1"?" 40 60 40 \
+      --menu "WHAT OPTIONS DO YOU WANT FOR  "$1" ?" 40 60 40 \
       1 "COPY CONFIGS, MAKE DIRECTORIES " \
       2 "OPTION 1(ABOVE) & EDIT ES SYSTEMS  " \ 
       3 "DOWNLOAD & APPLY RETROARCH CONFIG " \
