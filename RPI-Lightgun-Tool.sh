@@ -88,7 +88,7 @@ dialog  --sleep 1 --title "ATTENTION MESSAGE" --msgbox "
    done
 }
 
-function gin4ir-consoles() {
+function gun4ir-consoles() {
   local choice
   while true; do
     choice=$(dialog --backtitle "$BACKTITLE" --title "RPI GUN4IR CONSOLES MENU " \
