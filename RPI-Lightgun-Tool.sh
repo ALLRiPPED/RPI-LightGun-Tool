@@ -5,7 +5,7 @@ BACKTITLE="<-----RPI LIGHTGUN TOOL -----><->Version<->1.00"
 function gun-menu() {
 local choice
   while true; do
-    choice=$(dialog --backtitle "$BACKTITLE" --title "RPI LIGHTGUN TOOL MENU " \
+    choice=$(dialog --backtitle "$BACKTITLE" --title "MAIN MENU" \
       --ok-label Select --cancel-label Exit \
       --menu "WHAT KIND OF GUN DO YOU HAVE?" 40 60 40 \
       1 "Dolphin/WII Mote" \
