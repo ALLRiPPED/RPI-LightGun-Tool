@@ -9,9 +9,9 @@ Last Update:            11/5/22
 
           Grabs a pre setup retroarch config file for Retroarch systems.
 
-          Grabs or edits files on standalone emus .
+          Grabs or edits files on standalone emu configs.
 
-          Edit es_systems.cfg to add gun systems
+          Edit es_systems.cfg to add gun systems.
 
           Make new folders for gun games. 
 
@@ -25,32 +25,32 @@ curl -sSL WORK IN PROGRESS WORK IN PROGRESS
 
 - In Retropie
 
-            Go to Retropie/Config
+            1.Go to Retropie/Config
             
-            Launch RPI Lightgun Tool 
+            2.Launch RPI Lightgun Tool 
             
-            Select Gun Type
+            3.Select Gun Type
 
-            Select system/console
+            4.Select system/console
 
-            Press A/Enter
+            5.Press A/Enter
 
-            Select From The Options 
+            6.Select From The Options 
             
             
 - From Command Line/Terminal
 
-            Type "RPI-Lightgun-Tool" 
+            1.Type "RPI-Lightgun-Tool" 
                         
-            Press Enter
+            2.Press Enter
             
-            Select Gun Type
+            3.Select Gun Type
             
-            Select system/console
+            4.Select system/console
 
-            Press A/Enter
+            5.Press A/Enter
 
-            Select from the options
+            6.Select from the options
 ## FAQ
 
 - Where does it make new folder for gun games ?
