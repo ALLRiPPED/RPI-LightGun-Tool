@@ -15,7 +15,7 @@ Last Update:            11/5/22
 
           Make new folders for gun games. 
 
-          Ask what type of gun your using, & loads different menusfor different guns.
+          Ask what type of gun your using, & loads different menus for different guns.
 
 ## INSTALLATION
 
