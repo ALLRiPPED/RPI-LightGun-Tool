@@ -2,8 +2,11 @@
 WORK IN PROGRESS
 
 #Info 
+
          This is a tool to make using Lightguns on Retropie as easy as possible.
+         
          Version:                BETA 1.00
+         
          Last Update:            11/5/22
 
 ## FEATURES 
