@@ -7,15 +7,15 @@ Last Update:            11/5/22
 
 ## FEATURES 
 
-- Grabs a pre setup retroarch config file for Retroarch systems.
+          Grabs a pre setup retroarch config file for Retroarch systems.
 
-- Grabs or edits files on standalone emus .
+          Grabs or edits files on standalone emus .
 
-- Edit es_systems.cfg to add gun systems
+          Edit es_systems.cfg to add gun systems
 
-- Make new folders for gun games. 
+          Make new folders for gun games. 
 
-- Ask what type of gun your using, and loads different menus for different gun types.
+          Ask what type of gun your using, & loads different menus 
 
 ## INSTALLATION
 
