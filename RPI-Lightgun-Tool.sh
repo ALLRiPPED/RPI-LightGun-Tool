@@ -270,12 +270,12 @@ function mouse-gun() {
       2>&1 >/dev/tty)
 
     case "$choice" in
-    1) ra-gun "arcade"  ;;
-    2) ra-gun "atari800"  ;;
-    3) ra-gun "atari2600" ;;
-    4) ra-gun "nes" ".7z" ".nes" ".zip" ".7Z" ".NES" ".ZIP" ;;
-    5) ra-gun "snes"   ;;
-    6) ra-gun "mastersystem" ;;
+    1) ra-gun-mouse "arcade"  ;;
+    2) ra-gun-mouse "atari800"  ;;
+    3) ra-gun-mouse "atari2600" ;;
+    4) ra-gun-mouse "nes" ".7z" ".nes" ".zip" ".7Z" ".NES" ".ZIP" ;;
+    5) ra-gun-mouse "snes"   ;;
+    6) ra-gun-mouse "mastersystem" ;;
     7) model3-gun ;;
     -) no ;;
      *) break ;;
@@ -283,7 +283,7 @@ function mouse-gun() {
    done
 }
 
-function ra-gun() {
+function ra-gun-mouse() {
   local choice
   while true; do
     choice=$(dialog --backtitle "$BACKTITLE" --title " "$1" RETROARCH SETUP MENU " \
