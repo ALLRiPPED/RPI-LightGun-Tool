@@ -68,7 +68,7 @@ function gun4ir() {
 
     case "$choice" in
     1) offical-gun4ir ;;
-    2) ra-gun "atari800"  ;;
+    2) gun4ir-consoles  ;;
     -) no ;;
      *) break ;;
     esac
@@ -112,12 +112,12 @@ function gun4ir-consoles() {
       2>&1 >/dev/tty)
 
     case "$choice" in
-    1) ra-gun "arcade"  ;;
-    2) ra-gun "atari800"  ;;
-    3) ra-gun "atari2600" ;;
-    4) ra-gun "nes" ".7z" ".nes" ".zip" ".7Z" ".NES" ".ZIP" ;;
-    5) ra-gun "snes"   ;;
-    6) ra-gun "mastersystem" ;;
+    1) ra-gun4ir "arcade"  ;;
+    2) ra-gun4ir "atari800"  ;;
+    3) ra-gun4ir "atari2600" ;;
+    4) ra-gun4ir "nes" ".7z" ".nes" ".zip" ".7Z" ".NES" ".ZIP" ;;
+    5) ra-gun4ir "snes"   ;;
+    6) ra-gun4ir "mastersystem" ;;
     7) model3-gun ;;
     -) no ;;
      *) break ;;
@@ -136,8 +136,8 @@ function ra-gun4ir() {
     choice=$(dialog --backtitle "$BACKTITLE" --title " "$1" RETROARCH SETUP MENU " \
       --ok-label Select --cancel-label Back \
       --menu "WHAT OPTIONS DO YOU WANT FOR  "$1" ?" 40 60 40 \
-      1 "COPY CONFIGS, MAKE DIRECTORIES " \
-      2 "OPTION 1(ABOVE) & EDIT ES SYSTEMS  " \
+      1 "MAKE DIRECTORY FOR GUN GAMES" \
+      2 "MAKE DIRECTORY & EDIT ES SYSTEMS  " \
       3 "DOWNLOAD & APPLY RETROARCH CONFIG " \
       4 "APPLY ALL " \
       2>&1 >/dev/tty)
@@ -155,15 +155,16 @@ function ra-gun4ir() {
 
 
 function retroarch-config-gun4ir() {
-if [ ! -s "opt/retropie/configs/"$1"-gun" ]; then sudo wget https://github.com/Retro-Devils/RPI-LightGun-Tool/blob/main/ra-configs/"$1"-gun/retroarch.cfg -P /opt/retropie/configs/"$1"-gun/
-else
-sudo cp /opt/retropie/configs/"$1" -P /opt/retropie/configs/"$1"-gun
-sudo chmod -R 755 /opt/retropie/configs/"$1"-gun
-sudo wget https://github.com/Retro-Devils/RPI-LightGun-Tool/blob/main/ra-configs/"$1"-gun/retroarch.cfg -P /opt/retropie/configs/"$1"-gun/
+if [ ! -s "opt/retropie/configs/"$1"-gun" ]; then 
+sudo mv /opt/retropie/configs/"$1"/retroarch.cfg -P /opt/retropie/configs/"$1"/retroarch-cfg.backup
+sudo wget https://github.com/Retro-Devils/RPI-LightGun-Tool/blob/main/ra-configs/gun4ir/"$1"-gun/retroarch.cfg -P /opt/retropie/configs/"$1"/
 dialog  --sleep 1 --title "RETROARCH CONFIG EXIT MESSAGE" --msgbox "
 - Your config folder for "$1" has been copied as "$1"-gun
 - You will need to manually edit es-systems.cfg to reflect this 
 OR go back and press Make Directory & Edit ES Systems" 0 0
+else
+dialog  --sleep 1 --title "EMU MISSING" --msgbox "
+- EMU FOR "$1" MISSING PLEASE INSTALL FIRST!!" 0 0
 fi
 }
 
@@ -211,8 +212,8 @@ function ra-wii() {
     choice=$(dialog --backtitle "$BACKTITLE" --title " "$1" RETROARCH SETUP MENU " \
       --ok-label Select --cancel-label Back \
       --menu "WHAT OPTIONS DO YOU WANT FOR  "$1" ?" 40 60 40 \
-      1 "COPY CONFIGS, MAKE DIRECTORIES " \
-      2 "OPTION 1(ABOVE) & EDIT ES SYSTEMS  " \
+      1 "MAKE DIRECTORY FOR GUN GAMES " \
+      2 "MAKE DIRECTORY & EDIT ES SYSTEMS  " \
       3 "DOWNLOAD & APPLY RETROARCH CONFIG " \
       4 "APPLY ALL " \
       2>&1 >/dev/tty)
@@ -231,25 +232,16 @@ function ra-wii() {
 
 
 function ra-config-wii() {
-if [ ! -s "opt/retropie/configs/"$1"-gun" ]; then 
-sudo rm -R /opt/retropie/configs/"$1"-gun/
-sudo mkdir /opt/retropie/configs/"$1"-gun
-sudo wget https://raw.githubusercontent.com/Retro-Devils/RPI-LightGun-Tool/main/ra-configs/wii-mote/"$1"-gun/retroarch.cfg -P /opt/retropie/configs/"$1"-gun/
-sudo wget https://raw.githubusercontent.com/Retro-Devils/RPI-LightGun-Tool/main/ra-configs/wii-mote/"$1"-gun/emulators.cfg -P /opt/retropie/configs/"$1"-gun/
-sudo chmod -R 755 /opt/retropie/configs/"$1"-gun
+if [ ! -s "opt/retropie/configs/"$1" " ]; then 
+sudo mv /opt/retropie/configs/"$1"/retroarch.cfg -P /opt/retropie/configs/"$1"/retroarch-cfg.backup
+sudo wget https://github.com/Retro-Devils/RPI-LightGun-Tool/blob/main/ra-configs/wii-mote/"$1"-gun/retroarch.cfg -P /opt/retropie/configs/"$1"/
 dialog  --sleep 1 --title "RETROARCH CONFIG EXIT MESSAGE" --msgbox "
 - Your config folder for "$1" has been copied as "$1"-gun
-- You will need to manually edit es-systems.cfg to reflect this
+- You will need to manually edit es-systems.cfg to reflect this 
 OR go back and press Make Directory & Edit ES Systems" 0 0
 else
-sudo mkdir /opt/retropie/configs/"$1"-gun
-sudo chmod -R 755 /opt/retropie/configs/"$1"-gun
-sudo wget https://raw.githubusercontent.com/Retro-Devils/RPI-LightGun-Tool/main/ra-configs/wii-mote/"$1"-gun/retroarch.cfg -P /opt/retropie/configs/"$1"-gun/
-sudo wget https://raw.githubusercontent.com/Retro-Devils/RPI-LightGun-Tool/main/ra-configs/wii-mote/"$1"-gun/emulators.cfg -P /opt/retropie/configs/"$1"-gun/
-dialog  --sleep 1 --title "RETROARCH CONFIG EXIT MESSAGE" --msgbox "
-- Your config folder for "$1" has been copied as "$1"-gun
-- You will need to manually edit es-systems.cfg to reflect this
-OR go back and press Make Directory & Edit ES Systems" 0 0
+dialog  --sleep 1 --title "EMU MISSING" --msgbox "
+- EMU FOR "$1" MISSING PLEASE INSTALL FIRST!!" 0 0
 fi
 }
 
@@ -297,8 +289,8 @@ function ra-gun() {
     choice=$(dialog --backtitle "$BACKTITLE" --title " "$1" RETROARCH SETUP MENU " \
       --ok-label Select --cancel-label Back \
       --menu "WHAT OPTIONS DO YOU WANT FOR  "$1" ?" 40 60 40 \
-      1 "COPY CONFIGS, MAKE DIRECTORIES " \
-      2 "OPTION 1(ABOVE) & EDIT ES SYSTEMS  " \
+      1 "MAKE DIRECTORY FOR GUN GAMES " \
+      2 "MAKE DIRECTORY & EDIT ES SYSTEMS  " \
       3 "DOWNLOAD & APPLY RETROARCH CONFIG " \
       4 "APPLY ALL " \
       2>&1 >/dev/tty)
@@ -306,22 +298,41 @@ function ra-gun() {
     case "$choice" in
     1) copy-configs "$1" "$2" "$3" "$4" "$5" "$6" "$7" "$8" ;;
     2) es-edit-gun "$1" "$2" "$3" "$4" "$5" "$6" "$7" "$8" ;;
-    3) retroarch-config  "$1" "$2" "$3" "$4" "$5" "$6" "$7" "$8" ;;
-    4) apply-all-ra  ;;
+    3) retroarch-config-mouse  "$1" "$2" "$3" "$4" "$5" "$6" "$7" "$8" ;;
+    4) apply-all-mouse  ;;
     -) no ;;
      *) break ;;
     esac
    done
 }
 
-function copy-configs() {
-sudo cp /opt/retropie/configs/"$1" -P /opt/retropie/configs/"$1"-gun
-mkdir "$HOME"/RetroPie/roms/gun-games/"$1"
+
+function retroarch-config-mouse() {
+if [ ! -s "opt/retropie/configs/"$1" " ]; then 
+sudo mv /opt/retropie/configs/"$1"/retroarch.cfg -P /opt/retropie/configs/"$1"/retroarch-cfg.backup
+sudo wget https://github.com/Retro-Devils/RPI-LightGun-Tool/blob/main/ra-configs/mouse-gun/gun/"$1"-gun/retroarch.cfg -P /opt/retropie/configs/"$1"/
+dialog  --sleep 1 --title "RETROARCH CONFIG EXIT MESSAGE" --msgbox "
+- Your config folder for "$1" has been copied as "$1"-gun
+- You will need to manually edit es-systems.cfg to reflect this 
+OR go back and press Make Directory & Edit ES Systems" 0 0
+else
+dialog  --sleep 1 --title "EMU MISSING" --msgbox "
+- EMU FOR "$1" MISSING PLEASE INSTALL FIRST!!" 0 0
+fi
 }
 
 
+
+function apply-all-mouse() {
+es-edit-gun "$1" "$2" "$3" "$4" "$5" "$6" "$7" "$8"
+retroarch-config-mouse "$1" "$2" "$3" "$4" "$5" "$6" "$7" "$8"
+}
+
+
+
+####------------Multi guns--------------------####
+
 function es-edit-gun() {
-sudo cp /opt/retropie/configs/"$1" -P /opt/retropie/configs/"$1"-gun
 mkdir "$HOME"/RetroPie/roms/gun-games/"$1"
 if [ ! -s "$HOME/.emulationstation/es_systems.cfg" ]; then sudo rm -f $HOME/.emulationstation/es_systems.cfg; fi
 if [ ! -f "$HOME/.emulationstation/es_systems.cfg" ]; then cp $HOME/.emulationstation/es_systems.cfg $HOME/RetroPie/retropiemenu/gamelist.xml; fi
@@ -336,39 +347,13 @@ fi
 dialog  --sleep 1 --title "MAKE DIRECTORY & EDIT ES EXIT MESSAGE" --msgbox "
 - A FOLDER HAS BEEN MADE UNDER Home/Pi/RetroPie/roms/gun-games/"$1" 
 - home/Pi/.emulationstation/es_systems.cfg has been edited
-- Your configs for "$1" have been copied to guns config" 0 0
-}
-
-function retroarch-config() {
-if [ ! -s "opt/retropie/configs/"$1"-gun" ]; then 
-sudo rm -R /opt/retropie/configs/"$1"-gun/
-sudo mkdir /opt/retropie/configs/"$1"-gun/
-sudo wget https://raw.githubusercontent.com/Retro-Devils/RPI-LightGun-Tool/main/ra-configs/mouse-gun/nes-gun/retroarch.cfg -P /opt/retropie/configs/"$1"-gun/
-sudo wget https://raw.githubusercontent.com/Retro-Devils/RPI-LightGun-Tool/main/ra-configs/mouse-gun/nes-gun/emulators.cfg -P /opt/retropie/configs/"$1"-gun/sudo chmod -R 755 /opt/retropie/configs/"$1"-gun
-sudo chmod -R 755 /opt/retropie/configs/"$1"-gun
-dialog  --sleep 1 --title "RETROARCH CONFIG EXIT MESSAGE" --msgbox "
-- Your config folder for "$1" has been copied as "$1"-gun
-- You will need to manually edit es-systems.cfg to reflect this
-OR go back and press Make Directory & Edit ES Systems" 0 0
-else
-sudo mkdir /opt/retropie/configs/"$1"-gun
-sudo wget https://raw.githubusercontent.com/Retro-Devils/RPI-LightGun-Tool/main/ra-configs/mouse-gun/nes-gun/retroarch.cfg -P /opt/retropie/configs/"$1"-gun/
-sudo wget https://raw.githubusercontent.com/Retro-Devils/RPI-LightGun-Tool/main/ra-configs/mouse-gun/nes-gun/emulators.cfg -P /opt/retropie/configs/"$1"-gun/
-sudo chmod -R 755 /opt/retropie/configs/"$1"-gun
-dialog  --sleep 1 --title "RETROARCH CONFIG EXIT MESSAGE" --msgbox "
-- Your config folder for "$1" has been copied as "$1"-gun
-- You will need to manually edit es-systems.cfg to reflect this
-OR go back and press Make Directory & Edit ES Systems" 0 0
-fi
+- Your configs for "$1" have been backed up" 0 0
 }
 
 
-
-function apply-all-ra() {
-es-edit-gun "$1" "$2" "$3" "$4" "$5" "$6" "$7" "$8"
-retroarch-config "$1" "$2" "$3" "$4" "$5" "$6" "$7" "$8"
+function copy-configs() {
+mkdir "$HOME"/RetroPie/roms/gun-games/"$1"
 }
-
 
 
 ####------------------------SINDEN--------------------------------####
