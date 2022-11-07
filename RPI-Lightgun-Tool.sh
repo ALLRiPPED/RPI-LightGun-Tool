@@ -336,7 +336,7 @@ function es-edit-gun() {
 mkdir "$HOME"/RetroPie/roms/gun-games/"$1"
 if [ ! -s "$HOME/.emulationstation/es_systems.cfg" ]; then sudo rm -f $HOME/.emulationstation/es_systems.cfg; fi
 if [ ! -f "$HOME/.emulationstation/es_systems.cfg" ]; then cp $HOME/.emulationstation/es_systems.cfg $HOME/RetroPie/retropiemenu/gamelist.xml; fi
-CONTENT1="\t<system>\n\t\t  <name>"$1"-guns</name>\n\t\t  <fullname>"$1" Gun Games</fullname> \n\t\t  <path>/home/pi/RetroPie/roms/gun-games/"$1"</path> \n\t\t  <extension>"$2" "$3" "$4" "$5" "$6" "$7" "$8"</extension> \n\t\t<command>/opt/retropie/supplementary/runcommand/runcommand.sh 0 _SYS_ m "$1"-guns %ROM%</command> \n\t\t  <platform>"$1"</platform> \n\t\t  <theme>"$1"</theme> \n\t\t</system>"
+CONTENT1="\t<system>\n\t\t  <name>"$1"-guns</name>\n\t\t  <fullname>"$1" Gun Games</fullname> \n\t\t  <path>/home/pi/RetroPie/roms/gun-games/"$1"</path> \n\t\t  <extension>"$2" "$3" "$4" "$5" "$6" "$7" "$8"</extension> \n\t\t<command>/opt/retropie/supplementary/runcommand/runcommand.sh 0 _SYS_ m "$1" %ROM%</command> \n\t\t  <platform>"$1"</platform> \n\t\t  <theme>"$1"</theme> \n\t\t</system>"
 C1=$(echo $CONTENT1 | sed 's/\//\\\//g')
 if grep -q "$1" "$HOME/.emulationstation/es_systems.cfg"; then echo "es_systems.cfg entry confirmed"
 else
