@@ -158,7 +158,7 @@ function ra-gun4ir() {
 
 
 function retroarch-config-gun4ir() {
-if [ -d "opt/retropie/configs/"$1" " ]; then 
+if [ -d "opt/retropie/configs/$1" ]; then 
 sudo mv /opt/retropie/configs/"$1"/retroarch.cfg -P /opt/retropie/configs/"$1"/retroarch-cfg.backup
 sudo wget https://raw.githubusercontent.com/Retro-Devils/RPI-LightGun-Tool/main/ra-configs/gun4ir/"$1"-gun/retroarch.cfg -P /opt/retropie/configs/"$1"/
 chmod 755 /opt/retropie/configs/"$1"/retroarch.cfg
@@ -239,7 +239,7 @@ function ra-wii() {
 
 
 function ra-config-wii() {
-if [ -d "opt/retropie/configs/"$1" " ]; then 
+if [ -d "opt/retropie/configs/$1 " ]; then 
 sudo mv /opt/retropie/configs/"$1"/retroarch.cfg -P /opt/retropie/configs/"$1"/retroarch-cfg.backup
 sudo wget https://raw.githubusercontent.com/Retro-Devils/RPI-LightGun-Tool/main/ra-configs/gwii-mote/"$1"-gun/retroarch.cfg -P /opt/retropie/configs/"$1"/
 chmod 755 /opt/retropie/configs/"$1"/retroarch.cfg
@@ -319,7 +319,7 @@ function ra-gun-mouse() {
 
 
 function retroarch-config-mouse() {
-if [ -d "opt/retropie/configs/"$1" " ]; then 
+if [ -d "opt/retropie/configs/$1" ]; then 
 sudo mv /opt/retropie/configs/"$1"/retroarch.cfg -P /opt/retropie/configs/"$1"/retroarch-cfg.backup
 sudo wget https://raw.githubusercontent.com/Retro-Devils/RPI-LightGun-Tool/main/ra-configs/mouse-gun/"$1"-gun/retroarch.cfg -P /opt/retropie/configs/"$1"/
 chmod 755 /opt/retropie/configs/"$1"/retroarch.cfg
