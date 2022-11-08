@@ -227,10 +227,6 @@ else
 sudo mv /opt/retropie/configs/"$1"/retroarch.cfg /opt/retropie/configs/"$1"/retroarch-cfg.backup
 sudo wget https://raw.githubusercontent.com/Retro-Devils/RPI-LightGun-Tool/main/ra-configs/wii-mote/"$1"-gun/retroarch.cfg -P /opt/retropie/configs/"$1"/
 chmod 755 /opt/retropie/configs/"$1"/retroarch.cfg
-dialog  --sleep 1 --title "RETROARCH CONFIG EXIT MESSAGE" --msgbox "
-- Your retroarch config for "$1" has been backed up as retroarch-cfg.backup
-- You will need to manually edit es-systems.cfg for gun system
-OR go back and press Make Directory & Edit ES Systems" 0 0
 fi
 mkdir "$HOME"/RetroPie/roms/gun-games/"$1"
 if [ ! -s "$HOME/.emulationstation/es_systems.cfg" ]; then sudo rm -f $HOME/.emulationstation/es_systems.cfg; fi
