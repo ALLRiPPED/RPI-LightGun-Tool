@@ -108,7 +108,7 @@ function gun4ir-consoles() {
       4 "RA--NES Menu" \
       5 "RA--SNES Menu" \
       6 "RA--Mastersystem Menu" \
-      7 "SA--Model 3 Setup "
+      7 "SA--Model 3 Setup " \
       2>&1 >/dev/tty)
 
     case "$choice" in
@@ -160,7 +160,7 @@ function ra-gun4ir() {
 function retroarch-config-gun4ir() {
 if [ -d "opt/retropie/configs/"$1" " ]; then 
 sudo mv /opt/retropie/configs/"$1"/retroarch.cfg -P /opt/retropie/configs/"$1"/retroarch-cfg.backup
-sudo wget https://github.com/Retro-Devils/RPI-LightGun-Tool/blob/main/ra-configs/gun4ir/"$1"-gun/retroarch.cfg -P /opt/retropie/configs/"$1"/
+sudo wget https://raw.githubusercontent.com/Retro-Devils/RPI-LightGun-Tool/main/ra-configs/gun4ir/"$1"-gun/retroarch.cfg -P /opt/retropie/configs/"$1"/
 chmod 755 /opt/retropie/configs/"$1"/retroarch.cfg
 dialog  --sleep 1 --title "RETROARCH CONFIG EXIT MESSAGE" --msgbox "
 - Your config folder for "$1" has been copied as "$1"-gun
@@ -193,7 +193,7 @@ function dolphin-bar() {
       4 "RA--NES Menu" \
       5 "RA--SNES Menu" \
       6 "RA--Mastersystem Menu" \
-      7 "SA--Model 3 Setup "
+      7 "SA--Model 3 Setup " \
       2>&1 >/dev/tty)
 
     case "$choice" in
@@ -241,7 +241,7 @@ function ra-wii() {
 function ra-config-wii() {
 if [ -d "opt/retropie/configs/"$1" " ]; then 
 sudo mv /opt/retropie/configs/"$1"/retroarch.cfg -P /opt/retropie/configs/"$1"/retroarch-cfg.backup
-sudo wget https://github.com/Retro-Devils/RPI-LightGun-Tool/blob/main/ra-configs/wii-mote/"$1"-gun/retroarch.cfg -P /opt/retropie/configs/"$1"/
+sudo wget https://raw.githubusercontent.com/Retro-Devils/RPI-LightGun-Tool/main/ra-configs/gwii-mote/"$1"-gun/retroarch.cfg -P /opt/retropie/configs/"$1"/
 chmod 755 /opt/retropie/configs/"$1"/retroarch.cfg
 dialog  --sleep 1 --title "RETROARCH CONFIG EXIT MESSAGE" --msgbox "
 - Your config folder for "$1" has been copied as "$1"-gun
@@ -274,7 +274,7 @@ function mouse-gun() {
       4 "RA--NES Menu" \
       5 "RA--SNES Menu" \
       6 "RA--Mastersystem Menu" \
-      7 "SA--Model 3 Setup "
+      7 "SA--Model 3 Setup " \
       2>&1 >/dev/tty)
 
     case "$choice" in
@@ -321,7 +321,7 @@ function ra-gun-mouse() {
 function retroarch-config-mouse() {
 if [ -d "opt/retropie/configs/"$1" " ]; then 
 sudo mv /opt/retropie/configs/"$1"/retroarch.cfg -P /opt/retropie/configs/"$1"/retroarch-cfg.backup
-sudo wget https://github.com/Retro-Devils/RPI-LightGun-Tool/blob/main/ra-configs/mouse-gun/gun/"$1"-gun/retroarch.cfg -P /opt/retropie/configs/"$1"/
+sudo wget https://raw.githubusercontent.com/Retro-Devils/RPI-LightGun-Tool/main/ra-configs/mouse-gun/"$1"-gun/retroarch.cfg -P /opt/retropie/configs/"$1"/
 chmod 755 /opt/retropie/configs/"$1"/retroarch.cfg
 dialog  --sleep 1 --title "RETROARCH CONFIG EXIT MESSAGE" --msgbox "
 - Your config folder for "$1" has been copied as "$1"-gun
