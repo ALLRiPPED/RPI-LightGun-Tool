@@ -158,16 +158,16 @@ function ra-gun4ir() {
 
 
 function retroarch-config-gun4ir() {
-if [ -d "opt/retropie/configs/$1" ]; then 
+if [ -d "opt/retropie/configs/"$1" " ]; then 
 dialog  --sleep 1 --title "EMU MISSING" --msgbox "
 - EMU FOR "$1" MISSING PLEASE INSTALL FIRST!!" 0 0
 else
-sudo mv /opt/retropie/configs/"$1"/retroarch.cfg -P /opt/retropie/configs/"$1"/retroarch-cfg.backup
+sudo mv /opt/retropie/configs/"$1"/retroarch.cfg /opt/retropie/configs/"$1"/retroarch-cfg.backup
 sudo wget https://raw.githubusercontent.com/Retro-Devils/RPI-LightGun-Tool/main/ra-configs/gun4ir/"$1"-gun/retroarch.cfg -P /opt/retropie/configs/"$1"/
 chmod 755 /opt/retropie/configs/"$1"/retroarch.cfg
 dialog  --sleep 1 --title "RETROARCH CONFIG EXIT MESSAGE" --msgbox "
-- Your config folder for "$1" has been copied as "$1"-gun
-- You will need to manually edit es-systems.cfg to reflect this 
+- Your retroarch config for "$1" has been backed up as retroarch-cfg.backup
+- You will need to manually edit es-systems.cfg for gun system
 OR go back and press Make Directory & Edit ES Systems" 0 0
 fi
 }
@@ -239,7 +239,7 @@ function ra-wii() {
 
 
 function ra-config-wii() {
-if [ -d "opt/retropie/configs/$1 " ]; then 
+if [ -d "opt/retropie/configs/"$1" " ]; then 
 dialog  --sleep 1 --title "EMU MISSING" --msgbox "
 - EMU FOR "$1" MISSING PLEASE INSTALL FIRST!!" 0 0
 else
@@ -247,8 +247,8 @@ sudo mv /opt/retropie/configs/"$1"/retroarch.cfg -P /opt/retropie/configs/"$1"/r
 sudo wget https://raw.githubusercontent.com/Retro-Devils/RPI-LightGun-Tool/main/ra-configs/gwii-mote/"$1"-gun/retroarch.cfg -P /opt/retropie/configs/"$1"/
 chmod 755 /opt/retropie/configs/"$1"/retroarch.cfg
 dialog  --sleep 1 --title "RETROARCH CONFIG EXIT MESSAGE" --msgbox "
-- Your config folder for "$1" has been copied as "$1"-gun
-- You will need to manually edit es-systems.cfg to reflect this 
+- Your retroarch config for "$1" has been backed up as retroarch-cfg.backup
+- You will need to manually edit es-systems.cfg for gun system
 OR go back and press Make Directory & Edit ES Systems" 0 0
 fi
 }
@@ -319,7 +319,7 @@ function ra-gun-mouse() {
 
 
 function retroarch-config-mouse() {
-if [ -d "opt/retropie/configs/$1" ]; then 
+if [ -d "opt/retropie/configs/"$1" " ]; then 
 dialog  --sleep 1 --title "EMU MISSING" --msgbox "
 - EMU FOR "$1" MISSING PLEASE INSTALL FIRST!!" 0 0
 else
@@ -327,8 +327,8 @@ sudo mv /opt/retropie/configs/"$1"/retroarch.cfg -P /opt/retropie/configs/"$1"/r
 sudo wget https://raw.githubusercontent.com/Retro-Devils/RPI-LightGun-Tool/main/ra-configs/mouse-gun/"$1"-gun/retroarch.cfg -P /opt/retropie/configs/"$1"/
 chmod 755 /opt/retropie/configs/"$1"/retroarch.cfg
 dialog  --sleep 1 --title "RETROARCH CONFIG EXIT MESSAGE" --msgbox "
-- Your config folder for "$1" has been copied as "$1"-gun
-- You will need to manually edit es-systems.cfg to reflect this 
+- Your retroarch config for "$1" has been backed up as retroarch-cfg.backup
+- You will need to manually edit es-systems.cfg for gun system
 OR go back and press Make Directory & Edit ES Systems" 0 0
 fi
 }
