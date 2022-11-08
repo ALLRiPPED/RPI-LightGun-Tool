@@ -186,24 +186,33 @@ function dolphin-bar() {
   while true; do
     choice=$(dialog --backtitle "$BACKTITLE" --title "DOLPHIN BAR/WII MOTE MENU " \
       --ok-label Select --cancel-label Back \
-      --menu "PRESS A/ENTER TO LOAD MENU/SETUP" 40 60 40 \
-      1 "RA--Arcade Menu" \
-      2 "RA--Atari800 Menu" \
-      3 "RA--Atari2600 Menu" \
-      4 "RA--NES Menu" \
-      5 "RA--SNES Menu" \
-      6 "RA--Mastersystem Menu" \
-      7 "SA--Model 3 Setup " \
+      --menu "PRESS A/ENTER TO SETUP" 40 60 40 \
+      1 "Apply NES Gun Config" \
+      2 "Apply Model 3 Gun Config" \
       2>&1 >/dev/tty)
 
     case "$choice" in
-    1) ra-wii "arcade"  ;;
-    2) ra-wii "atari800"  ;;
-    3) ra-wii "atari2600" ;;
-    4) ra-wii "nes" ".7z" ".nes" ".zip" ".7Z" ".NES" ".ZIP" ;;
-    5) ra-wii "snes"   ;;
-    6) ra-wii "mastersystem" ;;
-    7) model3-gun ;;
+    1) ra-wii "nes" ".7z" ".nes" ".zip" ".7Z" ".NES" ".ZIP" ;;
+    2) model3-gun ;;
+    -) no ;;
+     *) break ;;
+    esac
+   done
+}
+
+function dolphin-bar-undo() {
+  local choice
+  while true; do
+    choice=$(dialog --backtitle "$BACKTITLE" --title "DOLPHIN BAR/WII MOTE MENU " \
+      --ok-label Select --cancel-label Back \
+      --menu "PRESS A/ENTER TO LOAD MENU/SETUP" 40 60 40 \
+      1 "Undo NES Gun Config" \
+      2 "Undo Model 3 Gun Config " \
+      2>&1 >/dev/tty)
+
+    case "$choice" in
+    1) wii-config "nes" ".7z" ".nes" ".zip" ".7Z" ".NES" ".ZIP" ;;
+    2) model3-gun ;;
     -) no ;;
      *) break ;;
     esac
@@ -238,7 +247,7 @@ function ra-wii() {
 
 
 
-function ra-config-wii() {
+function wii-config() {
 if [ -d "opt/retropie/configs/"$1" " ]; then 
 dialog  --sleep 1 --title "EMU MISSING" --msgbox "
 - EMU FOR "$1" MISSING PLEASE INSTALL FIRST!!" 0 0
@@ -251,13 +260,30 @@ dialog  --sleep 1 --title "RETROARCH CONFIG EXIT MESSAGE" --msgbox "
 - You will need to manually edit es-systems.cfg for gun system
 OR go back and press Make Directory & Edit ES Systems" 0 0
 fi
+mkdir "$HOME"/RetroPie/roms/gun-games/"$1"
+if [ ! -s "$HOME/.emulationstation/es_systems.cfg" ]; then sudo rm -f $HOME/.emulationstation/es_systems.cfg; fi
+if [ ! -f "$HOME/.emulationstation/es_systems.cfg" ]; then sudo cp /etc/emulationstation/es_systems.cfg $HOME/.emulationstation/es_systems.cfg; sudo chown pi:pi $HOME/.emulationstation/es_systems.cfg; fi
+CONTENT1="\t<system>\n\t\t  <name>"$1"-guns</name>\n\t\t  <fullname>"$1" Gun Games</fullname> \n\t\t  <path>/home/pi/RetroPie/roms/gun-games/"$1"</path> \n\t\t  <extension>"$2" "$3" "$4" "$5" "$6" "$7" "$8"</extension> \n\t\t<command>/opt/retropie/supplementary/runcommand/runcommand.sh 0 _SYS_ m "$1" %ROM%</command> \n\t\t  <platform>"$1"</platform> \n\t\t  <theme>"$1"</theme> \n\t\t</system>"
+C1=$(echo $CONTENT1 | sed 's/\//\\\//g')
+if grep -q "$1-gun" "$HOME/.emulationstation/es_systems.cfg"; then echo "es_systems.cfg entry confirmed"
+else
+	sed "/<\/system>/ s/.*/${C1}\n&/" $HOME/.emulationstation/es_systems.cfg > $HOME/temp
+	cat $HOME/temp > $HOME/.emulationstation/es_systems.cfg
+	rm -f $HOME/temp
+fi
+dialog  --sleep 1 --title "MAKE DIRECTORY & EDIT ES EXIT MESSAGE" --msgbox "
+- A FOLDER HAS BEEN MADE UNDER Home/Pi/RetroPie/roms/gun-games/"$1" 
+- home/Pi/.emulationstation/es_systems.cfg has been edited
+- Your retroarch config for "$1" has been backed up" 0 0
+if [ ! -d "$HOME/retropie/roms/gun-games/$1" ]; then mkdir "$HOME"/RetroPie/roms/gun-games/"$1"
+else
+dialog  --sleep 1 --title "MAKE DIRECTORY ERROR" --msgbox "
+- DIRECTORY ALREADY EXSITS 
+- CANNOT CREATE DIRECTORY" 0 0
+fi
+}
 }
 
-
-function apply-all-wii() {
-es-edit-gun 
-ra-config-wii
-}
 
 
 #----Mouse Gun---#
