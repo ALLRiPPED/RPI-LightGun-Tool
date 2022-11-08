@@ -375,7 +375,7 @@ dialog  --sleep 1 --title "MAKE DIRECTORY & EDIT ES EXIT MESSAGE" --msgbox "
 
 
 function copy-configs() {
-if [ ! -d "$HOME/retropie/roms/gun-games/"$1"" ]; then mkdir "$HOME"/RetroPie/roms/gun-games/"$1"
+if [ ! -d "$HOME/retropie/roms/gun-games/$1" ]; then mkdir "$HOME"/RetroPie/roms/gun-games/"$1"
 else
 dialog  --sleep 1 --title "MAKE DIRECTORY ERROR" --msgbox "
 - DIRECTORY ALREADY EXSITS 
