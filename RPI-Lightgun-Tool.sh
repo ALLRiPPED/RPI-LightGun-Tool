@@ -219,34 +219,6 @@ function dolphin-bar-undo() {
    done
 }
 
-function ra-wii() {
-  local choice
-  while true; do
-    choice=$(dialog --backtitle "$BACKTITLE" --title " "$1" RETROARCH SETUP MENU " \
-      --ok-label Select --cancel-label Back \
-      --menu "WHAT OPTIONS DO YOU WANT FOR  "$1" ?" 40 60 40 \
-      1 "--MAKE DIRECTORY FOR GUN GAMES--" \
-      2 "--MAKE DIRECTORY & EDIT ES SYSTEMS--" \
-      3 "--DOWNLOAD & APPLY RETROARCH CONFIG--" \
-      4 "--APPLY ALL THE ABOVE--- " \
-      - "-------------------------------------" \
-      5 "UNDO RETROARCH CONFIGS FROM THIS SCRIPT" \
-      2>&1 >/dev/tty)
-
-    case "$choice" in
-    1) copy-configs "$1" "$2" "$3" "$4" "$5" "$6" "$7" "$8" ;;
-    2) es-edit-gun "$1" "$2" "$3" "$4" "$5" "$6" "$7" "$8" ;;
-    3) ra-config-wii  "$1" "$2" "$3" "$4" "$5" "$6" "$7" "$8" ;;
-    4) apply-all-wii  ;;
-    -) no ;;
-    5) undo-retroarch ;;
-     *) break ;;
-    esac
-   done
-}
-
-
-
 function wii-config() {
 if [ -d "opt/retropie/configs/"$1" " ]; then 
 dialog  --sleep 1 --title "EMU MISSING" --msgbox "
@@ -282,8 +254,6 @@ dialog  --sleep 1 --title "MAKE DIRECTORY ERROR" --msgbox "
 - CANNOT CREATE DIRECTORY" 0 0
 fi
 }
-}
-
 
 
 #----Mouse Gun---#
