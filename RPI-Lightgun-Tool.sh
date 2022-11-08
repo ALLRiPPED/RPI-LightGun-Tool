@@ -227,7 +227,6 @@ else
 sudo mv /opt/retropie/configs/"$1"/retroarch.cfg /opt/retropie/configs/"$1"/retroarch-cfg.backup
 sudo wget https://raw.githubusercontent.com/Retro-Devils/RPI-LightGun-Tool/main/ra-configs/wii-mote/"$1"-gun/retroarch.cfg -P /opt/retropie/configs/"$1"/
 chmod 755 /opt/retropie/configs/"$1"/retroarch.cfg
-fi
 mkdir "$HOME"/RetroPie/roms/gun-games/"$1"
 if [ ! -s "$HOME/.emulationstation/es_systems.cfg" ]; then sudo rm -f $HOME/.emulationstation/es_systems.cfg; fi
 if [ ! -f "$HOME/.emulationstation/es_systems.cfg" ]; then sudo cp /etc/emulationstation/es_systems.cfg $HOME/.emulationstation/es_systems.cfg; sudo chown pi:pi $HOME/.emulationstation/es_systems.cfg; fi
@@ -238,13 +237,10 @@ else
 	sed "/<\/system>/ s/.*/${C1}\n&/" $HOME/.emulationstation/es_systems.cfg > $HOME/temp
 	cat $HOME/temp > $HOME/.emulationstation/es_systems.cfg
 	rm -f $HOME/temp
-fi
 dialog  --sleep 1 --title "MAKE DIRECTORY & EDIT ES EXIT MESSAGE" --msgbox "
 - A FOLDER HAS BEEN MADE UNDER Home/Pi/RetroPie/roms/gun-games/"$1" 
 - home/Pi/.emulationstation/es_systems.cfg has been edited
 - Your retroarch config for "$1" has been backed up" 0 0
-if [ ! -d "$HOME/retropie/roms/gun-games/$1" ]; then mkdir "$HOME"/RetroPie/roms/gun-games/"$1"
-else
 dialog  --sleep 1 --title "MAKE DIRECTORY ERROR" --msgbox "
 - DIRECTORY ALREADY EXSITS 
 - CANNOT CREATE DIRECTORY" 0 0
