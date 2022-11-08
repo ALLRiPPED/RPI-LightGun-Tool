@@ -243,8 +243,8 @@ if [ -d "opt/retropie/configs/"$1" " ]; then
 dialog  --sleep 1 --title "EMU MISSING" --msgbox "
 - EMU FOR "$1" MISSING PLEASE INSTALL FIRST!!" 0 0
 else
-sudo mv /opt/retropie/configs/"$1"/retroarch.cfg -P /opt/retropie/configs/"$1"/retroarch-cfg.backup
-sudo wget https://raw.githubusercontent.com/Retro-Devils/RPI-LightGun-Tool/main/ra-configs/gwii-mote/"$1"-gun/retroarch.cfg -P /opt/retropie/configs/"$1"/
+sudo mv /opt/retropie/configs/"$1"/retroarch.cfg /opt/retropie/configs/"$1"/retroarch-cfg.backup
+sudo wget https://raw.githubusercontent.com/Retro-Devils/RPI-LightGun-Tool/main/ra-configs/wii-mote/"$1"-gun/retroarch.cfg -P /opt/retropie/configs/"$1"/
 chmod 755 /opt/retropie/configs/"$1"/retroarch.cfg
 dialog  --sleep 1 --title "RETROARCH CONFIG EXIT MESSAGE" --msgbox "
 - Your retroarch config for "$1" has been backed up as retroarch-cfg.backup
@@ -323,7 +323,7 @@ if [ -d "opt/retropie/configs/"$1" " ]; then
 dialog  --sleep 1 --title "EMU MISSING" --msgbox "
 - EMU FOR "$1" MISSING PLEASE INSTALL FIRST!!" 0 0
 else
-sudo mv /opt/retropie/configs/"$1"/retroarch.cfg -P /opt/retropie/configs/"$1"/retroarch-cfg.backup
+sudo mv /opt/retropie/configs/"$1"/retroarch.cfg /opt/retropie/configs/"$1"/retroarch-cfg.backup
 sudo wget https://raw.githubusercontent.com/Retro-Devils/RPI-LightGun-Tool/main/ra-configs/mouse-gun/"$1"-gun/retroarch.cfg -P /opt/retropie/configs/"$1"/
 chmod 755 /opt/retropie/configs/"$1"/retroarch.cfg
 dialog  --sleep 1 --title "RETROARCH CONFIG EXIT MESSAGE" --msgbox "
