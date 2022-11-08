@@ -10,7 +10,7 @@ local choice
       --menu "WHAT KIND OF GUN DO YOU HAVE?" 40 60 40 \
       1 "Dolphin/WII Mote" \
       2 "Gun4IR Lightgun" \
-      3 "Mouse Input Gun" \
+      3 "Mouse Gun & Keyboard" \
       4 "Sinden Lightgun" \
       T1 "---ABOUT  RPI-LG-TOOL---" \
       T2 "---REMOVE RPI-LG-TOOL---" \
