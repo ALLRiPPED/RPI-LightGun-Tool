@@ -218,7 +218,6 @@ function dolphin-bar-undo() {
     esac
    done
 }
-
 function wii-config() {
 if [ -d "opt/retropie/configs/"$1" " ]; then 
 dialog  --sleep 1 --title "EMU MISSING" --msgbox "
@@ -237,13 +236,11 @@ else
 	sed "/<\/system>/ s/.*/${C1}\n&/" $HOME/.emulationstation/es_systems.cfg > $HOME/temp
 	cat $HOME/temp > $HOME/.emulationstation/es_systems.cfg
 	rm -f $HOME/temp
-dialog  --sleep 1 --title "MAKE DIRECTORY & EDIT ES EXIT MESSAGE" --msgbox "
+dialog  --sleep 1 --title "blah blah" --msgbox "
 - A FOLDER HAS BEEN MADE UNDER Home/Pi/RetroPie/roms/gun-games/"$1" 
 - home/Pi/.emulationstation/es_systems.cfg has been edited
 - Your retroarch config for "$1" has been backed up" 0 0
-dialog  --sleep 1 --title "MAKE DIRECTORY ERROR" --msgbox "
-- DIRECTORY ALREADY EXSITS 
-- CANNOT CREATE DIRECTORY" 0 0
+fi
 fi
 }
 
