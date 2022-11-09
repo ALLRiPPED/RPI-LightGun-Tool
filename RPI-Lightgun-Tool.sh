@@ -242,7 +242,6 @@ dialog  --sleep 1 --title "GUN CONFIG COMPLETE" --msgbox "
 - A FOLDER HAS BEEN MADE UNDER Home/Pi/RetroPie/roms/gun-games/"$1" 
 - home/Pi/.emulationstation/es_systems.cfg has been edited
 - Your retroarch config for "$1" has been backed up" 0 0
-fi
 }
 
 
