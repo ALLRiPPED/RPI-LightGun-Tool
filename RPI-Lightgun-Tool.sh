@@ -238,11 +238,6 @@ else
 	cat $HOME/temp > $HOME/.emulationstation/es_systems.cfg
 	rm -f $HOME/temp
 fi
-dialog  --sleep 1 --title "MAKE DIRECTORY & EDIT ES EXIT MESSAGE" --msgbox "
-- A FOLDER HAS BEEN MADE UNDER Home/Pi/RetroPie/roms/gun-games/"$1" 
-- home/Pi/.emulationstation/es_systems.cfg has been edited
-- Your configs for "$1" have been backed up" 0 0
-}
 dialog  --sleep 1 --title "GUN CONFIG COMPLETE" --msgbox "
 - A FOLDER HAS BEEN MADE UNDER Home/Pi/RetroPie/roms/gun-games/"$1" 
 - home/Pi/.emulationstation/es_systems.cfg has been edited
