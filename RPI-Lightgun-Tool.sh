@@ -218,17 +218,18 @@ function dolphin-bar-undo() {
     esac
    done
 }
+
+
 function wii-config() {
-if [ -d "opt/retropie/configs/"$1" " ]; then 
-dialog  --sleep 1 --title "EMU MISSING" --msgbox "
-- EMU FOR "$1" MISSING PLEASE INSTALL FIRST!!" 0 0
-else
+if [ ! -d "/opt/retropie/configs/$1" ]; then emu-error; fi
 sudo mv /opt/retropie/configs/"$1"/retroarch.cfg /opt/retropie/configs/"$1"/retroarch-cfg.backup
 sudo wget https://raw.githubusercontent.com/Retro-Devils/RPI-LightGun-Tool/main/ra-configs/wii-mote/"$1"-gun/retroarch.cfg -P /opt/retropie/configs/"$1"/
-chmod 755 /opt/retropie/configs/"$1"/retroarch.cfg
-mkdir "$HOME"/RetroPie/roms/gun-games/"$1"
+sudo chmod 755 /opt/retropie/configs/"$1"/retroarch.cfg
+if [ ! -d "$HOME/RetroPie/roms/gun-games/" ]; then mkdir "$HOME/RetroPie/roms/gun-games/"; fi
+if [ ! -d "$HOME/RetroPie/roms/gun-games/$1/" ]; then mkdir "$HOME/RetroPie/roms/gun-games/$1/"; fi
+echo "<-------------->STEP 1 COMPLETE<-------> "
 if [ ! -s "$HOME/.emulationstation/es_systems.cfg" ]; then sudo rm -f $HOME/.emulationstation/es_systems.cfg; fi
-if [ ! -f "$HOME/.emulationstation/es_systems.cfg" ]; then sudo cp /etc/emulationstation/es_systems.cfg $HOME/.emulationstation/es_systems.cfg; sudo chown pi:pi $HOME/.emulationstation/es_systems.cfg; fi
+if [ ! -f "$HOME/.emulationstation/es_systems.cfg" ]; then cp $HOME/.emulationstation/es_systems.cfg $HOME/RetroPie/retropiemenu/gamelist.xml; fi
 CONTENT1="\t<system>\n\t\t  <name>"$1"-guns</name>\n\t\t  <fullname>"$1" Gun Games</fullname> \n\t\t  <path>/home/pi/RetroPie/roms/gun-games/"$1"</path> \n\t\t  <extension>"$2" "$3" "$4" "$5" "$6" "$7" "$8"</extension> \n\t\t<command>/opt/retropie/supplementary/runcommand/runcommand.sh 0 _SYS_ m "$1" %ROM%</command> \n\t\t  <platform>"$1"</platform> \n\t\t  <theme>"$1"</theme> \n\t\t</system>"
 C1=$(echo $CONTENT1 | sed 's/\//\\\//g')
 if grep -q "$1-gun" "$HOME/.emulationstation/es_systems.cfg"; then echo "es_systems.cfg entry confirmed"
@@ -236,11 +237,16 @@ else
 	sed "/<\/system>/ s/.*/${C1}\n&/" $HOME/.emulationstation/es_systems.cfg > $HOME/temp
 	cat $HOME/temp > $HOME/.emulationstation/es_systems.cfg
 	rm -f $HOME/temp
-dialog  --sleep 1 --title "blah blah" --msgbox "
+fi
+dialog  --sleep 1 --title "MAKE DIRECTORY & EDIT ES EXIT MESSAGE" --msgbox "
+- A FOLDER HAS BEEN MADE UNDER Home/Pi/RetroPie/roms/gun-games/"$1" 
+- home/Pi/.emulationstation/es_systems.cfg has been edited
+- Your configs for "$1" have been backed up" 0 0
+}
+dialog  --sleep 1 --title "GUN CONFIG COMPLETE" --msgbox "
 - A FOLDER HAS BEEN MADE UNDER Home/Pi/RetroPie/roms/gun-games/"$1" 
 - home/Pi/.emulationstation/es_systems.cfg has been edited
 - Your retroarch config for "$1" has been backed up" 0 0
-fi
 fi
 }
 
