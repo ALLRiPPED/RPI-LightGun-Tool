@@ -197,7 +197,7 @@ function dolphin-bar() {
       2>&1 >/dev/tty)
 
     case "$choice" in
-    1) wii-config "nes" ".7z" ".nes" ".zip" ".7Z" ".NES" ".ZIP" ;;
+    1) ra-wii-config "nes" ".7z" ".nes" ".zip" ".7Z" ".NES" ".ZIP" ;;
     2) model3-gun ;;
     -) no ;;
      *) break ;;
@@ -225,29 +225,24 @@ function dolphin-bar-undo() {
 }
 
 
-function wii-config() {
+function ra-wii-config() {
 if [ ! -d "/opt/retropie/configs/$1" ]; then emu-error; fi
 sudo wget https://raw.githubusercontent.com/Retro-Devils/RPI-LightGun-Tool/main/ra-configs/wii-mote/"$1"-gun/retroarch-gun.cfg -P /opt/retropie/configs/"$1"/
 sudo chmod 755 /opt/retropie/configs/"$1"/retroarch-gun.cfg
-if [ ! -d "$HOME/RetroPie/roms/gun-games/" ]; then mkdir "$HOME/RetroPie/roms/gun-games/"; fi
-if [ ! -d "$HOME/RetroPie/roms/gun-games/$1/" ]; then mkdir "$HOME/RetroPie/roms/gun-games/$1/"; fi
-sudo mv /opt/retropie/configs/"$1"/emulators.cfg /opt/retropie/configs/"$1"/emulators-cfg.backup 
-echo "<-------------->STEP 1 COMPLETE<-------> "
-if [ ! -s "$HOME/.emulationstation/es_systems.cfg" ]; then sudo rm -f $HOME/.emulationstation/es_systems.cfg; fi
-if [ ! -f "$HOME/.emulationstation/es_systems.cfg" ]; then sudo cp /etc/emulationstation/es_systems.cfg $HOME/.emulationstation/es_systems.cfg; sudo chown pi:pi $HOME/.emulationstation/es_systems.cfg; fi
-CONTENT1="\t<system>\n\t\t<name>"$1"-guns</name>\n\t\t<fullname>"$1" Gun Games</fullname>\n\t\t<path>/home/pi/RetroPie/roms/gun-games/"$1"</path>\n\t\t<extension>"$2" "$3" "$4" "$5" "$6" "$7" "$8"</extension>\n\t\t<command>/opt/retropie/supplementary/runcommand/runcommand.sh 0 _SYS_ m "$1" %ROM%</command>\n\t\t<platform>"$1"</platform>\n\t\t<theme>"$1"</theme>\n\t\t</system>"
-C1=$(echo $CONTENT1 | sed 's/\//\\\//g')
-if grep -q "$1-guns" "$HOME/.emulationstation/es_systems.cfg"; then echo "es_systems.cfg entry confirmed"
-else
-	sed "/<\/system>/ s/.*/${C1}\n&/" $HOME/.emulationstation/es_systems.cfg > $HOME/temp
-	cat $HOME/temp > $HOME/.emulationstation/es_systems.cfg
-	rm -f $HOME/temp
-fi
+if [ ! -d "$HOME/RetroPie/roms/"$1"/gun-games/" ]; then mkdir "$HOME/RetroPie/roms/"$1"/gun-games/"; fi
 dialog  --sleep 1 --title "GUN CONFIG COMPLETE" --msgbox "
-- A FOLDER HAS BEEN MADE UNDER Home/Pi/RetroPie/roms/gun-games/"$1" 
-- home/Pi/.emulationstation/es_systems.cfg has been edited
+- A FOLDER HAS BEEN MADE UNDER Home/Pi/RetroPie/roms/"$1"/gun-games/ 
 - A new emu called "$1"-gun was added to retropie
-- Your emulators.cfg has been backed up" 0 0
+- WHEN YOU START A GUN GAME PRESS A WHILE LOADING CHANGE EMU TO "$1"-GUN" 0 0
+dialog  --sleep 1 --title "---FAQ---" --msgbox "
+- WHERE DO I PUT GAMES?
+----PLACE YOUR GAMES IN .../roms/"$1"/gun-games/
+
+- WHY DONT GAMES I ADDED SHOW?
+----MAKE SURE RETROPIE CAN SEE FOLDERS.
+
+- WHY DIDNT GUN WORK IN GAME?
+----MAKE SURE TO SELECT "$1"-GUN AS EMU. " 0 0
 }
 
 function undo-config() {
