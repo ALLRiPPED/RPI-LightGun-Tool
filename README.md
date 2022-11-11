@@ -11,15 +11,15 @@ WORK IN PROGRESS
 
 ## FEATURES 
 
-          Grabs a pre setup retroarch config file for Retroarch systems.
+          Grabs a pre setup retroarch-gun.cfg & emulators.cfg file for Retroarch systems.
 
           Grabs or edits files on standalone emu configs.
-
-          Edit es_systems.cfg to add gun systems.
 
           Make new folders for gun games. 
 
           Ask what type of gun your using, & loads different menus for different guns.
+          
+          Makes a new emulator (if possible) called "system-name"-gun. ex nes-gun
 
 ## INSTALLATION
 
@@ -63,23 +63,16 @@ WORK IN PROGRESS
       
       home/pi/RetroPie/roms/gun-games/"systemname"
       
-- What is new config called? Where is it?
+- What is new configs called? Where are they at?
 
-      The new config is located at /opt/retropie/configs/systemname-gun . 
-      It is a config with just gun setup . 
+      The new retroarch config is located at 
       
-- Whats this edit in es_systems.cfg?
-
-      This makes new systems for gun games.
+                  /opt/retropie/configs/systemname/retroarch-gun.cfg  
+                  
+      The new emulators.cfg is located at
       
-      Example for nes-gun system (not exact do NOT copy)
-      <system>
-      <name>nes-gun<name> 
-      <fullname>NES Gun Games<fullname>
-      <launch> ................../nes-gun<launch>
-      <path>home/pi/RetroPie/roms/gun-games/nes/<path>
-      <system>
-       
+                  /opt/retropie/configs/systemname/emulators.cfg
+      
 - What gun(s) is this for ?
       
       - Gun4IR 
@@ -88,3 +81,14 @@ WORK IN PROGRESS
       - Aimtrack(untested, Unlikely)
       - Sinden
 
+
+- How do I undo the changes the script made?
+
+         - Open RPI Lightgun Tool
+         
+         - Click Gun Type
+         
+         - Click on ---UNDO MENU---
+         
+         - Select system youd like to undo
+         
