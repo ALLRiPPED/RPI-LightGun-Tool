@@ -192,7 +192,7 @@ function dolphin-bar() {
       2>&1 >/dev/tty)
 
     case "$choice" in
-    1) ra-wii "nes" ".7z" ".nes" ".zip" ".7Z" ".NES" ".ZIP" ;;
+    1) wii-config "nes" ".7z" ".nes" ".zip" ".7Z" ".NES" ".ZIP" ;;
     2) model3-gun ;;
     -) no ;;
      *) break ;;
@@ -211,8 +211,8 @@ function dolphin-bar-undo() {
       2>&1 >/dev/tty)
 
     case "$choice" in
-    1) wii-config "nes" ".7z" ".nes" ".zip" ".7Z" ".NES" ".ZIP" ;;
-    2) model3-gun ;;
+    1) undo-config "nes" ;;
+    2) undo-config "model3" ;;
     -) no ;;
      *) break ;;
     esac
@@ -222,11 +222,11 @@ function dolphin-bar-undo() {
 
 function wii-config() {
 if [ ! -d "/opt/retropie/configs/$1" ]; then emu-error; fi
-sudo mv /opt/retropie/configs/"$1"/retroarch.cfg /opt/retropie/configs/"$1"/retroarch-cfg.backup
-sudo wget https://raw.githubusercontent.com/Retro-Devils/RPI-LightGun-Tool/main/ra-configs/wii-mote/"$1"-gun/retroarch.cfg -P /opt/retropie/configs/"$1"/
-sudo chmod 755 /opt/retropie/configs/"$1"/retroarch.cfg
+sudo wget https://raw.githubusercontent.com/Retro-Devils/RPI-LightGun-Tool/main/ra-configs/wii-mote/"$1"-gun/retroarch-gun.cfg -P /opt/retropie/configs/"$1"/
+sudo chmod 755 /opt/retropie/configs/"$1"/retroarch-gun.cfg
 if [ ! -d "$HOME/RetroPie/roms/gun-games/" ]; then mkdir "$HOME/RetroPie/roms/gun-games/"; fi
 if [ ! -d "$HOME/RetroPie/roms/gun-games/$1/" ]; then mkdir "$HOME/RetroPie/roms/gun-games/$1/"; fi
+sudo mv /opt/retropie/configs/"$1"/emulators.cfg /opt/retropie/configs/"$1"/emulators-cfg.backup 
 echo "<-------------->STEP 1 COMPLETE<-------> "
 if [ ! -s "$HOME/.emulationstation/es_systems.cfg" ]; then sudo rm -f $HOME/.emulationstation/es_systems.cfg; fi
 if [ ! -f "$HOME/.emulationstation/es_systems.cfg" ]; then sudo cp /etc/emulationstation/es_systems.cfg $HOME/.emulationstation/es_systems.cfg; sudo chown pi:pi $HOME/.emulationstation/es_systems.cfg; fi
@@ -241,9 +241,15 @@ fi
 dialog  --sleep 1 --title "GUN CONFIG COMPLETE" --msgbox "
 - A FOLDER HAS BEEN MADE UNDER Home/Pi/RetroPie/roms/gun-games/"$1" 
 - home/Pi/.emulationstation/es_systems.cfg has been edited
-- Your retroarch config for "$1" has been backed up" 0 0
+- A new emu called "$1"-gun was added to retropie
+- Your emulators.cfg has been backed up" 0 0
 }
 
+function undo-config() {
+sudo rm /opt/retropie/configs/"$1"/emulators.cfg
+sudo mv /opt/retropie/configs/"$1"/emulators-cfg.backup /opt/retropie/configs/"$1"/emulators.cfg
+sudo rm /opt/retropie/configs/"$1"/retroarch-gun.cfg
+}
 
 #----Mouse Gun---#
 
