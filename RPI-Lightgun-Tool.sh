@@ -38,9 +38,34 @@ APPRECIATE THE WAIT" 0 0
 ######----------------------SCRIPT TOOLS-------------------------------#####
 
 function gun-help() {
-echo "blah"
-}
+dialog  --sleep 1 --title "---START HELP---" --msgbox "
 
+___________BASIC INSTRUCTIONS__________
+- PICK YOUR GUN TYPE
+- ALL GUN TYPES WILL LOAD A SUB MENU
+- MOST SUB MENUS WILL BE A SYSTEMS LIST
+- PRESS A/ENTER TO CONFIGURE SYSTEM
+
+I DONT LIKE THIS . HOW DO I UNDO IT?
+- GO BACK TO GUN TYPE SUBMENU
+- CLICK -----UNDO MENU----
+- SELECT SYSTEM TO UNDO" 0 0
+dialog  --sleep 1 --title "---FAQ---" --msgbox "
+- WHERE DO I PUT GAMES?
+----PLACE YOUR GAMES IN .../roms/systemname/gun-games/
+- WHY DONT GAMES I ADDED SHOW?
+----MAKE SURE RETROPIE CAN SEE FOLDERS.
+- WHY DIDNT GUN WORK IN GAME?
+----MAKE SURE TO SELECT systemname-gun AS EMU. " 0 0
+dialog  --sleep 1 --title "---CREDITS---" --msgbox "
+ALL CREDITS TO CREATOR OF POKITTO EMU
+felipemanga
+
+HIS GITHUB IS HERE 
+https://github.com/felipemanga/PokittoEmu
+
+WE SIMPLY AUTOMATED/PORTED IT TO RETROPIE" 0 0
+}
 
 function remove-script() {
 sudo rm $HOME/RetroPie/retropiemenu/RPI-Lightgun-Tool.sh
@@ -194,11 +219,13 @@ function dolphin-bar() {
       --menu "PRESS A/ENTER TO SETUP" 40 60 40 \
       1 "Apply NES Gun Config" \
       2 "Apply Model 3 Gun Config" \
+      3 "-----UNDO MENU-----" \
       2>&1 >/dev/tty)
 
     case "$choice" in
     1) ra-wii-config "nes" ".7z" ".nes" ".zip" ".7Z" ".NES" ".ZIP" ;;
     2) model3-gun ;;
+    3) dolphin-bar-undo ;;
     -) no ;;
      *) break ;;
     esac
@@ -208,16 +235,14 @@ function dolphin-bar() {
 function dolphin-bar-undo() {
   local choice
   while true; do
-    choice=$(dialog --backtitle "$BACKTITLE" --title "DOLPHIN BAR/WII MOTE MENU " \
+    choice=$(dialog --backtitle "$BACKTITLE" --title "WII MOTE UNDO MENU " \
       --ok-label Select --cancel-label Back \
-      --menu "PRESS A/ENTER TO LOAD MENU/SETUP" 40 60 40 \
+      --menu "PRESS A/ENTER TO UNDO" 40 60 40 \
       1 "Undo NES Gun Config" \
-      2 "Undo Model 3 Gun Config " \
       2>&1 >/dev/tty)
 
     case "$choice" in
-    1) undo-config "nes" ;;
-    2) undo-config "model3" ;;
+    1) undo-retroarch "nes" ;;
     -) no ;;
      *) break ;;
     esac
@@ -234,146 +259,76 @@ dialog  --sleep 1 --title "GUN CONFIG COMPLETE" --msgbox "
 - A FOLDER HAS BEEN MADE UNDER Home/Pi/RetroPie/roms/"$1"/gun-games/ 
 - A new emu called "$1"-gun was added to retropie
 - WHEN YOU START A GUN GAME PRESS A WHILE LOADING CHANGE EMU TO "$1"-GUN" 0 0
-dialog  --sleep 1 --title "---FAQ---" --msgbox "
-- WHERE DO I PUT GAMES?
-----PLACE YOUR GAMES IN .../roms/"$1"/gun-games/
-
-- WHY DONT GAMES I ADDED SHOW?
-----MAKE SURE RETROPIE CAN SEE FOLDERS.
-
-- WHY DIDNT GUN WORK IN GAME?
-----MAKE SURE TO SELECT "$1"-GUN AS EMU. " 0 0
 }
 
-function undo-config() {
-sudo rm /opt/retropie/configs/"$1"/emulators.cfg
-sudo mv /opt/retropie/configs/"$1"/emulators-cfg.backup /opt/retropie/configs/"$1"/emulators.cfg
-sudo rm /opt/retropie/configs/"$1"/retroarch-gun.cfg
-}
-
-#----Mouse Gun---#
+#--mouse/key---#
 
 function mouse-gun() {
   local choice
   while true; do
-    choice=$(dialog --backtitle "$BACKTITLE" --title "MOUSE GUN MENU " \
+    choice=$(dialog --backtitle "$BACKTITLE" --title "MOUSE GUN INPUT MENU " \
       --ok-label Select --cancel-label Back \
-      --menu "PRESS A/ENTER TO LOAD MENU/SETUP" 40 60 40 \
-      1 "RA--Arcade Menu" \
-      2 "RA--Atari800 Menu" \
-      3 "RA--Atari2600 Menu" \
-      4 "RA--NES Menu" \
-      5 "RA--SNES Menu" \
-      6 "RA--Mastersystem Menu" \
-      7 "SA--Model 3 Setup " \
+      --menu "PRESS A/ENTER TO SETUP" 40 60 40 \
+      1 "Apply NES Gun Config" \
+      2 "Apply Model 3 Gun Config" \
+      3 "-----UNDO MENU-----" \
       2>&1 >/dev/tty)
 
     case "$choice" in
-    1) ra-gun-mouse "arcade"  ;;
-    2) ra-gun-mouse "atari800"  ;;
-    3) ra-gun-mouse "atari2600" ;;
-    4) ra-gun-mouse "nes" ".7z" ".nes" ".zip" ".7Z" ".NES" ".ZIP" ;;
-    5) ra-gun-mouse "snes"   ;;
-    6) ra-gun-mouse "mastersystem" ;;
-    7) model3-gun ;;
+    1) ra-mouse-config "nes" ".7z" ".nes" ".zip" ".7Z" ".NES" ".ZIP" ;;
+    2) model3-gun ;;
+    3) mouse-gun-undo ;;
     -) no ;;
      *) break ;;
     esac
    done
 }
 
-function ra-gun-mouse() {
+function mouse-gun-undo() {
   local choice
   while true; do
-    choice=$(dialog --backtitle "$BACKTITLE" --title " "$1" RETROARCH SETUP MENU " \
+    choice=$(dialog --backtitle "$BACKTITLE" --title "MOUSE INPUT GUN UNDO MENU " \
       --ok-label Select --cancel-label Back \
-      --menu "WHAT OPTIONS DO YOU WANT FOR  "$1" ?" 40 60 40 \
-      1 "MAKE DIRECTORY FOR GUN GAMES " \
-      2 "MAKE DIRECTORY & EDIT ES SYSTEMS  " \
-      3 "DOWNLOAD & APPLY RETROARCH CONFIG " \
-      4 "--APPLY ALL THE ABOVE--- " \
-      - "-------------------------------------" \
-      5 "UNDO RETROARCH CONFIGS FROM THIS SCRIPT" \
+      --menu "PRESS A/ENTER TO UNDO" 40 60 40 \
+      1 "Undo NES Gun Config" \
       2>&1 >/dev/tty)
 
     case "$choice" in
-    1) copy-configs "$1" "$2" "$3" "$4" "$5" "$6" "$7" "$8" ;;
-    2) es-edit-gun "$1" "$2" "$3" "$4" "$5" "$6" "$7" "$8" ;;
-    3) retroarch-config-mouse  "$1" "$2" "$3" "$4" "$5" "$6" "$7" "$8" ;;
-    4) apply-all-mouse  ;;
+    1) undo-retroarch "nes" ;;
     -) no ;;
-    5) undo-retroarch ;;
      *) break ;;
     esac
    done
 }
 
 
-function retroarch-config-mouse() {
-if [ -d "opt/retropie/configs/"$1" " ]; then 
-dialog  --sleep 1 --title "EMU MISSING" --msgbox "
-- EMU FOR "$1" MISSING PLEASE INSTALL FIRST!!" 0 0
-else
-sudo mv /opt/retropie/configs/"$1"/retroarch.cfg /opt/retropie/configs/"$1"/retroarch-cfg.backup
-sudo wget https://raw.githubusercontent.com/Retro-Devils/RPI-LightGun-Tool/main/ra-configs/mouse-gun/"$1"-gun/retroarch.cfg -P /opt/retropie/configs/"$1"/
-chmod 755 /opt/retropie/configs/"$1"/retroarch.cfg
-dialog  --sleep 1 --title "RETROARCH CONFIG EXIT MESSAGE" --msgbox "
-- Your retroarch config for "$1" has been backed up as retroarch-cfg.backup
-- You will need to manually edit es-systems.cfg for gun system
-OR go back and press Make Directory & Edit ES Systems" 0 0
-fi
+function ra-mouse-config() {
+if [ ! -d "/opt/retropie/configs/$1" ]; then emu-error; fi
+sudo wget https://raw.githubusercontent.com/Retro-Devils/RPI-LightGun-Tool/main/ra-configs/mouse-gun/"$1"-gun/retroarch-gun.cfg -P /opt/retropie/configs/"$1"/
+sudo chmod 755 /opt/retropie/configs/"$1"/retroarch-gun.cfg
+if [ ! -d "$HOME/RetroPie/roms/"$1"/gun-games/" ]; then mkdir "$HOME/RetroPie/roms/"$1"/gun-games/"; fi
+dialog  --sleep 1 --title "GUN CONFIG COMPLETE" --msgbox "
+- A FOLDER HAS BEEN MADE UNDER Home/Pi/RetroPie/roms/"$1"/gun-games/ 
+- A new emu called "$1"-gun was added to retropie
+- WHEN YOU START A GUN GAME PRESS A WHILE LOADING CHANGE EMU TO "$1"-GUN" 0 0
 }
 
 
 
-function apply-all-mouse() {
-es-edit-gun "$1" "$2" "$3" "$4" "$5" "$6" "$7" "$8"
-retroarch-config-mouse "$1" "$2" "$3" "$4" "$5" "$6" "$7" "$8"
-}
-
+####------------Multi guns--------------------####
 
 function undo-retroarch() {
-if [ ! -f "/opt/retropie/configs/"$1"/retroarch-cfg.backup" ]; then 
+if [ ! -f "/opt/retropie/configs/"$1"/retroarch-gun.cfg" ]; then 
 dialog  --sleep 1 --title "ERROR ERROR" --msgbox "
 - RPI LIGHTGUN TOOL HASNT TOUCHED THIS SYSTEM
 - IT CANNOT UNDO WHAT IT DIDNT DO LOL
 - EXITING NOW" 0 0
 else
-sudo rm /opt/retropie/configs/"$1"/retroarch.cfg
-sudo mv /opt/retropie/configs/"$1"/retroarch-cfg.backup -P /opt/retropie/configs/"$1"/retroarch.cfg
+sudo rm /opt/retropie/configs/"$1"/emulators.cfg
+sudo mv /opt/retropie/configs/"$1"/emulators-cfg.backup /opt/retropie/configs/"$1"/emulators.cfg
+sudo rm /opt/retropie/configs/"$1"/retroarch-gun.cfg
 fi
 }
-
-####------------Multi guns--------------------####
-
-function es-edit-gun() {
-mkdir "$HOME"/RetroPie/roms/gun-games/"$1"
-if [ ! -s "$HOME/.emulationstation/es_systems.cfg" ]; then sudo rm -f $HOME/.emulationstation/es_systems.cfg; fi
-if [ ! -f "$HOME/.emulationstation/es_systems.cfg" ]; then sudo cp /etc/emulationstation/es_systems.cfg $HOME/.emulationstation/es_systems.cfg; sudo chown pi:pi $HOME/.emulationstation/es_systems.cfg; fi
-CONTENT1="\t<system>\n\t\t<name>"$1"-guns</name>\n\t\t<fullname>"$1" Gun Games</fullname>\n\t\t<path>/home/pi/RetroPie/roms/gun-games/"$1"</path>\n\t\t<extension>"$2" "$3" "$4" "$5" "$6" "$7" "$8"</extension>\n\t\t<command>/opt/retropie/supplementary/runcommand/runcommand.sh 0 _SYS_ m "$1" %ROM%</command>\n\t\t<platform>"$1"</platform>\n\t\t<theme>"$1"</theme>\n\t\t</system>"
-C1=$(echo $CONTENT1 | sed 's/\//\\\//g')
-if grep -q "$1-gun" "$HOME/.emulationstation/es_systems.cfg"; then echo "es_systems.cfg entry confirmed"
-else
-	sed "/<\/system>/ s/.*/${C1}\n&/" $HOME/.emulationstation/es_systems.cfg > $HOME/temp
-	cat $HOME/temp > $HOME/.emulationstation/es_systems.cfg
-	rm -f $HOME/temp
-fi
-dialog  --sleep 1 --title "MAKE DIRECTORY & EDIT ES EXIT MESSAGE" --msgbox "
-- A FOLDER HAS BEEN MADE UNDER Home/Pi/RetroPie/roms/gun-games/"$1" 
-- home/Pi/.emulationstation/es_systems.cfg has been edited
-- Your configs for "$1" have been backed up" 0 0
-}
-
-
-function copy-configs() {
-if [ ! -d "$HOME/retropie/roms/gun-games/$1" ]; then mkdir "$HOME"/RetroPie/roms/gun-games/"$1"
-else
-dialog  --sleep 1 --title "MAKE DIRECTORY ERROR" --msgbox "
-- DIRECTORY ALREADY EXSITS 
-- CANNOT CREATE DIRECTORY" 0 0
-fi
-}
-
 
 ####------------------------SINDEN--------------------------------####
 
