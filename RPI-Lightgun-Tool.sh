@@ -1,6 +1,6 @@
 #!/bin/bash
 export NCURSES_NO_UTF8_ACS=1
-BACKTITLE="<-----RPI LIGHTGUN TOOL -----><->Version<->1.00"
+BACKTITLE="<-----RPI LIGHTGUN TOOL -----><->Version<->1.01"
 
 function gun-menu() {
 local choice
@@ -10,7 +10,7 @@ local choice
       --menu "WHAT KIND OF GUN DO YOU HAVE?" 40 60 40 \
       1 "Dolphin/WII Mote" \
       2 "Gun4IR Lightgun" \
-      3 "Mouse Gun & Keyboard" \
+      3 "General Mouse Gun Input" \
       4 "Sinden Lightgun" \
       T1 "---ABOUT  RPI-LG-TOOL---" \
       T2 "---REMOVE RPI-LG-TOOL---" \
