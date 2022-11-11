@@ -223,7 +223,7 @@ function dolphin-bar() {
       2>&1 >/dev/tty)
 
     case "$choice" in
-    1) ra-wii-config "nes" ".7z" ".nes" ".zip" ".7Z" ".NES" ".ZIP" ;;
+    1) ra-wii-config "nes" "lr-fceumm" "fceumm_libretro" ;;
     2) model3-gun ;;
     3) dolphin-bar-undo ;;
     -) no ;;
@@ -254,13 +254,14 @@ function ra-wii-config() {
 if [ ! -d "/opt/retropie/configs/$1" ]; then emu-error; fi
 sudo wget https://raw.githubusercontent.com/Retro-Devils/RPI-LightGun-Tool/main/ra-configs/wii-mote/"$1"-gun/retroarch-gun.cfg -P /opt/retropie/configs/"$1"/
 sudo chmod 755 /opt/retropie/configs/"$1"/retroarch-gun.cfg
-if [ ! -d "$HOME/RetroPie/roms/"$1"/gun-games/" ]; then mkdir "$HOME/RetroPie/roms/"$1"/gun-games/"; fi
-if grep -q 'nes-gun' "/opt/retropie/configs/"$1"/emulators.cfg"; then
-   sudo sed -i 'nes-gun = "/opt/retropie/emulators/retroarch/bin/retroarch -L /opt/retropie/libretrocores/lr-fceumm/fceumm_libretro.so --config /opt/retropie/configs/nes/retroarch-gun.cfg %ROM%"' /opt/retropie/configs/"$1"/emulators.cfg
+if [ ! -d "$HOME/RetroPie/roms/$1/gun-games/" ]; then mkdir "$HOME/RetroPie/roms/$1/gun-games/"; fi
+sudo cp /opt/retropie/configs/"$1"/emulators.cfg /opt/retropie/configs/"$1"/emulators-cfg.backup
+if grep -q '$1-gun' "/opt/retropie/configs/$1/emulators.cfg"; then
+   sudo sed -i '$1-gun = "/opt/retropie/emulators/retroarch/bin/retroarch -L /opt/retropie/libretrocores/$2/$3.so --config /opt/retropie/configs/$1/retroarch-gun.cfg %ROM%"' /opt/retropie/configs/"$1"/emulators.cfg
   fi
 dialog  --sleep 1 --title "GUN CONFIG COMPLETE" --msgbox "
 - A FOLDER HAS BEEN MADE UNDER Home/Pi/RetroPie/roms/"$1"/gun-games/ 
-- A new emu called "$1"-gun was added to retropie
+- A new emu called "$1"-gun was added to emulators.cfg
 - WHEN YOU START A GUN GAME PRESS A WHILE LOADING CHANGE EMU TO "$1"-GUN" 0 0
 }
 
@@ -310,6 +311,10 @@ if [ ! -d "/opt/retropie/configs/$1" ]; then emu-error; fi
 sudo wget https://raw.githubusercontent.com/Retro-Devils/RPI-LightGun-Tool/main/ra-configs/mouse-gun/"$1"-gun/retroarch-gun.cfg -P /opt/retropie/configs/"$1"/
 sudo chmod 755 /opt/retropie/configs/"$1"/retroarch-gun.cfg
 if [ ! -d "$HOME/RetroPie/roms/"$1"/gun-games/" ]; then mkdir "$HOME/RetroPie/roms/"$1"/gun-games/"; fi
+sudo cp /opt/retropie/configs/"$1"/emulators.cfg /opt/retropie/configs/"$1"/emulators-cfg.backup
+if grep -q '$1-gun' "/opt/retropie/configs/$1/emulators.cfg"; then
+   sudo sed -i '$1-gun = "/opt/retropie/emulators/retroarch/bin/retroarch -L /opt/retropie/libretrocores/$2/$3.so --config /opt/retropie/configs/$1/retroarch-gun.cfg %ROM%"' /opt/retropie/configs/"$1"/emulators.cfg
+  fi
 dialog  --sleep 1 --title "GUN CONFIG COMPLETE" --msgbox "
 - A FOLDER HAS BEEN MADE UNDER Home/Pi/RetroPie/roms/"$1"/gun-games/ 
 - A new emu called "$1"-gun was added to retropie
