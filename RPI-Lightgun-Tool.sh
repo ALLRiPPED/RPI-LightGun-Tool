@@ -34,6 +34,7 @@ function soon() {
 dialog  --sleep 1 --title "ATTENTION MESSAGE" --msgbox "
 COMING SOON TO MY FRIEND
 APPRECIATE THE WAIT" 0 0 
+}
 
 ######----------------------SCRIPT TOOLS-------------------------------#####
 
