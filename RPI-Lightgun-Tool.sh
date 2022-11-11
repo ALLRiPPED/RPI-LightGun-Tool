@@ -19,8 +19,8 @@ local choice
 
     case "$choice" in
     1) dolphin-bar  ;;
-    2) gun4ir  ;;
-    3) mouse-gun ;;
+    2) soon  ;;
+    3) soon ;;
     4) sinden-menu ;;
     T1) gun-help ;;
     T2) remove-script ;;
@@ -29,6 +29,11 @@ local choice
     esac
    done
 }
+
+function soon() {
+dialog  --sleep 1 --title "ATTENTION MESSAGE" --msgbox "
+COMING SOON TO MY FRIEND
+APPRECIATE THE WAIT" 0 0 
 
 ######----------------------SCRIPT TOOLS-------------------------------#####
 
