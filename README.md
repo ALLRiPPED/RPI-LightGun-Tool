@@ -61,7 +61,7 @@ WORK IN PROGRESS
 
 - Where does it make new folder for gun games ?
       
-      home/pi/RetroPie/roms/gun-games/"systemname"
+      home/pi/RetroPie/roms/"systemname"/gun-games/
       
 - What is new configs called? Where are they at?
 
@@ -77,7 +77,7 @@ WORK IN PROGRESS
       
       - Gun4IR 
       - Wii Mote Guns
-      - Actual mouse
+      - Actual mouse (or general mouse input)
       - Aimtrack(untested, Unlikely)
       - Sinden
 
