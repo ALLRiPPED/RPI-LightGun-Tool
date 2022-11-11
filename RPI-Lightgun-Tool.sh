@@ -255,6 +255,9 @@ if [ ! -d "/opt/retropie/configs/$1" ]; then emu-error; fi
 sudo wget https://raw.githubusercontent.com/Retro-Devils/RPI-LightGun-Tool/main/ra-configs/wii-mote/"$1"-gun/retroarch-gun.cfg -P /opt/retropie/configs/"$1"/
 sudo chmod 755 /opt/retropie/configs/"$1"/retroarch-gun.cfg
 if [ ! -d "$HOME/RetroPie/roms/"$1"/gun-games/" ]; then mkdir "$HOME/RetroPie/roms/"$1"/gun-games/"; fi
+if grep -q 'nes-gun' "/opt/retropie/configs/"$1"/emulators.cfg"; then
+   sudo sed -i 'nes-gun = "/opt/retropie/emulators/retroarch/bin/retroarch -L /opt/retropie/libretrocores/lr-fceumm/fceumm_libretro.so --config /opt/retropie/configs/nes/retroarch-gun.cfg %ROM%"' /opt/retropie/configs/"$1"/emulators.cfg
+  fi
 dialog  --sleep 1 --title "GUN CONFIG COMPLETE" --msgbox "
 - A FOLDER HAS BEEN MADE UNDER Home/Pi/RetroPie/roms/"$1"/gun-games/ 
 - A new emu called "$1"-gun was added to retropie
