@@ -19,7 +19,7 @@ WORK IN PROGRESS
 
           Ask what type of gun your using, & loads different menus for different guns.
           
-          Makes a new emulator (if possible) called "system-name"-gun. ex nes-gun
+          Makes a new "emulator" in retropie (if possible), called systemname-gun. ex nes-gun
 
 ## INSTALLATION
 
