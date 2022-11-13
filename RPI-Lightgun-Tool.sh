@@ -1,8 +1,6 @@
 #!/bin/bash
 export NCURSES_NO_UTF8_ACS=1
 BACKTITLE="<-----RPI LIGHTGUN TOOL -----><->Version<->1.01"
-NESEMU = "lr-snes9x = "/opt/retropie/emulators/retroarch/bin/retroarch -L /opt/retropie/libretrocores/$2/$3.so --config /opt/retropie/configs/$1/retroarch-gun.cfg %ROM%" "
-
 
 function gun-menu() {
 local choice
