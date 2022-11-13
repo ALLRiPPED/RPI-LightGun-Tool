@@ -1,6 +1,8 @@
 #!/bin/bash
 export NCURSES_NO_UTF8_ACS=1
 BACKTITLE="<-----RPI LIGHTGUN TOOL -----><->Version<->1.01"
+NESEMU = "lr-snes9x = "/opt/retropie/emulators/retroarch/bin/retroarch -L /opt/retropie/libretrocores/$2/$3.so --config /opt/retropie/configs/$1/retroarch-gun.cfg %ROM%" "
+
 
 function gun-menu() {
 local choice
@@ -84,9 +86,7 @@ chmod 755 $HOME/RetroPie/retropiemenu/RPI-Lightgun-Tool.sh
 sudo chmod 755 /usr/local/bin/RPI-Lightgun-Tool
 }
 
-####------------------------MOUSE INPUTS--------------------------------####
-
-#---GUN4IR---#
+#---------------------------------------------------------------GUN4IR---------------------------------------------------------------#
 function gun4ir() {
   local choice
   while true; do
@@ -210,7 +210,7 @@ retroarch-config-gun4ir
 }
 
 
-#--Dolphin/Wii---#
+#--------------------------------------------------------------Dolphin/Wii-----------------------------------------------------------------------------------------------------#
 
 function dolphin-bar() {
   local choice
@@ -258,16 +258,20 @@ sudo chmod 755 /opt/retropie/configs/"$1"/retroarch-gun.cfg
 if [ ! -d "$HOME/RetroPie/roms/$1/gun-games/" ]; then mkdir "$HOME/RetroPie/roms/$1/gun-games/"; fi
 sudo cp /opt/retropie/configs/"$1"/emulators.cfg /opt/retropie/configs/"$1"/emulators-cfg.backup
 sudo wget https://raw.githubusercontent.com/Retro-Devils/RPI-LightGun-Tool/main/ra-configs/wii-mote/"$1"-gun/emulators.cfg -P /opt/retropie/configs/"$1"/
-#if grep -q '$1-gun' "/opt/retropie/configs/$1/emulators.cfg"; then
-#   sudo sed -i '$1-gun = "/opt/retropie/emulators/retroarch/bin/retroarch -L /opt/retropie/libretrocores/$2/$3.so --config /opt/retropie/configs/$1/retroarch-gun.cfg %ROM%"' /opt/retropie/configs/"$1"/emulators.cfg
-#  fi
+if [ ! -f "/opt/retropie/configs/"$1"/emulators.cfg.bak" ] ; then
+sudo sed -i  .bak '"$1-gun = "/opt/retropie/emulators/retroarch/bin/retroarch -L /opt/retropie/libretrocores/$2/$3.so --config /opt/retropie/configs/$1/retroarch-gun.cfg %ROM%"' /opt/retropie/configs/"$1"/emulators.cfg
 dialog  --sleep 1 --title "GUN CONFIG COMPLETE" --msgbox "
 - A FOLDER HAS BEEN MADE UNDER Home/Pi/RetroPie/roms/"$1"/gun-games/ 
 - A new emu called "$1"-gun was added to emulators.cfg
 - WHEN YOU START A GUN GAME PRESS A WHILE LOADING CHANGE EMU TO "$1"-GUN" 0 0
+else
+dialog  --sleep 1 --title "GUN ALREADY CONFIGURED" --msgbox "
+- NO NEED TO CONFIGURE WITH THIS TOOL
+- PLEASE REPORT ERRORS TO RETRO DEVILS" 0 0
+fi
 }
 
-#--mouse/key---#
+#--------------------------------------------------------------Mouse/Key-------------------------------------------------------------------------------------------------------#
 
 function mouse-gun() {
   local choice
@@ -337,6 +341,7 @@ else
 sudo rm /opt/retropie/configs/"$1"/emulators.cfg
 sudo mv /opt/retropie/configs/"$1"/emulators-cfg.backup /opt/retropie/configs/"$1"/emulators.cfg
 sudo rm /opt/retropie/configs/"$1"/retroarch-gun.cfg
+sudo rm /opt/retropie/configs/"$1"/emulators.cfg.bak.cfg
 fi
 }
 
