@@ -95,7 +95,7 @@ WORK IN PROGRESS
          
 # Credits 
 
-         /u Sinden Credits
+         <bold> Sinden Credits </bold>
          
          ------------------------------------------
          
