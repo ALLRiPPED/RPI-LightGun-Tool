@@ -251,7 +251,7 @@ function dolphin-bar-undo() {
 
 function ra-wii-config() {
 if [ ! -d "/opt/retropie/configs/$1" ]; then emu-error; fi
-sudo wget https://raw.githubusercontent.com/Retro-Devils/RPI-LightGun-Tool/main/ra-configs/wii-mote/"$1"-gun/retroarch-gun.cfg -P /opt/retropie/configs/"$1"/
+sudo wget https://raw.githubusercontent.com/Retro-Devils/RPI-LightGun-Tool/main/ra-configs/wii-mote/nes/retroarch-gun.cfg -P /opt/retropie/configs/"$1"/
 sudo chmod 755 /opt/retropie/configs/"$1"/retroarch-gun.cfg
 if [ ! -d "$HOME/RetroPie/roms/$1/gun-games/" ]; then mkdir "$HOME/RetroPie/roms/$1/gun-games/"; fi
 #sudo cp /opt/retropie/configs/"$1"/emulators.cfg /opt/retropie/configs/"$1"/emulators-cfg.backup
