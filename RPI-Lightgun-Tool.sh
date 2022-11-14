@@ -257,7 +257,7 @@ if [ ! -d "$HOME/RetroPie/roms/$1/gun-games/" ]; then mkdir "$HOME/RetroPie/roms
 sudo cp /opt/retropie/configs/"$1"/emulators.cfg /opt/retropie/configs/"$1"/emulators-cfg.backup
 #sudo wget https://raw.githubusercontent.com/Retro-Devils/RPI-LightGun-Tool/main/ra-configs/wii-mote/"$1"/emulators.cfg -P /opt/retropie/configs/"$1"/
 if [ ! -f "/opt/retropie/configs/"$1"/confirm-gun" ] ; then
-sed -i '/default/a $1-gun = "/opt/retropie/emulators/retroarch/bin/retroarch -L /opt/retropie/libretrocores/$2/$3.so --config /opt/retropie/configs/$1/retroarch-gun.cfg %ROM%"' /opt/retropie/configs/"$1"/emulators.cfg
+sed -i '/default/a "$1"-gun = "/opt/retropie/emulators/retroarch/bin/retroarch -L /opt/retropie/libretrocores/"$2"/"$3".so --config /opt/retropie/configs/"$1"/retroarch-gun.cfg %ROM%"' /opt/retropie/configs/"$1"/emulators.cfg
 sudo wget https://raw.githubusercontent.com/Retro-Devils/RPI-LightGun-Tool/main/ra-configs/confirm-gun -P /opt/retropie/configs/"$1"
 dialog  --sleep 1 --title "GUN CONFIG COMPLETE" --msgbox "
 - A FOLDER HAS BEEN MADE UNDER Home/Pi/RetroPie/roms/"$1"/gun-games/ 
