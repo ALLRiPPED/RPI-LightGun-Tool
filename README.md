@@ -92,3 +92,13 @@ WORK IN PROGRESS
          
          - Select system youd like to undo
          
+         
+# Credits 
+
+         Sinden Credits
+         
+         Configs----------Widge-5---------------https://github.com/Widge-5/sinden-barebones-configs
+         
+         Setup------------SindenLightGun----------https://github.com/SindenLightgun/SindenLightgunLinux
+         
+         
