@@ -151,12 +151,12 @@ function dolphin-bar() {
 function nes-wii() {
 if [ ! -d "/opt/retropie/configs/nes" ]; then emu-error; fi
 sudo wget https://raw.githubusercontent.com/Retro-Devils/RPI-LightGun-Tool/main/ra-configs/wii-mote/nes/retroarch-gun.cfg -P /opt/retropie/configs/nes/
-sudo chmod 755 /opt/retropie/configs/nes/retroarch-gun.cfg
+sudo chmod 777 /opt/retropie/configs/nes/retroarch-gun.cfg
 if [ ! -d "$HOME/RetroPie/roms/nes/gun-games/" ]; then mkdir "$HOME/RetroPie/roms/nes/gun-games/"; fi
 sudo cp /opt/retropie/configs/nes/emulators.cfg /opt/retropie/configs/nes/emulators-cfg.backup
 #sudo wget https://raw.githubusercontent.com/Retro-Devils/RPI-LightGun-Tool/main/ra-configs/wii-mote/nes/emulators.cfg -P /opt/retropie/configs/nes/
 if [ ! -f "/opt/retropie/configs/nes/confirm-gun" ] ; then
-sed -i '/default/a "nes-gun = "/opt/retropie/emulators/retroarch/bin/retroarch -L /opt/retropie/libretrocores/lr-fceumm/fceumm_libretro.so --config /opt/retropie/configs/nes/retroarch-gun.cfg %ROM%"' /opt/retropie/configs/nes/emulators.cfg
+sed -i '/default/a nes-gun = "/opt/retropie/emulators/retroarch/bin/retroarch -L /opt/retropie/libretrocores/lr-fceumm/fceumm_libretro.so --config /opt/retropie/configs/nes/retroarch-gun.cfg %ROM%"' /opt/retropie/configs/nes/emulators.cfg
 sudo wget https://raw.githubusercontent.com/Retro-Devils/RPI-LightGun-Tool/main/ra-configs/confirm-gun -P /opt/retropie/configs/nes
 dialog  --sleep 1 --title "GUN CONFIG COMPLETE" --msgbox "
 - A FOLDER HAS BEEN MADE UNDER Home/Pi/RetroPie/roms/nes/gun-games/ 
@@ -172,12 +172,12 @@ fi
 function snes-wii() {
 if [ ! -d "/opt/retropie/configs/snes" ]; then emu-error; fi
 sudo wget https://raw.githubusercontent.com/Retro-Devils/RPI-LightGun-Tool/main/ra-configs/wii-mote/snes/retroarch-gun.cfg -P /opt/retropie/configs/snes/
-sudo chmod 755 /opt/retropie/configs/snes/retroarch-gun.cfg
+sudo chmod 777 /opt/retropie/configs/snes/retroarch-gun.cfg
 if [ ! -d "$HOME/RetroPie/roms/snes/gun-games/" ]; then mkdir "$HOME/RetroPie/roms/snes/gun-games/"; fi
 sudo cp /opt/retropie/configs/snes/emulators.cfg /opt/retropie/configs/snes/emulators-cfg.backup
 #sudo wget https://raw.githubusercontent.com/Retro-Devils/RPI-LightGun-Tool/main/ra-configs/wii-mote/snes/emulators.cfg -P /opt/retropie/configs/snes/
 if [ ! -f "/opt/retropie/configs/snes/confirm-gun" ] ; then
-sed -i '/default/a "snes-gun = "/opt/retropie/emulators/retroarch/bin/retroarch -L /opt/retropie/libretrocores/lr-snes9x/snes9x_libretro.so --config /opt/retropie/configs/snes/retroarch-gun.cfg %ROM%"' /opt/retropie/configs/snes/emulators.cfg
+sed -i '/default/a snes-gun = "/opt/retropie/emulators/retroarch/bin/retroarch -L /opt/retropie/libretrocores/lr-snes9x/snes9x_libretro.so --config /opt/retropie/configs/snes/retroarch-gun.cfg %ROM%"' /opt/retropie/configs/snes/emulators.cfg
 sudo wget https://raw.githubusercontent.com/Retro-Devils/RPI-LightGun-Tool/main/ra-configs/confirm-gun -P /opt/retropie/configs/snes
 dialog  --sleep 1 --title "GUN CONFIG COMPLETE" --msgbox "
 - A FOLDER HAS BEEN MADE UNDER Home/Pi/RetroPie/roms/snes/gun-games/ 
@@ -307,6 +307,13 @@ sudo mv /opt/retropie/configs/"$1"/emulators-cfg.backup /opt/retropie/configs/"$
 sudo rm /opt/retropie/configs/"$1"/retroarch-gun.cfg
 sudo rm /opt/retropie/configs/"$1"/emulators.cfg.bak.cfg
 fi
+}
+
+function emu-error() {
+dialog  --sleep 1 --title "EMULATOR ERROR" --msgbox "
+- YOU DO NOT HAVE THE CORRECT EMU INSTALLED
+- TOOL CANT CONFIGURE A EMU NOT THIER
+- EXITING NOW" 0 0
 }
 
 ####--------------------------------------------------------------------------------------------SINDEN------------------------------------------------------------------####
