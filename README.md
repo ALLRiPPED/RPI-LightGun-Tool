@@ -97,8 +97,20 @@ WORK IN PROGRESS
 
          Sinden Credits
          
-         Configs----------Widge-5---------------https://github.com/Widge-5/sinden-barebones-configs
+         ------------------------------------------
          
-         Setup------------SindenLightGun----------https://github.com/SindenLightgun/SindenLightgunLinux
+         Configuration Files
+         
+         Widge-5
+         
+         https://github.com/Widge-5/sinden-barebones-configs
+         
+         
+         
+         Setup Script 
+         
+         SindenLightGun
+         
+         https://github.com/SindenLightgun/SindenLightgunLinux
          
          
