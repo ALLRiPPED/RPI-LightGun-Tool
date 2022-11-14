@@ -10,7 +10,7 @@ local choice
       --menu "WHAT KIND OF GUN DO YOU HAVE?" 40 60 40 \
       1 "Dolphin/WII Mote" \
       2 "Gun4IR Lightgun" \
-      3 "General Mouse Gun Input" \
+      3 "Infared Mouse Gun" \
       4 "Sinden Lightgun" \
       T1 "---ABOUT  RPI-LG-TOOL---" \
       T2 "---REMOVE RPI-LG-TOOL---" \
@@ -30,16 +30,18 @@ local choice
    done
 }
 
+######--------------------------------------------------------TEMPORARY----------------------------------------------------------------------------------#####
+
 function soon() {
 dialog  --sleep 1 --title "ATTENTION MESSAGE" --msgbox "
 COMING SOON TO MY FRIEND
 APPRECIATE THE WAIT" 0 0 
 }
 
-######----------------------SCRIPT TOOLS-------------------------------#####
+######--------------------------------------------------------SCRIPT TOOLS----------------------------------------------------------------------------------#####
 
 function gun-help() {
-dialog  --sleep 1 --title "---START HELP---" --msgbox "
+dialog  --sleep 1 --title "---RPI LIGHTGUN TOOL HELP---" --msgbox "
 
 ___________BASIC INSTRUCTIONS__________
 - PICK YOUR GUN TYPE
@@ -58,14 +60,6 @@ dialog  --sleep 1 --title "---FAQ---" --msgbox "
 ----MAKE SURE RETROPIE CAN SEE FOLDERS.
 - WHY DIDNT GUN WORK IN GAME?
 ----MAKE SURE TO SELECT systemname-gun AS EMU. " 0 0
-dialog  --sleep 1 --title "---CREDITS---" --msgbox "
-ALL CREDITS TO CREATOR OF POKITTO EMU
-felipemanga
-
-HIS GITHUB IS HERE 
-https://github.com/felipemanga/PokittoEmu
-
-WE SIMPLY AUTOMATED/PORTED IT TO RETROPIE" 0 0
 }
 
 function remove-script() {
@@ -125,90 +119,13 @@ dialog  --sleep 1 --title "ATTENTION MESSAGE" --msgbox "
    done
 }
 
-function gun4ir-consoles() {
-  local choice
-  while true; do
-    choice=$(dialog --backtitle "$BACKTITLE" --title "RPI GUN4IR CONSOLES MENU " \
-      --ok-label Select --cancel-label Back \
-      --menu "PRESS A/ENTER TO LOAD MENU/SETUP" 40 60 40 \
-      1 "RA--Arcade Menu" \
-      2 "RA--Atari800 Menu" \
-      3 "RA--Atari2600 Menu" \
-      4 "RA--NES Menu" \
-      5 "RA--SNES Menu" \
-      6 "RA--Mastersystem Menu" \
-      7 "SA--Model 3 Setup " \
-      2>&1 >/dev/tty)
-
-    case "$choice" in
-    1) ra-gun4ir "arcade"  ;;
-    2) ra-gun4ir "atari800"  ;;
-    3) ra-gun4ir "atari2600" ;;
-    4) ra-gun4ir "nes" ".7z" ".nes" ".zip" ".7Z" ".NES" ".ZIP" ;;
-    5) ra-gun4ir "snes"   ;;
-    6) ra-gun4ir "mastersystem" ;;
-    7) model3-gun ;;
-    -) no ;;
-     *) break ;;
-    esac
-   done
-}
 
 function gun-firm() {
 wget https://github.com/gobozgz/GUN4IR/archive/refs/tags/2.16.zip -P "$HOME"
 unzip 2.16.zip
 }
 
-function ra-gun4ir() {
-  local choice
-  while true; do
-    choice=$(dialog --backtitle "$BACKTITLE" --title " "$1" RETROARCH SETUP MENU " \
-      --ok-label Select --cancel-label Back \
-      --menu "WHAT OPTIONS DO YOU WANT FOR  "$1" ?" 40 60 40 \
-      1 "MAKE DIRECTORY FOR GUN GAMES" \
-      2 "MAKE DIRECTORY & EDIT ES SYSTEMS  " \
-      3 "DOWNLOAD & APPLY RETROARCH CONFIG " \
-      4 "--APPLY ALL THE ABOVE--- " \
-      - "-------------------------------------" \
-      5 "UNDO RETROARCH CONFIGS FROM THIS SCRIPT" \
-      2>&1 >/dev/tty)
-
-    case "$choice" in
-    1) copy-configs "$1" "$2" "$3" "$4" "$5" "$6" "$7" "$8" ;;
-    1) es-edit-gun "$1" "$2" "$3" "$4" "$5" "$6" "$7" "$8" ;;
-    2) retroarch-config-gun4ir  "$1" "$2" "$3" "$4" "$5" "$6" "$7" "$8" ;;
-    3) apply-all-gun4ir  ;;
-    -) no ;;
-    5) undo-retroarch ;;
-     *) break ;;
-    esac
-   done
-}
-
-
-function retroarch-config-gun4ir() {
-if [ -d "opt/retropie/configs/"$1" " ]; then 
-dialog  --sleep 1 --title "EMU MISSING" --msgbox "
-- EMU FOR "$1" MISSING PLEASE INSTALL FIRST!!" 0 0
-else
-sudo mv /opt/retropie/configs/"$1"/retroarch.cfg /opt/retropie/configs/"$1"/retroarch-cfg.backup
-sudo wget https://raw.githubusercontent.com/Retro-Devils/RPI-LightGun-Tool/main/ra-configs/gun4ir/"$1"-gun/retroarch.cfg -P /opt/retropie/configs/"$1"/
-chmod 755 /opt/retropie/configs/"$1"/retroarch.cfg
-dialog  --sleep 1 --title "RETROARCH CONFIG EXIT MESSAGE" --msgbox "
-- Your retroarch config for "$1" has been backed up as retroarch-cfg.backup
-- You will need to manually edit es-systems.cfg for gun system
-OR go back and press Make Directory & Edit ES Systems" 0 0
-fi
-}
-
-
-function apply-all-gun4ir() {
-es-edit-gun 
-retroarch-config-gun4ir
-}
-
-
-#--------------------------------------------------------------Dolphin/Wii-----------------------------------------------------------------------------------------------------#
+#--------------------------------------------------------------DOLPHIN BAR---------------------------------------------------------------------------------------#
 
 function dolphin-bar() {
   local choice
@@ -222,14 +139,58 @@ function dolphin-bar() {
       2>&1 >/dev/tty)
 
     case "$choice" in
-    1) ra-wii-config "nes" "lr-fceumm" "fceumm_libretro" ;;
-    2) model3-gun ;;
+    1) nes-wii ;;
+    2) model3 ;;
     3) dolphin-bar-undo ;;
     -) no ;;
      *) break ;;
     esac
    done
 }
+
+function nes-wii() {
+if [ ! -d "/opt/retropie/configs/nes" ]; then emu-error; fi
+sudo wget https://raw.githubusercontent.com/Retro-Devils/RPI-LightGun-Tool/main/ra-configs/wii-mote/nes/retroarch-gun.cfg -P /opt/retropie/configs/nes/
+sudo chmod 755 /opt/retropie/configs/nes/retroarch-gun.cfg
+if [ ! -d "$HOME/RetroPie/roms/nes/gun-games/" ]; then mkdir "$HOME/RetroPie/roms/nes/gun-games/"; fi
+sudo cp /opt/retropie/configs/nes/emulators.cfg /opt/retropie/configs/nes/emulators-cfg.backup
+#sudo wget https://raw.githubusercontent.com/Retro-Devils/RPI-LightGun-Tool/main/ra-configs/wii-mote/nes/emulators.cfg -P /opt/retropie/configs/nes/
+if [ ! -f "/opt/retropie/configs/nes/confirm-gun" ] ; then
+sed -i '/default/a "nes-gun = "/opt/retropie/emulators/retroarch/bin/retroarch -L /opt/retropie/libretrocores/lr-fceumm/fceumm_libretro.so --config /opt/retropie/configs/nes/retroarch-gun.cfg %ROM%"' /opt/retropie/configs/nes/emulators.cfg
+sudo wget https://raw.githubusercontent.com/Retro-Devils/RPI-LightGun-Tool/main/ra-configs/confirm-gun -P /opt/retropie/configs/nes
+dialog  --sleep 1 --title "GUN CONFIG COMPLETE" --msgbox "
+- A FOLDER HAS BEEN MADE UNDER Home/Pi/RetroPie/roms/nes/gun-games/ 
+- A new emu called nes-gun was added to emulators.cfg
+- WHEN YOU START A GUN GAME PRESS A WHILE LOADING CHANGE EMU TO nes-gun" 0 0
+else
+dialog  --sleep 1 --title "GUN ALREADY CONFIGURED" --msgbox "
+- NO NEED TO CONFIGURE WITH THIS TOOL
+- PLEASE REPORT ERRORS TO RETRO DEVILS" 0 0
+fi
+}
+
+function snes-wii() {
+if [ ! -d "/opt/retropie/configs/snes" ]; then emu-error; fi
+sudo wget https://raw.githubusercontent.com/Retro-Devils/RPI-LightGun-Tool/main/ra-configs/wii-mote/snes/retroarch-gun.cfg -P /opt/retropie/configs/snes/
+sudo chmod 755 /opt/retropie/configs/snes/retroarch-gun.cfg
+if [ ! -d "$HOME/RetroPie/roms/snes/gun-games/" ]; then mkdir "$HOME/RetroPie/roms/snes/gun-games/"; fi
+sudo cp /opt/retropie/configs/snes/emulators.cfg /opt/retropie/configs/snes/emulators-cfg.backup
+#sudo wget https://raw.githubusercontent.com/Retro-Devils/RPI-LightGun-Tool/main/ra-configs/wii-mote/snes/emulators.cfg -P /opt/retropie/configs/snes/
+if [ ! -f "/opt/retropie/configs/snes/confirm-gun" ] ; then
+sed -i '/default/a "snes-gun = "/opt/retropie/emulators/retroarch/bin/retroarch -L /opt/retropie/libretrocores/lr-snes9x/snes9x_libretro.so --config /opt/retropie/configs/snes/retroarch-gun.cfg %ROM%"' /opt/retropie/configs/snes/emulators.cfg
+sudo wget https://raw.githubusercontent.com/Retro-Devils/RPI-LightGun-Tool/main/ra-configs/confirm-gun -P /opt/retropie/configs/snes
+dialog  --sleep 1 --title "GUN CONFIG COMPLETE" --msgbox "
+- A FOLDER HAS BEEN MADE UNDER Home/Pi/RetroPie/roms/snes/gun-games/ 
+- A new emu called snes-gun was added to emulators.cfg
+- WHEN YOU START A GUN GAME PRESS A WHILE LOADING CHANGE EMU TO snes-gun" 0 0
+else
+dialog  --sleep 1 --title "GUN ALREADY CONFIGURED" --msgbox "
+- NO NEED TO CONFIGURE WITH THIS TOOL
+- PLEASE REPORT ERRORS TO RETRO DEVILS" 0 0
+fi
+}
+
+
 
 function dolphin-bar-undo() {
   local choice
@@ -248,34 +209,12 @@ function dolphin-bar-undo() {
    done
 }
 
-
-function ra-wii-config() {
-if [ ! -d "/opt/retropie/configs/$1" ]; then emu-error; fi
-sudo wget https://raw.githubusercontent.com/Retro-Devils/RPI-LightGun-Tool/main/ra-configs/wii-mote/nes/retroarch-gun.cfg -P /opt/retropie/configs/"$1"/
-sudo chmod 755 /opt/retropie/configs/"$1"/retroarch-gun.cfg
-if [ ! -d "$HOME/RetroPie/roms/$1/gun-games/" ]; then mkdir "$HOME/RetroPie/roms/$1/gun-games/"; fi
-sudo cp /opt/retropie/configs/"$1"/emulators.cfg /opt/retropie/configs/"$1"/emulators-cfg.backup
-#sudo wget https://raw.githubusercontent.com/Retro-Devils/RPI-LightGun-Tool/main/ra-configs/wii-mote/"$1"/emulators.cfg -P /opt/retropie/configs/"$1"/
-if [ ! -f "/opt/retropie/configs/"$1"/confirm-gun" ] ; then
-sed -i '/default/a "$1"-gun = "/opt/retropie/emulators/retroarch/bin/retroarch -L /opt/retropie/libretrocores/"$2"/"$3".so --config /opt/retropie/configs/"$1"/retroarch-gun.cfg %ROM%"' /opt/retropie/configs/"$1"/emulators.cfg
-sudo wget https://raw.githubusercontent.com/Retro-Devils/RPI-LightGun-Tool/main/ra-configs/confirm-gun -P /opt/retropie/configs/"$1"
-dialog  --sleep 1 --title "GUN CONFIG COMPLETE" --msgbox "
-- A FOLDER HAS BEEN MADE UNDER Home/Pi/RetroPie/roms/"$1"/gun-games/ 
-- A new emu called "$1"-gun was added to emulators.cfg
-- WHEN YOU START A GUN GAME PRESS A WHILE LOADING CHANGE EMU TO "$1"-GUN" 0 0
-else
-dialog  --sleep 1 --title "GUN ALREADY CONFIGURED" --msgbox "
-- NO NEED TO CONFIGURE WITH THIS TOOL
-- PLEASE REPORT ERRORS TO RETRO DEVILS" 0 0
-fi
-}
-
-#--------------------------------------------------------------Mouse/Key-------------------------------------------------------------------------------------------------------#
+#--------------------------------------------------------------IR MOUSE GUN-------------------------------------------------------------------------------------------------------#
 
 function mouse-gun() {
   local choice
   while true; do
-    choice=$(dialog --backtitle "$BACKTITLE" --title "MOUSE GUN INPUT MENU " \
+    choice=$(dialog --backtitle "$BACKTITLE" --title "IR MOUSE GUN MENU " \
       --ok-label Select --cancel-label Back \
       --menu "PRESS A/ENTER TO SETUP" 40 60 40 \
       1 "Apply NES Gun Config" \
@@ -284,19 +223,61 @@ function mouse-gun() {
       2>&1 >/dev/tty)
 
     case "$choice" in
-    1) ra-mouse-config "nes" ".7z" ".nes" ".zip" ".7Z" ".NES" ".ZIP" ;;
-    2) model3-gun ;;
-    3) mouse-gun-undo ;;
+    1) nes-mouse ;;
+    2) model3 ;;
+    3) mouse-undo ;;
     -) no ;;
      *) break ;;
     esac
    done
 }
 
-function mouse-gun-undo() {
+function nes-mouse() {
+if [ ! -d "/opt/retropie/configs/nes" ]; then emu-error; fi
+sudo wget https://raw.githubusercontent.com/Retro-Devils/RPI-LightGun-Tool/main/ra-configs/mouse-input/nes/retroarch-gun.cfg -P /opt/retropie/configs/nes/
+sudo chmod 755 /opt/retropie/configs/nes/retroarch-gun.cfg
+if [ ! -d "$HOME/RetroPie/roms/nes/gun-games/" ]; then mkdir "$HOME/RetroPie/roms/nes/gun-games/"; fi
+sudo cp /opt/retropie/configs/nes/emulators.cfg /opt/retropie/configs/nes/emulators-cfg.backup
+#sudo wget https://raw.githubusercontent.com/Retro-Devils/RPI-LightGun-Tool/main/ra-configs/mouse-input/nes/emulators.cfg -P /opt/retropie/configs/nes/
+if [ ! -f "/opt/retropie/configs/nes/confirm-gun" ] ; then
+sed -i '/default/a "nes-gun = "/opt/retropie/emulators/retroarch/bin/retroarch -L /opt/retropie/libretrocores/lr-fceumm/fceumm_libretro.so --config /opt/retropie/configs/nes/retroarch-gun.cfg %ROM%"' /opt/retropie/configs/nes/emulators.cfg
+sudo wget https://raw.githubusercontent.com/Retro-Devils/RPI-LightGun-Tool/main/ra-configs/confirm-gun -P /opt/retropie/configs/nes
+dialog  --sleep 1 --title "GUN CONFIG COMPLETE" --msgbox "
+- A FOLDER HAS BEEN MADE UNDER Home/Pi/RetroPie/roms/nes/gun-games/ 
+- A new emu called nes-gun was added to emulators.cfg
+- WHEN YOU START A GUN GAME PRESS A WHILE LOADING CHANGE EMU TO nes-gun" 0 0
+else
+dialog  --sleep 1 --title "GUN ALREADY CONFIGURED" --msgbox "
+- NO NEED TO CONFIGURE WITH THIS TOOL
+- PLEASE REPORT ERRORS TO RETRO DEVILS" 0 0
+fi
+}
+
+function snes-mouse() {
+if [ ! -d "/opt/retropie/configs/snes" ]; then emu-error; fi
+sudo wget https://raw.githubusercontent.com/Retro-Devils/RPI-LightGun-Tool/main/ra-configs/mouse-input/snes/retroarch-gun.cfg -P /opt/retropie/configs/snes/
+sudo chmod 755 /opt/retropie/configs/snes/retroarch-gun.cfg
+if [ ! -d "$HOME/RetroPie/roms/snes/gun-games/" ]; then mkdir "$HOME/RetroPie/roms/snes/gun-games/"; fi
+sudo cp /opt/retropie/configs/snes/emulators.cfg /opt/retropie/configs/snes/emulators-cfg.backup
+#sudo wget https://raw.githubusercontent.com/Retro-Devils/RPI-LightGun-Tool/main/ra-configs/mouse-input/snes/emulators.cfg -P /opt/retropie/configs/snes/
+if [ ! -f "/opt/retropie/configs/snes/confirm-gun" ] ; then
+sed -i '/default/a "snes-gun = "/opt/retropie/emulators/retroarch/bin/retroarch -L /opt/retropie/libretrocores/lr-snes9x/snes9x_libretro.so --config /opt/retropie/configs/snes/retroarch-gun.cfg %ROM%"' /opt/retropie/configs/snes/emulators.cfg
+sudo wget https://raw.githubusercontent.com/Retro-Devils/RPI-LightGun-Tool/main/ra-configs/confirm-gun -P /opt/retropie/configs/snes
+dialog  --sleep 1 --title "GUN CONFIG COMPLETE" --msgbox "
+- A FOLDER HAS BEEN MADE UNDER Home/Pi/RetroPie/roms/snes/gun-games/ 
+- A new emu called snes-gun was added to emulators.cfg
+- WHEN YOU START A GUN GAME PRESS A WHILE LOADING CHANGE EMU TO snes-gun" 0 0
+else
+dialog  --sleep 1 --title "GUN ALREADY CONFIGURED" --msgbox "
+- NO NEED TO CONFIGURE WITH THIS TOOL
+- PLEASE REPORT ERRORS TO RETRO DEVILS" 0 0
+fi
+}
+
+function mouse-undo() {
   local choice
   while true; do
-    choice=$(dialog --backtitle "$BACKTITLE" --title "MOUSE INPUT GUN UNDO MENU " \
+    choice=$(dialog --backtitle "$BACKTITLE" --title "IR MOUSE UNDO MENU " \
       --ok-label Select --cancel-label Back \
       --menu "PRESS A/ENTER TO UNDO" 40 60 40 \
       1 "Undo NES Gun Config" \
@@ -311,24 +292,8 @@ function mouse-gun-undo() {
 }
 
 
-function ra-mouse-config() {
-if [ ! -d "/opt/retropie/configs/$1" ]; then emu-error; fi
-sudo wget https://raw.githubusercontent.com/Retro-Devils/RPI-LightGun-Tool/main/ra-configs/mouse-gun/"$1"-gun/retroarch-gun.cfg -P /opt/retropie/configs/"$1"/
-sudo chmod 755 /opt/retropie/configs/"$1"/retroarch-gun.cfg
-if [ ! -d "$HOME/RetroPie/roms/"$1"/gun-games/" ]; then mkdir "$HOME/RetroPie/roms/"$1"/gun-games/"; fi
-sudo cp /opt/retropie/configs/"$1"/emulators.cfg /opt/retropie/configs/"$1"/emulators-cfg.backup
-if grep -q '$1-gun' "/opt/retropie/configs/$1/emulators.cfg"; then
-   sudo sed -i '$1-gun = "/opt/retropie/emulators/retroarch/bin/retroarch -L /opt/retropie/libretrocores/$2/$3.so --config /opt/retropie/configs/$1/retroarch-gun.cfg %ROM%"' /opt/retropie/configs/"$1"/emulators.cfg
-  fi
-dialog  --sleep 1 --title "GUN CONFIG COMPLETE" --msgbox "
-- A FOLDER HAS BEEN MADE UNDER Home/Pi/RetroPie/roms/"$1"/gun-games/ 
-- A new emu called "$1"-gun was added to retropie
-- WHEN YOU START A GUN GAME PRESS A WHILE LOADING CHANGE EMU TO "$1"-GUN" 0 0
-}
 
-
-
-####------------Multi guns--------------------####
+####--------------------------------------------------------------------------------Multi guns-----------------------------------------------------------------------####
 
 function undo-retroarch() {
 if [ ! -f "/opt/retropie/configs/"$1"/retroarch-gun.cfg" ]; then 
@@ -344,9 +309,10 @@ sudo rm /opt/retropie/configs/"$1"/emulators.cfg.bak.cfg
 fi
 }
 
-####------------------------SINDEN--------------------------------####
+####--------------------------------------------------------------------------------------------SINDEN------------------------------------------------------------------####
 
 function sinden-menu() {
+if [ ! -d "$HOME/SindenLightgunLinux" ]; then
 dialog  --sleep 1 --title "CREDITS" --msgbox "
 - ALL CREDIT GOES TO 
 https://github.com/SindenLightgun/SindenLightgunLinux
@@ -367,6 +333,9 @@ https://github.com/SindenLightgun/SindenLightgunLinux
      *) break ;;
     esac
    done
+else
+sinden-consoles 
+fi
 }
 
 function sinden-config() {
@@ -397,16 +366,22 @@ git pull
 fi
 }
 
-###------------------STANDALONES-----------------###
 
-function model3-gun() {
+function sinden-consoles() {
+dialog  --sleep 1 --title "COMING SOON" --msgbox "
+- COMING SOON
+- PLEASE WAIT LOL" 0 0
+}
+###---------------------------------------------------------------------STANDALONES--------------------------------------------------------------------###
+
+function model3() {
 if [ ! -d "opt/retropie/configs/model3" ]; then
 dialog  --sleep 1 --title "MISSING EMU ERROR" --msgbox "
 - SUPER MODEL 3 IS NOT INSTALLED 
 - CANT CREATE GUN CONFIG WITHOUT EMU 
 - EXTING " 0 0
 else
-wget https://raw.githubusercontent.com/Retro-Devils/RPI-LightGun-Tool/main/sa-configs/all/model3-gun/supermodel.ini -P
+wget https://raw.githubusercontent.com/Retro-Devils/RPI-LightGun-Tool/main/sa-configs/all/model3/supermodel.ini -P
 fi
 }
 
