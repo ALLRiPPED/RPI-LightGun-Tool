@@ -95,9 +95,7 @@ WORK IN PROGRESS
          
 # Credits 
 
-         <bold> Sinden Credits </bold>
-         
-         ------------------------------------------
+Sinden Credits 
          
          Configuration Files
          
