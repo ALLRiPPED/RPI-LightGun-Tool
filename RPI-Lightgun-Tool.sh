@@ -148,6 +148,78 @@ function dolphin-bar() {
    done
 }
 
+function arcade-wii() {
+if [ ! -d "/opt/retropie/configs/arcade" ]; then emu-error; fi
+sudo wget https://raw.githubusercontent.com/Retro-Devils/RPI-LightGun-Tool/main/ra-configs/wii-mote/arcade/retroarch-gun-2003plus.cfg -P /opt/retropie/configs/arcade/
+sudo wget https://raw.githubusercontent.com/Retro-Devils/RPI-LightGun-Tool/main/ra-configs/wii-mote/arcade/retroarch-gun-2003.cfg -P /opt/retropie/configs/arcade/
+sudo wget https://raw.githubusercontent.com/Retro-Devils/RPI-LightGun-Tool/main/ra-configs/wii-mote/arcade/retroarch-gun-2016.cfg -P /opt/retropie/configs/arcade/
+sudo chmod 777 /opt/retropie/configs/arcade/retroarch-gun-2003+.cfg
+sudo chmod 777 /opt/retropie/configs/arcade/retroarch-gun-2003.cfg
+sudo chmod 777 /opt/retropie/configs/arcade/retroarch-gun-2016.cfg
+if [ ! -d "$HOME/RetroPie/roms/mastersytem/gun-games/" ]; then mkdir "$HOME/RetroPie/roms/arcade/gun-games/"; fi
+sudo cp /opt/retropie/configs/mastersytem/emulators.cfg /opt/retropie/configs/arcade/emulators-cfg.backup
+#sudo wget https://raw.githubusercontent.com/Retro-Devils/RPI-LightGun-Tool/main/ra-configs/wii-mote/arcade/emulators.cfg -P /opt/retropie/configs/arcade/
+if [ ! -f "/opt/retropie/configs/arcade/confirm-gun" ] ; then
+sed -i '/default/a arcade-gun-2003+ = "/opt/retropie/emulators/retroarch/bin/retroarch -L /opt/retropie/libretrocores/lr-mame2003-plus/mame2003_plus_libretro.so --config /opt/retropie/configs/arcade/retroarch-gun-2003+.cfg %ROM%"' /opt/retropie/configs/arcade/emulators.cfg
+sed -i '/arcade-gun-2003+/a arcade-gun-2003 = "/opt/retropie/emulators/retroarch/bin/retroarch -L /opt/retropie/libretrocores/lr-mame2003/mame2003_libretro.so --config /opt/retropie/configs/arcade/retroarch.cfg %ROM%"' /opt/retropie/configs/arcade/emulators.cfg
+sed -i '/arcade-gun-2003/a arcade-gun-2016 = "/opt/retropie/emulators/retroarch/bin/retroarch -L /opt/retropie/libretrocores/lr-mame2016/mamearcade2016_libretro.so --config /opt/retropie/configs/arcade/retroarch.cfg %ROM%"' /opt/retropie/configs/arcade/emulators.cfg
+sudo wget https://raw.githubusercontent.com/Retro-Devils/RPI-LightGun-Tool/main/ra-configs/confirm-gun -P /opt/retropie/configs/arcade
+dialog  --sleep 1 --title "GUN CONFIG COMPLETE" --msgbox "
+- A FOLDER HAS BEEN MADE UNDER Home/Pi/RetroPie/roms/arcade/gun-games/ 
+- New emus called arcade-gun-2003, arcade-gun2003+, arcade2016 was added to emulators.cfg
+- PLEASE SELECT MAME VERSION YOU NEED FOR ROM WHEN LAUNCHING GAME
+- arcade-gun-2003 is LR MAME 2003, arcade-gun-2003+ is LR MAME 2003plus etc." 0 0
+else
+dialog  --sleep 1 --title "GUN ALREADY CONFIGURED" --msgbox "
+- NO NEED TO CONFIGURE WITH THIS TOOL
+- PLEASE REPORT ERRORS TO RETRO DEVILS" 0 0
+fi
+}
+
+function dreamcast-wii() {
+sudo wget https://raw.githubusercontent.com/Retro-Devils/RPI-LightGun-Tool/main/scriptmodules/   -P $HOME/RetroPie-Setup/Scriptmodules/emulator/
+cd $HOME/RetroPie-Setup
+sudo ./retropie_packages.sh attractmode
+sudo wget https://raw.githubusercontent.com/Retro-Devils/RPI-LightGun-Tool/main/ra-configs/wii-mote/dreamcast/retroarch-gun.cfg -P /opt/retropie/configs/dreamcast/
+sudo chmod 777 /opt/retropie/configs/dreamcast/retroarch-gun.cfg
+if [ ! -d "$HOME/RetroPie/roms/mastersytem/gun-games/" ]; then mkdir "$HOME/RetroPie/roms/dreamcast/gun-games/"; fi
+sudo cp /opt/retropie/configs/mastersytem/emulators.cfg /opt/retropie/configs/dreamcast/emulators-cfg.backup
+#sudo wget https://raw.githubusercontent.com/Retro-Devils/RPI-LightGun-Tool/main/ra-configs/wii-mote/dreamcast/emulators.cfg -P /opt/retropie/configs/dreamcast/
+if [ ! -f "/opt/retropie/configs/dreamcast/confirm-gun" ] ; then
+sed -i '/default/a dreamcast-gun = "/opt/retropie/emulators/retroarch/bin/retroarch -L /opt/retropie/libretrocores/lr-flycast/flycast_libretro.so </dev/null --config /opt/retropie/configs/dreamcast/retroarch.cfg %ROM%"' /opt/retropie/configs/dreamcast/emulators.cfg
+sudo wget https://raw.githubusercontent.com/Retro-Devils/RPI-LightGun-Tool/main/ra-configs/confirm-gun -P /opt/retropie/configs/dreamcast
+dialog  --sleep 1 --title "GUN CONFIG COMPLETE" --msgbox "
+- A FOLDER HAS BEEN MADE UNDER Home/Pi/RetroPie/roms/dreamcast/gun-games/ 
+- A new emu called dreamcast-gun was added to emulators.cfg
+- WHEN YOU START A GUN GAME PRESS A WHILE LOADING CHANGE EMU TO dreamcast-gun" 0 0
+else
+dialog  --sleep 1 --title "GUN ALREADY CONFIGURED" --msgbox "
+- NO NEED TO CONFIGURE WITH THIS TOOL
+- PLEASE REPORT ERRORS TO RETRO DEVILS" 0 0
+fi
+}
+
+function genesis-wii() {
+if [ ! -d "/opt/retropie/configs/genesis" ]; then emu-error; fi
+sudo wget https://raw.githubusercontent.com/Retro-Devils/RPI-LightGun-Tool/main/ra-configs/wii-mote/genesis/retroarch-gun.cfg -P /opt/retropie/configs/genesis/
+sudo chmod 777 /opt/retropie/configs/genesis/retroarch-gun.cfg
+if [ ! -d "$HOME/RetroPie/roms/mastersytem/gun-games/" ]; then mkdir "$HOME/RetroPie/roms/genesis/gun-games/"; fi
+sudo cp /opt/retropie/configs/mastersytem/emulators.cfg /opt/retropie/configs/genesis/emulators-cfg.backup
+#sudo wget https://raw.githubusercontent.com/Retro-Devils/RPI-LightGun-Tool/main/ra-configs/wii-mote/genesis/emulators.cfg -P /opt/retropie/configs/genesis/
+if [ ! -f "/opt/retropie/configs/genesis/confirm-gun" ] ; then
+sed -i '/default/a genesis-gun = "/opt/retropie/emulators/retroarch/bin/retroarch -L /opt/retropie/libretrocores/lr-genesis-plus-gx/genesis_plus_gx_libretro.so --config /opt/retropie/configs/genesis/retroarch-gun.cfg %ROM%"' /opt/retropie/configs/genesis/emulators.cfg
+sudo wget https://raw.githubusercontent.com/Retro-Devils/RPI-LightGun-Tool/main/ra-configs/confirm-gun -P /opt/retropie/configs/genesis
+dialog  --sleep 1 --title "GUN CONFIG COMPLETE" --msgbox "
+- A FOLDER HAS BEEN MADE UNDER Home/Pi/RetroPie/roms/genesis/gun-games/ 
+- A new emu called genesis-gun was added to emulators.cfg
+- WHEN YOU START A GUN GAME PRESS A WHILE LOADING CHANGE EMU TO genesis-gun" 0 0
+else
+dialog  --sleep 1 --title "GUN ALREADY CONFIGURED" --msgbox "
+- NO NEED TO CONFIGURE WITH THIS TOOL
+- PLEASE REPORT ERRORS TO RETRO DEVILS" 0 0
+fi
+}
+
 function nes-wii() {
 if [ ! -d "/opt/retropie/configs/nes" ]; then emu-error; fi
 sudo wget https://raw.githubusercontent.com/Retro-Devils/RPI-LightGun-Tool/main/ra-configs/wii-mote/nes/retroarch-gun.cfg -P /opt/retropie/configs/nes/
@@ -162,6 +234,27 @@ dialog  --sleep 1 --title "GUN CONFIG COMPLETE" --msgbox "
 - A FOLDER HAS BEEN MADE UNDER Home/Pi/RetroPie/roms/nes/gun-games/ 
 - A new emu called nes-gun was added to emulators.cfg
 - WHEN YOU START A GUN GAME PRESS A WHILE LOADING CHANGE EMU TO nes-gun" 0 0
+else
+dialog  --sleep 1 --title "GUN ALREADY CONFIGURED" --msgbox "
+- NO NEED TO CONFIGURE WITH THIS TOOL
+- PLEASE REPORT ERRORS TO RETRO DEVILS" 0 0
+fi
+}
+
+function mastersystem-wii() {
+if [ ! -d "/opt/retropie/configs/mastersystem" ]; then emu-error; fi
+sudo wget https://raw.githubusercontent.com/Retro-Devils/RPI-LightGun-Tool/main/ra-configs/wii-mote/mastersystem/retroarch-gun.cfg -P /opt/retropie/configs/mastersystem/
+sudo chmod 777 /opt/retropie/configs/mastersystem/retroarch-gun.cfg
+if [ ! -d "$HOME/RetroPie/roms/mastersytem/gun-games/" ]; then mkdir "$HOME/RetroPie/roms/mastersystem/gun-games/"; fi
+sudo cp /opt/retropie/configs/mastersytem/emulators.cfg /opt/retropie/configs/mastersystem/emulators-cfg.backup
+#sudo wget https://raw.githubusercontent.com/Retro-Devils/RPI-LightGun-Tool/main/ra-configs/wii-mote/mastersystem/emulators.cfg -P /opt/retropie/configs/mastersystem/
+if [ ! -f "/opt/retropie/configs/mastersystem/confirm-gun" ] ; then
+sed -i '/default/a mastersystem-gun = "/opt/retropie/emulators/retroarch/bin/retroarch -L /opt/retropie/libretrocores/lr-genesis-plus-gx/genesis_plus_gx_libretro.so --config /opt/retropie/configs/mastersystem/retroarch-gun.cfg %ROM%"' /opt/retropie/configs/mastersystem/emulators.cfg
+sudo wget https://raw.githubusercontent.com/Retro-Devils/RPI-LightGun-Tool/main/ra-configs/confirm-gun -P /opt/retropie/configs/mastersystem
+dialog  --sleep 1 --title "GUN CONFIG COMPLETE" --msgbox "
+- A FOLDER HAS BEEN MADE UNDER Home/Pi/RetroPie/roms/mastersystem/gun-games/ 
+- A new emu called mastersystem-gun was added to emulators.cfg
+- WHEN YOU START A GUN GAME PRESS A WHILE LOADING CHANGE EMU TO mastersystem-gun" 0 0
 else
 dialog  --sleep 1 --title "GUN ALREADY CONFIGURED" --msgbox "
 - NO NEED TO CONFIGURE WITH THIS TOOL
