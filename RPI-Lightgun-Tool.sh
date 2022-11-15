@@ -123,9 +123,9 @@ function dolphin-bar() {
 
 function arcade-wii() {
 if [ ! -d "/opt/retropie/configs/arcade" ]; then emu-error; fi
-sudo wget https://raw.githubusercontent.com/Retro-Devils/RPI-LightGun-Tool/main/scriptmodules/multi-input/libretrocores/lr-flycast.sh  -P $HOME/RetroPie-Setup/scriptmodules/libretrocores/
-sudo wget https://raw.githubusercontent.com/Retro-Devils/RPI-LightGun-Tool/main/scriptmodules/sinden/libretrocores/lr-mame-StormedBubbles.sh -P $HOME/RetroPie-Setup/scriptmodules/libretrocores/
-sudo wget https://raw.githubusercontent.com/Retro-Devils/RPI-LightGun-Tool/main/scriptmodules/sinden/libretrocores/lr-mame2015-StormedBubbles.sh -P $HOME/RetroPie-Setup/scriptmodules/libretrocores/
+if [ ! -f "$HOME/RetroPie-Setup/scriptmodules/libretrocores/lr-flycast.sh" ]; then sudo wget https://raw.githubusercontent.com/Retro-Devils/RPI-LightGun-Tool/main/scriptmodules/multi-input/libretrocores/lr-flycast.sh  -P $HOME/RetroPie-Setup/scriptmodules/libretrocores/; fi
+if [ ! -f "$HOME/RetroPie-Setup/scriptmodules/libretrocores/lr-mame-StormedBubbles.sh" ]; then sudo wget https://raw.githubusercontent.com/Retro-Devils/RPI-LightGun-Tool/main/scriptmodules/sinden/libretrocores/lr-mame-StormedBubbles.sh -P $HOME/RetroPie-Setup/scriptmodules/libretrocores/; fi
+if [ ! -f "$HOME/RetroPie-Setup/scriptmodules/libretrocores/lr-mame2015-StormedBubbles.sh" ]; then sudo wget https://raw.githubusercontent.com/Retro-Devils/RPI-LightGun-Tool/main/scriptmodules/sinden/libretrocores/lr-mame2015-StormedBubbles.sh -P $HOME/RetroPie-Setup/scriptmodules/libretrocores/; fi
 ]cd $HOME/RetroPie-Setup
 sudo ./retropie_packages.sh lr-mame-StormedBubbles
 sudo ./retropie_packages.sh lr-mame2015-StormedBubbles
@@ -165,9 +165,9 @@ fi
 }
 
 function dreamcast-wii() {
-sudo wget https://raw.githubusercontent.com/Retro-Devils/RPI-LightGun-Tool/main/scriptmodules/multi-input/libretrocores/lr-flycast.sh  -P $HOME/RetroPie-Setup/scriptmodules/libretrocores/
-sudo wget https://raw.githubusercontent.com/Retro-Devils/RPI-LightGun-Tool/main/scriptmodules/sinden/libretrocores/lr-flycast-flyinghead.sh -P $HOME/RetroPie-Setup/scriptmodules/libretrocores/
-sudo wget https://raw.githubusercontent.com/Retro-Devils/RPI-LightGun-Tool/main/scriptmodules/sinden/libretrocores/lr-flycast-mazan.sh -P $HOME/RetroPie-Setup/scriptmodules/libretrocores/
+if [ ! -f "$HOME/RetroPie-Setup/scriptmodules/libretrocores/lr-flycast.sh" ]; then sudo wget https://raw.githubusercontent.com/Retro-Devils/RPI-LightGun-Tool/main/scriptmodules/multi-input/libretrocores/lr-flycast.sh  -P $HOME/RetroPie-Setup/scriptmodules/libretrocores/; fi
+if [ ! -f "$HOME/RetroPie-Setup/scriptmodules/libretrocores/lr-flyinghead.sh" ]; then sudo wget https://raw.githubusercontent.com/Retro-Devils/RPI-LightGun-Tool/main/scriptmodules/sinden/libretrocores/lr-flycast-flyinghead.sh -P $HOME/RetroPie-Setup/scriptmodules/libretrocores/; fi
+if [ ! -f "$HOME/RetroPie-Setup/scriptmodules/libretrocores/lr-flycast-mazan.sh" ]; then sudo wget https://raw.githubusercontent.com/Retro-Devils/RPI-LightGun-Tool/main/scriptmodules/sinden/libretrocores/lr-flycast-mazan.sh -P $HOME/RetroPie-Setup/scriptmodules/libretrocores/; fi
 cd $HOME/RetroPie-Setup
 sudo ./retropie_packages.sh lr-flycast
 sudo ./retropie_packages.sh lr-flycast-mazan
