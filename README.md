@@ -77,7 +77,7 @@ WORK IN PROGRESS
       
       - Gun4IR 
       - Wii Mote Guns
-      - Actual mouse (or general mouse input)
+      - Actual mouse (or Infared Mouse Gun)
       - Aimtrack(untested, Unlikely)
       - Sinden
 
