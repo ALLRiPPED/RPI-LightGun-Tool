@@ -20,8 +20,8 @@ local choice
       2>&1 >/dev/tty)
 
     case "$choice" in
-    1) aimtrack ;;
-    2) soon ;;
+    1) soon ;;
+    2) aimtrack ;;
     3) dolphin-bar  ;;
     4) soon  ;;
     5) soon ;;
@@ -83,7 +83,7 @@ sudo chmod 755 /usr/local/bin/RPI-Lightgun-Tool
 }
 
 #--------------------------------------------------------------AIMTRACK---------------------------------------------------------------------------------------#
-function aintrack() {
+function aimtrack() {
 dialog  --sleep 1 --title "AIMTRACK MESSAGE" --msgbox "
 - UNFORTUNATELY MOST SAY AIMTRACK DOESNT WORK ON PI
 - AIMTRACK IS UNTESTED ON PI TO OUR KNOWLEDGE
