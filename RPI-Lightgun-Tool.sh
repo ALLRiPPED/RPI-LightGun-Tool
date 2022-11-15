@@ -8,20 +8,24 @@ local choice
     choice=$(dialog --backtitle "$BACKTITLE" --title "MAIN MENU" \
       --ok-label Select --cancel-label Exit \
       --menu "WHAT KIND OF GUN DO YOU HAVE?" 40 60 40 \
-      1 "Dolphin/WII Mote" \
-      2 "Gun4IR Lightgun" \
-      3 "Infared Mouse Gun" \
-      4 "Sinden Lightgun" \
+      1 "AE Lightgun" \
+      2 "AimTrack lightgun" \
+      3 "Dolphin/WII Mote" \
+      4 "Gun4IR Lightgun" \
+      5 "Infared Mouse Gun" \
+      6 "Sinden Lightgun" \
       T1 "---ABOUT  RPI-LG-TOOL---" \
       T2 "---REMOVE RPI-LG-TOOL---" \
       T3 "---UPDATE RPI-LG-TOOL---" \
       2>&1 >/dev/tty)
 
     case "$choice" in
-    1) dolphin-bar  ;;
-    2) soon  ;;
-    3) soon ;;
-    4) sinden-menu ;;
+    1) aimtrack ;;
+    2) soon ;;
+    3) dolphin-bar  ;;
+    4) soon  ;;
+    5) soon ;;
+    6) sinden-menu ;;
     T1) gun-help ;;
     T2) remove-script ;;
     T3) update-script ;;
@@ -78,52 +82,21 @@ chmod 755 $HOME/RetroPie/retropiemenu/RPI-Lightgun-Tool.sh
 sudo chmod 755 /usr/local/bin/RPI-Lightgun-Tool
 }
 
-#---------------------------------------------------------------GUN4IR---------------------------------------------------------------#
-function gun4ir() {
-  local choice
-  while true; do
-    choice=$(dialog --backtitle "$BACKTITLE" --title "RPI GUN4IR SETUP MENU " \
-      --ok-label Select --cancel-label Back \
-      --menu "PRESS A/ENTER TO LOAD CONSOLE MENU" 40 60 40 \
-      1 "Gun4IR Offical Firmware" \
-      2 "Console Selection" \
-      2>&1 >/dev/tty)
-
-    case "$choice" in
-    1) offical-gun4ir ;;
-    2) gun4ir-consoles  ;;
-    -) no ;;
-     *) break ;;
-    esac
-   done
-}
-
-function offical-gun4ir() {
-dialog  --sleep 1 --title "ATTENTION MESSAGE" --msgbox "
-- This is a gui for windows not linux(retropie).
-- You might be able to run through wine, untested thus far.
-- To our knowledge you do NOT need it for pi." 0 0
-  local choice
-  while true; do
-    choice=$(dialog --backtitle "$BACKTITLE" --title "RPI GUN4IR SETUP MENU " \
-      --ok-label Select --cancel-label Back \
-      --menu "PRESS A/ENTER TO SELECT" 40 60 40 \
-      1 "Download Firmware and GUI" \
-      2>&1 >/dev/tty)
-
-    case "$choice" in
-    1) gun4ir-firm  ;;
-    -) no ;;
-     *) break ;;
-    esac
-   done
+#--------------------------------------------------------------AIMTRACK---------------------------------------------------------------------------------------#
+function aintrack() {
+dialog  --sleep 1 --title "AIMTRACK MESSAGE" --msgbox "
+- UNFORTUNATELY MOST SAY AIMTRACK DOESNT WORK ON PI
+- AIMTRACK IS UNTESTED ON PI TO OUR KNOWLEDGE
+- WE DO NOT HAVE ANYWAY OF CONFIGURING IT
+- SORRY FOR TROUBLE
+- PLEASE REPORT TO DEVILS IF YOU HAVE TESTED" 0 0
 }
 
 
-function gun-firm() {
-wget https://github.com/gobozgz/GUN4IR/archive/refs/tags/2.16.zip -P "$HOME"
-unzip 2.16.zip
-}
+#--------------------------------------------------------------AE LIGHTGUN---------------------------------------------------------------------------------------#
+
+# PLACEHOLDER YEAH YEAH BOIIIIIIIIIII
+
 
 #--------------------------------------------------------------DOLPHIN BAR---------------------------------------------------------------------------------------#
 
@@ -302,6 +275,54 @@ function dolphin-bar-undo() {
    done
 }
 
+#---------------------------------------------------------------GUN4IR---------------------------------------------------------------#
+function gun4ir() {
+  local choice
+  while true; do
+    choice=$(dialog --backtitle "$BACKTITLE" --title "RPI GUN4IR SETUP MENU " \
+      --ok-label Select --cancel-label Back \
+      --menu "PRESS A/ENTER TO LOAD CONSOLE MENU" 40 60 40 \
+      1 "Gun4IR Offical Firmware" \
+      2 "Console Selection" \
+      2>&1 >/dev/tty)
+
+    case "$choice" in
+    1) offical-gun4ir ;;
+    2) gun4ir-consoles  ;;
+    -) no ;;
+     *) break ;;
+    esac
+   done
+}
+
+function offical-gun4ir() {
+dialog  --sleep 1 --title "ATTENTION MESSAGE" --msgbox "
+- This is a gui for windows not linux(retropie).
+- You might be able to run through wine, untested thus far.
+- To our knowledge you do NOT need it for pi." 0 0
+  local choice
+  while true; do
+    choice=$(dialog --backtitle "$BACKTITLE" --title "RPI GUN4IR SETUP MENU " \
+      --ok-label Select --cancel-label Back \
+      --menu "PRESS A/ENTER TO SELECT" 40 60 40 \
+      1 "Download Firmware and GUI" \
+      2>&1 >/dev/tty)
+
+    case "$choice" in
+    1) gun4ir-firm  ;;
+    -) no ;;
+     *) break ;;
+    esac
+   done
+}
+
+
+function gun-firm() {
+wget https://github.com/gobozgz/GUN4IR/archive/refs/tags/2.16.zip -P "$HOME"
+unzip 2.16.zip
+}
+
+
 #--------------------------------------------------------------IR MOUSE GUN-------------------------------------------------------------------------------------------------------#
 
 function mouse-gun() {
@@ -386,7 +407,7 @@ function mouse-undo() {
 
 
 
-####--------------------------------------------------------------------------------Multi guns-----------------------------------------------------------------------####
+####--------------------------------------------------------------------------------MULTI INPUT-----------------------------------------------------------------------####
 
 function undo-retroarch() {
 if [ ! -f "/opt/retropie/configs/"$1"/retroarch-gun.cfg" ]; then 
