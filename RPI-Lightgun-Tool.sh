@@ -104,7 +104,7 @@ function ae-lightgun() {
       --menu "PRESS A/ENTER TO SETUP" 40 60 40 \
       1 "Apply NES Gun Config" \
       2 "Apply Model 3 Gun Config" \
-      3 "AELIGHTGUN Offical Scripts" \
+      3 "--Offical Scripts--" \
       4 "-----UNDO MENU-----" \
       2>&1 >/dev/tty)
 
@@ -427,15 +427,15 @@ function gun4ir() {
       --menu "PRESS A/ENTER TO SETUP" 40 60 40 \
       1 "Apply NES Gun Config" \
       2 "Apply Model 3 Gun Config" \
-      3 "GUN4IR Offical Scripts" \
-      3 "-----UNDO MENU-----" \
+      3 "--Offical Scripts--" \
+      4 "-----UNDO MENU-----" \
       2>&1 >/dev/tty)
 
     case "$choice" in
     1) nes-gun4ir ;;
     2) model3 ;;
     3) offical-gun4ir ;;
-    3) gun4ir-undo ;;
+    4) gun4ir-undo ;;
     -) no ;;
      *) break ;;
     esac
