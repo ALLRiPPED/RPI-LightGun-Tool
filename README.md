@@ -75,10 +75,11 @@ WORK IN PROGRESS
       
 - What gun(s) is this for ?
       
-      - Gun4IR 
-      - Wii Mote Guns
       - Actual mouse (or Infared Mouse Gun)
       - Aimtrack(untested, Unlikely)
+      - Aelightgun
+      - Gun4IR 
+      - Wii Mote Guns
       - Sinden
 
 
