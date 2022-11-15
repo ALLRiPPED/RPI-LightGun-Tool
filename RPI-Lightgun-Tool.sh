@@ -14,9 +14,11 @@ local choice
       4 "Gun4IR Lightgun" \
       5 "Infared Mouse Gun" \
       6 "Sinden Lightgun" \
+      - "------------------------" \
       T1 "---ABOUT  RPI-LG-TOOL---" \
       T2 "---REMOVE RPI-LG-TOOL---" \
       T3 "---UPDATE RPI-LG-TOOL---" \
+      oo "------------------------" \
       2>&1 >/dev/tty)
 
     case "$choice" in
@@ -29,6 +31,8 @@ local choice
     T1) gun-help ;;
     T2) remove-script ;;
     T3) update-script ;;
+    oo) secret-menu ;;
+     -) no ;;
      *) break ;;
     esac
    done
@@ -732,5 +736,42 @@ fi
 
 
 
+###---------------------------------------------------------------------SECRET SHHHH SECRET--------------------------------------------------------------------###
+
+function secret-menu() {
+dialog  --sleep 1 --title "CONGRATULATIONS" --msgbox "
+- CONGRATS MY FRIEND 
+- YOU HAVE FOUND THE SECRET MENU 
+- PLEASE SELECT PACK TO DOWNLOAD " 0 0
+  local choice
+  while true; do
+    choice=$(dialog --backtitle "$BACKTITLE" --title "SECRET MENU " \
+      --ok-label Select --cancel-label Back \
+      --menu "PRESS A/ENTER TO SELECT" 40 60 40 \
+      1 "NES Pack" \
+      2 "SNES Packs" \
+      2>&1 >/dev/tty)
+
+    case "$choice" in
+    1) wget-pack "nes" ;;
+    2) wget-pack "snes" ;;
+    3) wget-all ;;
+    -) no ;;
+     *) break ;;
+    esac
+   done
+}
+
+function wget-pack() {
+wget https://archive.org/download/RPI-Lightgun-Games/"$1"-lightgun-games.zip -P "$HOME"/RetroPie/roms/"$1"/gun-games/
+sudo unzip "$HOME"/RetroPie/roms/"$1"/gun-games/"$1"-lightgun-games
+sleep 1
+sudo rm "$HOME"/RetroPie/roms/"$1"/gun-games/"$1"-lightgun-games
+}
+
+function wget-all() {
+wget-pack "nes"
+wget pack "snes"
+}
 
 gun-menu
