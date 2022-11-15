@@ -126,9 +126,13 @@ if [ ! -d "/opt/retropie/configs/arcade" ]; then emu-error; fi
 sudo wget https://raw.githubusercontent.com/Retro-Devils/RPI-LightGun-Tool/main/ra-configs/wii-mote/arcade/retroarch-gun-2003plus.cfg -P /opt/retropie/configs/arcade/
 sudo wget https://raw.githubusercontent.com/Retro-Devils/RPI-LightGun-Tool/main/ra-configs/wii-mote/arcade/retroarch-gun-2003.cfg -P /opt/retropie/configs/arcade/
 sudo wget https://raw.githubusercontent.com/Retro-Devils/RPI-LightGun-Tool/main/ra-configs/wii-mote/arcade/retroarch-gun-2016.cfg -P /opt/retropie/configs/arcade/
+sudo wget https://raw.githubusercontent.com/Retro-Devils/RPI-LightGun-Tool/main/ra-configs/wii-mote/arcade/retroarch-gun-stormbubb.cfg -P /opt/retropie/configs/arcade/
+sudo wget https://raw.githubusercontent.com/Retro-Devils/RPI-LightGun-Tool/main/ra-configs/wii-mote/arcade/retroarch-gun-2015stormbubb.cfg -P /opt/retropie/configs/arcade/
 sudo chmod 777 /opt/retropie/configs/arcade/retroarch-gun-2003+.cfg
 sudo chmod 777 /opt/retropie/configs/arcade/retroarch-gun-2003.cfg
 sudo chmod 777 /opt/retropie/configs/arcade/retroarch-gun-2016.cfg
+sudo chmod 777 /opt/retropie/configs/arcade/retroarch-gun-stormbubb.cfg
+sudo chmod 777 /opt/retropie/configs/arcade/retroarch-gun-2015stormbubb.cfg
 if [ ! -d "$HOME/RetroPie/roms/mastersytem/gun-games/" ]; then mkdir "$HOME/RetroPie/roms/arcade/gun-games/"; fi
 sudo cp /opt/retropie/configs/mastersytem/emulators.cfg /opt/retropie/configs/arcade/emulators-cfg.backup
 #sudo wget https://raw.githubusercontent.com/Retro-Devils/RPI-LightGun-Tool/main/ra-configs/wii-mote/arcade/emulators.cfg -P /opt/retropie/configs/arcade/
