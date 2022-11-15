@@ -11,7 +11,7 @@ WORK IN PROGRESS
 
 ## FEATURES 
 
-          Grabs a pre setup retroarch-gun.cfg & emulators.cfg file for Retroarch systems.
+          Grabs a pre setup retroarch-gun.cfg file for Retroarch systems.
 
           Grabs or edits files on standalone emu configs.
 
@@ -19,7 +19,7 @@ WORK IN PROGRESS
 
           Ask what type of gun your using, & loads different menus for different guns.
           
-          Makes a new "emulator" in retropie (if possible), called systemname-gun. ex nes-gun
+          Makes a new "emulator" in retropie, called systemname-gun. ex nes-gun
 
 ## INSTALLATION
 
