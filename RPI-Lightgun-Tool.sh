@@ -123,16 +123,27 @@ function dolphin-bar() {
 
 function arcade-wii() {
 if [ ! -d "/opt/retropie/configs/arcade" ]; then emu-error; fi
+sudo wget https://raw.githubusercontent.com/Retro-Devils/RPI-LightGun-Tool/main/scriptmodules/multi-input/libretrocores/lr-flycast.sh  -P $HOME/RetroPie-Setup/scriptmodules/libretrocores/
+sudo wget https://raw.githubusercontent.com/Retro-Devils/RPI-LightGun-Tool/main/scriptmodules/sinden/libretrocores/lr-mame-StormedBubbles.sh -P $HOME/RetroPie-Setup/scriptmodules/libretrocores/
+sudo wget https://raw.githubusercontent.com/Retro-Devils/RPI-LightGun-Tool/main/scriptmodules/sinden/libretrocores/lr-mame2015-StormedBubbles.sh -P $HOME/RetroPie-Setup/scriptmodules/libretrocores/
+]cd $HOME/RetroPie-Setup
+sudo ./retropie_packages.sh lr-mame-StormedBubbles
+sudo ./retropie_packages.sh lr-mame2015-StormedBubbles
+sudo ./retropie_packages.sh lr-flycast
+sudo ./retropie_packages.sh lr-mame2003plus
+sudo ./retropie_packages.sh lr-mame2003
 sudo wget https://raw.githubusercontent.com/Retro-Devils/RPI-LightGun-Tool/main/ra-configs/wii-mote/arcade/retroarch-gun-2003plus.cfg -P /opt/retropie/configs/arcade/
 sudo wget https://raw.githubusercontent.com/Retro-Devils/RPI-LightGun-Tool/main/ra-configs/wii-mote/arcade/retroarch-gun-2003.cfg -P /opt/retropie/configs/arcade/
 sudo wget https://raw.githubusercontent.com/Retro-Devils/RPI-LightGun-Tool/main/ra-configs/wii-mote/arcade/retroarch-gun-2016.cfg -P /opt/retropie/configs/arcade/
 sudo wget https://raw.githubusercontent.com/Retro-Devils/RPI-LightGun-Tool/main/ra-configs/wii-mote/arcade/retroarch-gun-stormbubb.cfg -P /opt/retropie/configs/arcade/
 sudo wget https://raw.githubusercontent.com/Retro-Devils/RPI-LightGun-Tool/main/ra-configs/wii-mote/arcade/retroarch-gun-2015stormbubb.cfg -P /opt/retropie/configs/arcade/
+sudo wget https://raw.githubusercontent.com/Retro-Devils/RPI-LightGun-Tool/main/ra-configs/wii-mote/arcade/retroarch-gun-flycast.cfg -P /opt/retropie/configs/arcade/
 sudo chmod 777 /opt/retropie/configs/arcade/retroarch-gun-2003+.cfg
 sudo chmod 777 /opt/retropie/configs/arcade/retroarch-gun-2003.cfg
 sudo chmod 777 /opt/retropie/configs/arcade/retroarch-gun-2016.cfg
 sudo chmod 777 /opt/retropie/configs/arcade/retroarch-gun-stormbubb.cfg
 sudo chmod 777 /opt/retropie/configs/arcade/retroarch-gun-2015stormbubb.cfg
+sudo chmod 777 /opt/retropie/configs/arcade/retroarch-gun-flycast.cfg
 if [ ! -d "$HOME/RetroPie/roms/mastersytem/gun-games/" ]; then mkdir "$HOME/RetroPie/roms/arcade/gun-games/"; fi
 sudo cp /opt/retropie/configs/mastersytem/emulators.cfg /opt/retropie/configs/arcade/emulators-cfg.backup
 #sudo wget https://raw.githubusercontent.com/Retro-Devils/RPI-LightGun-Tool/main/ra-configs/wii-mote/arcade/emulators.cfg -P /opt/retropie/configs/arcade/
@@ -156,7 +167,7 @@ fi
 function dreamcast-wii() {
 sudo wget https://raw.githubusercontent.com/Retro-Devils/RPI-LightGun-Tool/main/scriptmodules/multi-input/libretrocores/lr-flycast.sh  -P $HOME/RetroPie-Setup/scriptmodules/libretrocores/
 sudo wget https://raw.githubusercontent.com/Retro-Devils/RPI-LightGun-Tool/main/scriptmodules/sinden/libretrocores/lr-flycast-flyinghead.sh -P $HOME/RetroPie-Setup/scriptmodules/libretrocores/
-sudo wget https://raw.githubusercontent.com/Retro-Devils/RPI-LightGun-Tool/main/scriptmodules/sinden/libretrocores/lr-flycast-mazan -P $HOME/RetroPie-Setup/scriptmodules/libretrocores/
+sudo wget https://raw.githubusercontent.com/Retro-Devils/RPI-LightGun-Tool/main/scriptmodules/sinden/libretrocores/lr-flycast-mazan.sh -P $HOME/RetroPie-Setup/scriptmodules/libretrocores/
 cd $HOME/RetroPie-Setup
 sudo ./retropie_packages.sh lr-flycast
 sudo ./retropie_packages.sh lr-flycast-mazan
