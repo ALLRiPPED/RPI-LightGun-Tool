@@ -5,7 +5,7 @@ WORK IN PROGRESS
 
          This is a tool to make using Lightguns on Retropie as easy as possible.
          
-         Version:                BETA 1.00
+         Version:                BETA 1.01
          
          Last Update:            11/5/22
 
@@ -69,18 +69,22 @@ WORK IN PROGRESS
       
                   /opt/retropie/configs/systemname/retroarch-gun.cfg  
                   
-      The new emulators.cfg is located at
+      The new edited emulators.cfg is located at
       
                   /opt/retropie/configs/systemname/emulators.cfg
+                  
+      Your emulators.cfg backup is located at 
+                  
+                  /opt/retropie/configs/systemname/emulators.cfg-backup
       
 - What gun(s) is this for ?
       
-      - Actual mouse (or Infared Mouse Gun)
       - Aimtrack(untested, Unlikely)
-      - Aelightgun
-      - Gun4IR 
-      - Wii Mote Guns
-      - Sinden
+      - AE Lightgun
+      - Dolphin Bar with Wii mote
+      - Gun4IR Lightgun
+      - Infared Mouse Input Guns
+      - Sinden Lightgun
 
 
 - How do I undo the changes the script made?
