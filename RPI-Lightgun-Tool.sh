@@ -227,6 +227,7 @@ dialog  --sleep 1 --title "GUN ALREADY CONFIGURED" --msgbox "
 - NO NEED TO CONFIGURE WITH THIS TOOL
 - PLEASE REPORT ERRORS TO RETRO DEVILS" 0 0
 fi
+dolphin-layout
 }
 
 function dreamcast-wii() {
@@ -263,6 +264,7 @@ dialog  --sleep 1 --title "GUN ALREADY CONFIGURED" --msgbox "
 - NO NEED TO CONFIGURE WITH THIS TOOL
 - PLEASE REPORT ERRORS TO RETRO DEVILS" 0 0
 fi
+dolphin-layout
 }
 
 function genesis-wii() {
@@ -283,6 +285,7 @@ dialog  --sleep 1 --title "GUN ALREADY CONFIGURED" --msgbox "
 - NO NEED TO CONFIGURE WITH THIS TOOL
 - PLEASE REPORT ERRORS TO RETRO DEVILS" 0 0
 fi
+dolphin-layout
 }
 
 function nes-wii() {
@@ -303,6 +306,7 @@ dialog  --sleep 1 --title "GUN ALREADY CONFIGURED" --msgbox "
 - NO NEED TO CONFIGURE WITH THIS TOOL
 - PLEASE REPORT ERRORS TO RETRO DEVILS" 0 0
 fi
+dolhin-layout
 }
 
 function mastersystem-wii() {
@@ -323,6 +327,7 @@ dialog  --sleep 1 --title "GUN ALREADY CONFIGURED" --msgbox "
 - NO NEED TO CONFIGURE WITH THIS TOOL
 - PLEASE REPORT ERRORS TO RETRO DEVILS" 0 0
 fi
+dolhin-layout
 }
 
 
@@ -356,6 +361,7 @@ dialog  --sleep 1 --title "GUN ALREADY CONFIGURED" --msgbox "
 - NO NEED TO CONFIGURE WITH THIS TOOL
 - PLEASE REPORT ERRORS TO RETRO DEVILS" 0 0
 fi
+dolphin-layout
 }
 
 function segacd-wii() {
@@ -376,6 +382,7 @@ dialog  --sleep 1 --title "GUN ALREADY CONFIGURED" --msgbox "
 - NO NEED TO CONFIGURE WITH THIS TOOL
 - PLEASE REPORT ERRORS TO RETRO DEVILS" 0 0
 fi
+dolphin-layout
 }
 
 
@@ -397,6 +404,7 @@ dialog  --sleep 1 --title "GUN ALREADY CONFIGURED" --msgbox "
 - NO NEED TO CONFIGURE WITH THIS TOOL
 - PLEASE REPORT ERRORS TO RETRO DEVILS" 0 0
 fi
+dolphin-layout
 }
 
 
@@ -416,6 +424,20 @@ function dolphin-bar-undo() {
      *) break ;;
     esac
    done
+}
+
+function dolphin-layout() {
+dialog  --sleep 1 --title "ATTENTION MESSAGE" --msgbox "
+WII MOTE LAYOUT IS AS FOLLOWS
+BUTTON------- IN EMU/WITH HOTKEY
++  ---------- start/hotkey
+-  ---------- select/quit
+1  ---------- nothing
+2  ---------- nothing
+down  ------- down/reset
+up  --------- up/menu
+left  ------- left/save state
+right  ------ right/load state " 0 0
 }
 
 #---------------------------------------------------------------GUN4IR---------------------------------------------------------------#
