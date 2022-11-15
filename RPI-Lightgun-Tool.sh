@@ -112,7 +112,7 @@ function ae-lightgun() {
     1) nes-ae ;;
     2) model3 ;;
     3) offical-ae ;;
-    4) dolphin-bar-undo ;;
+    4) ae-undo ;;
     -) no ;;
      *) break ;;
     esac
@@ -141,9 +141,23 @@ dialog  --sleep 1 --title "ATTENTION MESSAGE" --msgbox "
 }
 
 function ae-firm() {
-wget https://github.com/gobozgz/GUN4IR/archive/refs/tags/2.16.zip -P "$HOME"
-unzip "$HOME"/gun4ir-2.16.zip
-rm "$HOME"/gun4ir-2.16.zip
+}
+
+function ae-undo() {
+  local choice
+  while true; do
+    choice=$(dialog --backtitle "$BACKTITLE" --title "AE LIGHTGUN UNDO MENU " \
+      --ok-label Select --cancel-label Back \
+      --menu "PRESS A/ENTER TO UNDO" 40 60 40 \
+      1 "Undo NES Gun Config" \
+      2>&1 >/dev/tty)
+
+    case "$choice" in
+    1) undo-retroarch "nes" ;;
+    -) no ;;
+     *) break ;;
+    esac
+   done
 }
 
 
@@ -421,7 +435,7 @@ function gun4ir() {
     1) nes-gun4ir ;;
     2) model3 ;;
     3) offical-gun4ir ;;
-    3) retroarch-undo ;;
+    3) gun4ir-undo ;;
     -) no ;;
      *) break ;;
     esac
@@ -457,6 +471,22 @@ dialog  --sleep 1 --title "EXIT MESSAGE" --msgbox "
 - GUN4IR software downloaded to home/pi/GUN4IR-2.16" 0 0
 }
 
+function gun4ir-undo() {
+  local choice
+  while true; do
+    choice=$(dialog --backtitle "$BACKTITLE" --title "GUN4IR UNDO MENU " \
+      --ok-label Select --cancel-label Back \
+      --menu "PRESS A/ENTER TO UNDO" 40 60 40 \
+      1 "Undo NES Gun Config" \
+      2>&1 >/dev/tty)
+
+    case "$choice" in
+    1) undo-retroarch "nes" ;;
+    -) no ;;
+     *) break ;;
+    esac
+   done
+}
 
 
 #--------------------------------------------------------------IR MOUSE GUN-------------------------------------------------------------------------------------------------------#
@@ -586,7 +616,7 @@ https://github.com/SindenLightgun/SindenLightgunLinux
     case "$choice" in
     1) sinden-install ;;
     2) sinden-config ;;
-    3) sinden-consols ;;
+    3) sinden-consoles ;;
     -) no ;;
      *) break ;;
     esac
@@ -647,6 +677,24 @@ dialog  --sleep 1 --title "COMING SOON" --msgbox "
 - COMING SOON
 - PLEASE WAIT LOL" 0 0
 }
+
+function SINDEN-undo() {
+  local choice
+  while true; do
+    choice=$(dialog --backtitle "$BACKTITLE" --title "SINDEN UNDO MENU " \
+      --ok-label Select --cancel-label Back \
+      --menu "PRESS A/ENTER TO UNDO" 40 60 40 \
+      1 "Undo NES Gun Config" \
+      2>&1 >/dev/tty)
+
+    case "$choice" in
+    1) undo-sinden "nes" ;;
+    -) no ;;
+     *) break ;;
+    esac
+   done
+}
+
 ###---------------------------------------------------------------------STANDALONES--------------------------------------------------------------------###
 
 function model3() {
