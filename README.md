@@ -75,7 +75,7 @@ WORK IN PROGRESS
                   
       Your emulators.cfg backup is located at 
                   
-                  /opt/retropie/configs/systemname/emulators.cfg-backup
+                  /opt/retropie/configs/systemname/emulators-cfg.backup
       
 - What gun(s) is this for ?
       
