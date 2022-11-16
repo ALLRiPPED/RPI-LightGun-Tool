@@ -276,13 +276,11 @@ dolphin-layout
 }
 
 function dreamcast-wii() {
-if [ ! -f "$HOME/RetroPie-Setup/scriptmodules/libretrocores/lr-flycast.sh" ]; then sudo wget https://raw.githubusercontent.com/Retro-Devils/RPI-LightGun-Tool/main/scriptmodules/multi-input/libretrocores/lr-flycast.sh  -P $HOME/RetroPie-Setup/scriptmodules/libretrocores/; fi
-if [ ! -f "$HOME/RetroPie-Setup/scriptmodules/libretrocores/lr-flyinghead.sh" ]; then sudo wget https://raw.githubusercontent.com/Retro-Devils/RPI-LightGun-Tool/main/scriptmodules/sinden/libretrocores/lr-flycast-flyinghead.sh -P $HOME/RetroPie-Setup/scriptmodules/libretrocores/; fi
-if [ ! -f "$HOME/RetroPie-Setup/scriptmodules/libretrocores/lr-flycast-mazan.sh" ]; then sudo wget https://raw.githubusercontent.com/Retro-Devils/RPI-LightGun-Tool/main/scriptmodules/sinden/libretrocores/lr-flycast-mazan.sh -P $HOME/RetroPie-Setup/scriptmodules/libretrocores/; fi
 cd $HOME/RetroPie-Setup
-sudo ./retropie_packages.sh lr-flycast
-sudo ./retropie_packages.sh lr-flycast-mazan
-sudo ./retropie_packages.sh lr-flycast-flyinghead
+if [ ! -f "$HOME/RetroPie-Setup/scriptmodules/libretrocores/lr-flycast.sh" ]; then sudo wget https://raw.githubusercontent.com/Retro-Devils/RPI-LightGun-Tool/main/scriptmodules/multi-input/libretrocores/lr-flycast.sh  -P $HOME/RetroPie-Setup/scriptmodules/libretrocores/ && sudo ./retropie_packages.sh lr-flycast; fi
+if [ ! -f "$HOME/RetroPie-Setup/scriptmodules/libretrocores/lr-flyinghead.sh" ]; then sudo wget https://raw.githubusercontent.com/Retro-Devils/RPI-LightGun-Tool/main/scriptmodules/sinden/libretrocores/lr-flycast-flyinghead.sh -P $HOME/RetroPie-Setup/scriptmodules/libretrocores/ 7&& sudo ./retropie_packages.sh lr-flycast-flyinghead; fi
+if [ ! -f "$HOME/RetroPie-Setup/scriptmodules/libretrocores/lr-flycast-mazan.sh" ]; then sudo wget https://raw.githubusercontent.com/Retro-Devils/RPI-LightGun-Tool/main/scriptmodules/sinden/libretrocores/lr-flycast-mazan.sh -P $HOME/RetroPie-Setup/scriptmodules/libretrocores/ && sudo ./retropie_packages.sh lr-flycast-mazan; fi
+cd
 sudo wget https://raw.githubusercontent.com/Retro-Devils/RPI-LightGun-Tool/main/ra-configs/wii-mote/dreamcast/retroarch-gun-flycast.cfg -P /opt/retropie/configs/dreamcast/
 sudo wget https://raw.githubusercontent.com/Retro-Devils/RPI-LightGun-Tool/main/ra-configs/wii-mote/dreamcast/retroarch-gun-mazan.cfg -P /opt/retropie/configs/dreamcast/
 sudo wget https://raw.githubusercontent.com/Retro-Devils/RPI-LightGun-Tool/main/ra-configs/wii-mote/dreamcast/retroarch-gun-flyinghead.cfg -P /opt/retropie/configs/dreamcast/
@@ -378,11 +376,9 @@ dolhin-layout
 
 function ps1-wii() {
 if [ ! -d "/opt/retropie/configs/psx" ]; then emu-error; fi
-if [ ! -f "$HOME/RetroPie-Setup/scriptmodules/libretrocores/lr-duckstation.sh" ]; then sudo wget https://raw.githubusercontent.com/Retro-Devils/RPI-LightGun-Tool/main/scriptmodules/multi-input/libretrocores/lr-swanstation.sh  -P $HOME/RetroPie-Setup/scriptmodules/libretrocores/; fi
-if [ ! -f "$HOME/RetroPie-Setup/scriptmodules/libretrocores/lr-swanstation.sh" ]; then sudo wget https://raw.githubusercontent.com/Retro-Devils/RPI-LightGun-Tool/main/scriptmodules/multi-input/libretrocores/lr-duckstation.sh  -P $HOME/RetroPie-Setup/scriptmodules/libretrocores/; fi
-cd $HOME/RetroPie-Setup
-sudo ./retropie_packages.sh lr-duckstation
-sudo ./retropie_packages.sh lr-swanstation
+if [ ! -f "$HOME/RetroPie-Setup/scriptmodules/libretrocores/lr-duckstation.sh" ]; then sudo wget https://raw.githubusercontent.com/Retro-Devils/RPI-LightGun-Tool/main/scriptmodules/multi-input/libretrocores/lr-swanstation.sh  -P $HOME/RetroPie-Setup/scriptmodules/libretrocores/ && sudo ./retropie_packages.sh lr-swanstation; fi
+if [ ! -f "$HOME/RetroPie-Setup/scriptmodules/libretrocores/lr-swanstation.sh" ]; then sudo wget https://raw.githubusercontent.com/Retro-Devils/RPI-LightGun-Tool/main/scriptmodules/multi-input/libretrocores/lr-duckstation.sh  -P $HOME/RetroPie-Setup/scriptmodules/libretrocores/ && sudo ./retropie_packages.sh lr-duckstation; fi
+cd
 sleep 1
 sudo wget https://raw.githubusercontent.com/Retro-Devils/RPI-LightGun-Tool/main/ra-configs/wii-mote/psx/retroarch-gun-duck.cfg -P /opt/retropie/configs/psx/
 sudo wget https://raw.githubusercontent.com/Retro-Devils/RPI-LightGun-Tool/main/ra-configs/wii-mote/psx/retroarch-gun-swan.cfg -P /opt/retropie/configs/psx/
