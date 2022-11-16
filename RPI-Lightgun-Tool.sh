@@ -17,8 +17,8 @@ local choice
       - "------------------------" \
       T1 "---ABOUT  RPI-LG-TOOL---" \
       T2 "---DISPLAY GUN LAYOUTS--" \
-      T2 "---REMOVE RPI-LG-TOOL---" \
-      T3 "---UPDATE RPI-LG-TOOL---" \
+      T3 "---REMOVE RPI-LG-TOOL---" \
+      T4 "---UPDATE RPI-LG-TOOL---" \
       oo "------------------------" \
       2>&1 >/dev/tty)
 
