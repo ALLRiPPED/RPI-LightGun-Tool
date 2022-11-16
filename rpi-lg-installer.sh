@@ -28,7 +28,11 @@ function gun-install-menu() {
 function install() {
 if [ -f "$HOME/RetroPie/retropiemenu/RPI-Lightgun-Tool.sh" ]; then sudo rm $HOME/RetroPie/retropiemenu/RPI-Lightgun-Tool.sh; fi
 if [ -f "/usr/local/bin/RPI-Lightgun-Tool" ]; then sudo rm /usr/local/bin/RPI-Lightgun-Tool; fi
+if [ ! -d "/$HOME/Lightgun-Tool/" ]; then mkdir /$HOME/Lightgun-Tool/
 wget https://raw.githubusercontent.com/Retro-Devils/RPI-LightGun-Tool/main/RPI-Lightgun-Tool.sh -P $HOME/RetroPie/retropiemenu/
+wget        WII LAYOUT PICS 
+wget        SETUP VIDEO 
+wget        IR MOUSE AND KEYBOARD PICs
 sleep 1
 sudo cp $HOME/RetroPie/retropiemenu/RPI-Lightgun-Tool.sh -f /usr/local/bin/RPI-Lightgun-Tool
 sleep 1
