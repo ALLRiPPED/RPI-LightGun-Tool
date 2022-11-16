@@ -78,7 +78,7 @@ sudo rm /usr/local/bin/RPI-Lightgun-Tool
 function update-script() {
 if [ -f "$HOME/RetroPie/retropiemenu/RPI-Lightgun-Tool.sh" ]; then sudo rm $HOME/RetroPie/retropiemenu/RPI-Lightgun-Tool.sh; fi
 if [ -f "/usr/local/bin/RPI-Lightgun-Tool" ]; then sudo rm /usr/local/bin/RPI-Lightgun-Tool; fi
-if [ ! -d "/$HOME/Lightgun-Tool/" ]; then mkdir /$HOME/Lightgun-Tool/
+if [ ! -d "/$HOME/Lightgun-Tool/" ]; then mkdir /$HOME/Lightgun-Tool/; fi
 wget https://raw.githubusercontent.com/Retro-Devils/RPI-LightGun-Tool/main/RPI-Lightgun-Tool.sh -P $HOME/RetroPie/retropiemenu/
 wget        WII LAYOUT PICS 
 wget        SETUP VIDEO 
