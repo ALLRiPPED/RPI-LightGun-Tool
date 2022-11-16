@@ -236,12 +236,10 @@ if [ ! -d "/opt/retropie/configs/arcade" ]; then emu-error; fi
 if [ ! -f "$HOME/RetroPie-Setup/scriptmodules/libretrocores/lr-flycast.sh" ]; then sudo wget https://raw.githubusercontent.com/Retro-Devils/RPI-LightGun-Tool/main/scriptmodules/multi-input/libretrocores/lr-flycast.sh  -P $HOME/RetroPie-Setup/scriptmodules/libretrocores/; fi
 if [ ! -f "$HOME/RetroPie-Setup/scriptmodules/libretrocores/lr-mame-StormedBubbles.sh" ]; then sudo wget https://raw.githubusercontent.com/Retro-Devils/RPI-LightGun-Tool/main/scriptmodules/sinden/libretrocores/lr-mame-StormedBubbles.sh -P $HOME/RetroPie-Setup/scriptmodules/libretrocores/; fi
 if [ ! -f "$HOME/RetroPie-Setup/scriptmodules/libretrocores/lr-mame2015-StormedBubbles.sh" ]; then sudo wget https://raw.githubusercontent.com/Retro-Devils/RPI-LightGun-Tool/main/scriptmodules/sinden/libretrocores/lr-mame2015-StormedBubbles.sh -P $HOME/RetroPie-Setup/scriptmodules/libretrocores/; fi
-]cd $HOME/RetroPie-Setup
+cd $HOME/RetroPie-Setup
 sudo ./retropie_packages.sh lr-mame-StormedBubbles
 sudo ./retropie_packages.sh lr-mame2015-StormedBubbles
 sudo ./retropie_packages.sh lr-flycast
-sudo ./retropie_packages.sh lr-mame2003plus
-sudo ./retropie_packages.sh lr-mame2003
 sudo wget https://raw.githubusercontent.com/Retro-Devils/RPI-LightGun-Tool/main/ra-configs/wii-mote/arcade/retroarch-gun-2003plus.cfg -P /opt/retropie/configs/arcade/
 sudo wget https://raw.githubusercontent.com/Retro-Devils/RPI-LightGun-Tool/main/ra-configs/wii-mote/arcade/retroarch-gun-2003.cfg -P /opt/retropie/configs/arcade/
 sudo wget https://raw.githubusercontent.com/Retro-Devils/RPI-LightGun-Tool/main/ra-configs/wii-mote/arcade/retroarch-gun-2016.cfg -P /opt/retropie/configs/arcade/
@@ -254,7 +252,7 @@ sudo chmod 777 /opt/retropie/configs/arcade/retroarch-gun-2016.cfg
 sudo chmod 777 /opt/retropie/configs/arcade/retroarch-gun-stormbubb.cfg
 sudo chmod 777 /opt/retropie/configs/arcade/retroarch-gun-2015stormbubb.cfg
 sudo chmod 777 /opt/retropie/configs/arcade/retroarch-gun-flycast.cfg
-if [ ! -d "$HOME/RetroPie/roms/mastersytem/gun-games/" ]; then mkdir "$HOME/RetroPie/roms/arcade/gun-games/"; fi
+if [ ! -d "$HOME/RetroPie/roms/arcade/gun-games/" ]; then mkdir "$HOME/RetroPie/roms/arcade/gun-games/"; fi
 sudo cp /opt/retropie/configs/mastersytem/emulators.cfg /opt/retropie/configs/arcade/emulators-cfg.backup
 if [ ! -f "/opt/retropie/configs/arcade/confirm-gun" ] ; then
 sed -i '/default/a lightgun-2003+ = "/opt/retropie/emulators/retroarch/bin/retroarch -L /opt/retropie/libretrocores/lr-mame2003-plus/mame2003_plus_libretro.so --config /opt/retropie/configs/arcade/retroarch-gun-2003+.cfg %ROM%"' /opt/retropie/configs/arcade/emulators.cfg
@@ -291,7 +289,7 @@ sudo wget https://raw.githubusercontent.com/Retro-Devils/RPI-LightGun-Tool/main/
 sudo chmod 777 /opt/retropie/configs/dreamcast/retroarch-gun-flycast.cfg
 sudo chmod 777 /opt/retropie/configs/dreamcast/retroarch-gun-mazan.cfg
 sudo chmod 777 /opt/retropie/configs/dreamcast/retroarch-gun-flyinghead.cfg
-if [ ! -d "$HOME/RetroPie/roms/mastersytem/gun-games/" ]; then mkdir "$HOME/RetroPie/roms/dreamcast/gun-games/"; fi
+if [ ! -d "$HOME/RetroPie/roms/dreamcast/gun-games/" ]; then mkdir "$HOME/RetroPie/roms/dreamcast/gun-games/"; fi
 sudo cp /opt/retropie/configs/mastersytem/emulators.cfg /opt/retropie/configs/dreamcast/emulators-cfg.backup
 if [ ! -f "/opt/retropie/configs/dreamcast/confirm-gun" ] ; then
 sed -i '/default/a lightgun-flycast = "/opt/retropie/emulators/retroarch/bin/retroarch -L /opt/retropie/libretrocores/lr-flycast/flycast_libretro.so </dev/null --config /opt/retropie/configs/dreamcast/retroarch.cfg %ROM%"' /opt/retropie/configs/dreamcast/emulators.cfg
