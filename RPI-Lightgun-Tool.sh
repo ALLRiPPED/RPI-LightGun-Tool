@@ -183,7 +183,7 @@ function dolphin-bar() {
       2>&1 >/dev/tty)
 
     case "$choice" in
-    1) gnesis-wii ;;
+    1) genesis-wii ;;
     2) nes-wii ;;
     3) mastersystem-wii ;;
     4) model3 ;;
