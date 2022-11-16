@@ -127,8 +127,6 @@ dialog  --sleep 1 --title "AIMTRACK MESSAGE" --msgbox "
 
 
 #--------------------------------------------------------------AE LIGHTGUN---------------------------------------------------------------------------------------#
-
-#---------------------------------------------------------------GUN4IR---------------------------------------------------------------#
 function ae-lightgun() {
   local choice
   while true; do
@@ -203,15 +201,16 @@ function dolphin-bar() {
     choice=$(dialog --backtitle "$BACKTITLE" --title "DOLPHIN BAR/WII MOTE MENU " \
       --ok-label Select --cancel-label Back \
       --menu "PRESS A/ENTER TO SETUP" 40 60 40 \
-      1 "Apply---Arcade Config" \
-      2 "Apply---Dreamcast Config" \
-      3 "Apply---Genesis Config" \
-      4 "Apply---NES Config" \
+      1 "Apply----Arcade Config" \
+      2 "Apply----Dreamcast Config" \
+      3 "Apply----Genesis Config" \
+      4 "Apply----NES Config" \
       5 "Apply----Masterystem Config" \
       6 "Apply----Model 3 Config" \
       7 "Apply----PS1 Config" \
       8 "Apply----Sega CD Config" \
       9 "Apply----SNES Config" \
+      A "-----APPLY ALL-----" \
       U "-----UNDO MENU-----" \
       2>&1 >/dev/tty)
 
@@ -225,6 +224,7 @@ function dolphin-bar() {
     7) ps1-wii ;;
     8) segacd-wii ;;
     9) snes-wii ;;
+    A) all-wii ;;
     U) dolphin-bar-undo ;;
     -) no ;;
      *) break ;;
@@ -508,6 +508,19 @@ A ----------- nothing
 trigeer ----- nothing" 0 0
 }
 
+function all-wii() {
+arcade-wii
+dreamcast-wii
+genesis-wii
+mastersystem-wii
+nes-wii
+snes-wii
+ps1-wii
+segcd-wii
+snes-wii
+}
+
+
 #---------------------------------------------------------------GUN4IR---------------------------------------------------------------#
 function gun4ir() {
   local choice
@@ -577,6 +590,7 @@ function gun4ir-undo() {
     esac
    done
 }
+
 
 
 #--------------------------------------------------------------IR MOUSE GUN-------------------------------------------------------------------------------------------------------#
