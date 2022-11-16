@@ -174,16 +174,20 @@ function dolphin-bar() {
     choice=$(dialog --backtitle "$BACKTITLE" --title "DOLPHIN BAR/WII MOTE MENU " \
       --ok-label Select --cancel-label Back \
       --menu "PRESS A/ENTER TO SETUP" 40 60 40 \
-      1 "Apply NES Gun Config" \
-      2 "Apply Model 3 Gun Config" \
-      3 "Apply SNES Gun Config" \
+      1 "Apply Genesis Gun Config" \
+      2 "Apply NES Gun Config" \
+      3 "Apply Masterystem Gun Config" \
+      4 "Apply Model 3 Gun Config" \
+      5 "Apply SNES Gun Config" \
       U "-----UNDO MENU-----" \
       2>&1 >/dev/tty)
 
     case "$choice" in
-    1) nes-wii ;;
-    2) model3 ;;
-    3) snes-wii ;;
+    1) gnesis-wii ;;
+    2) nes-wii ;;
+    3) mastersystem-wii ;;
+    4) model3 ;;
+    5) snes-wii ;;
     U) dolphin-bar-undo ;;
     -) no ;;
      *) break ;;
@@ -278,11 +282,11 @@ function genesis-wii() {
 if [ ! -d "/opt/retropie/configs/genesis" ]; then emu-error; fi
 sudo wget https://raw.githubusercontent.com/Retro-Devils/RPI-LightGun-Tool/main/ra-configs/wii-mote/genesis/retroarch-gun.cfg -P /opt/retropie/configs/genesis/
 sudo chmod 777 /opt/retropie/configs/genesis/retroarch-gun.cfg
-if [ ! -d "$HOME/RetroPie/roms/mastersytem/gun-games/" ]; then mkdir "$HOME/RetroPie/roms/genesis/gun-games/"; fi
+if [ ! -d "$HOME/RetroPie/roms/genesis/gun-games/" ]; then mkdir "$HOME/RetroPie/roms/genesis/gun-games/"; fi
 sudo cp /opt/retropie/configs/genesis/emulators.cfg /opt/retropie/configs/genesis/emulators-cfg.backup
 if [ ! -f "/opt/retropie/configs/genesis/confirm-gun" ] ; then
 sed -i '/default/a lightgun-genesis = "/opt/retropie/emulators/retroarch/bin/retroarch -L /opt/retropie/libretrocores/lr-genesis-plus-gx/genesis_plus_gx_libretro.so --config /opt/retropie/configs/genesis/retroarch-gun.cfg %ROM%"' /opt/retropie/configs/genesis/emulators.cfg
-sudo wget https://raw.githubusercontent.com/Retro-Devils/RPI-LightGun-Tool/main/ra-configs/confirm-gun -P /opt/retropie/configs/genesis
+sudo wget https://raw.githubusercontent.com/Retro-Devils/RPI-LightGun-Tool/main/ra-configs/confirm-gun -P /opt/retropie/configs/genesis/
 dialog  --sleep 1 --title "GUN CONFIG COMPLETE" --msgbox "
 - A FOLDER HAS BEEN MADE UNDER Home/Pi/RetroPie/roms/genesis/gun-games/ 
 - A new emu called lightgun-genesis was added to emulators.cfg
