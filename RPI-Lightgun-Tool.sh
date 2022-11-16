@@ -183,7 +183,8 @@ function dolphin-bar() {
       3 "Apply NES Gun Config" \
       4 "Apply Masterystem Gun Config" \
       5 "Apply Model 3 Gun Config" \
-      6 "Apply SNES Gun Config" \
+      6 "Apply Sega CD Gun Config" \
+      7 "Apply SNES Gun Config" \
       U "-----UNDO MENU-----" \
       2>&1 >/dev/tty)
 
@@ -193,7 +194,8 @@ function dolphin-bar() {
     3) nes-wii ;;
     4) mastersystem-wii ;;
     5) model3 ;;
-    6) snes-wii ;;
+    6) segacd-wii ;;
+    7) snes-wii ;;
     U) dolphin-bar-undo ;;
     -) no ;;
      *) break ;;
