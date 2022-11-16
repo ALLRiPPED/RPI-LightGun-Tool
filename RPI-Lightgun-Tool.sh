@@ -175,13 +175,14 @@ function dolphin-bar() {
       --menu "PRESS A/ENTER TO SETUP" 40 60 40 \
       1 "Apply NES Gun Config" \
       2 "Apply Model 3 Gun Config" \
-      3 "-----UNDO MENU-----" \
+      U "-----UNDO MENU-----" \
       2>&1 >/dev/tty)
 
     case "$choice" in
     1) nes-wii ;;
     2) model3 ;;
-    3) dolphin-bar-undo ;;
+    3) snes-wii ;;
+    U) dolphin-bar-undo ;;
     -) no ;;
      *) break ;;
     esac
