@@ -434,7 +434,9 @@ function dolphin-bar-undo() {
 function dolphin-layout() {
 dialog  --sleep 1 --title "ATTENTION MESSAGE" --msgbox "
 WII MOTE LAYOUT IS AS FOLLOWS
-BUTTON------- IN EMU/WITH HOTKEY
+
+FOR RETROARCH/IN GAME
+WII MOTE -----IN RA/WITH HOTKEY
 +  ---------- start/hotkey
 -  ---------- select/quit
 1  ---------- nothing
@@ -442,7 +444,22 @@ BUTTON------- IN EMU/WITH HOTKEY
 down  ------- down/reset
 up  --------- up/menu
 left  ------- left/save state
-right  ------ right/load state " 0 0
+right  ------ right/load state
+trigger ----- a & shoot
+A ----------- b & reload 
+
+FOR EMULATION STATION
+WII MOTE -----IN RETROPIE MENUS
++  ---------- start
+-  ---------- select
+1  ---------- A
+2  ---------- B
+down  ------- down
+up  --------- up
+left  ------- left/save state
+right  ------ right/load state
+A ----------- nothing
+trigeer ----- nothing" 0 0
 }
 
 #---------------------------------------------------------------GUN4IR---------------------------------------------------------------#
