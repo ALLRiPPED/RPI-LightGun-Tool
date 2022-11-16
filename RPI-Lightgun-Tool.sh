@@ -16,7 +16,7 @@ local choice
       6 "Sinden Lightgun" \
       - "------------------------" \
       T1 "---ABOUT  RPI-LG-TOOL---" \
-      T2 "---DISPLAY GUN LAYOUTS--" \ 
+      T2 "---DISPLAY GUN LAYOUTS--" \
       T2 "---REMOVE RPI-LG-TOOL---" \
       T3 "---UPDATE RPI-LG-TOOL---" \
       oo "------------------------" \
