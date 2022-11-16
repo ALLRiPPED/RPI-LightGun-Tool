@@ -35,8 +35,9 @@ wget https://raw.githubusercontent.com/Retro-Devils/RPI-LightGun-Tool/main/Light
 sleep 1
 sudo cp $HOME/RetroPie/retropiemenu/RPI-Lightgun-Tool.sh -f /usr/local/bin/RPI-Lightgun-Tool
 sleep 1
-chmod 755 $HOME/RetroPie/retropiemenu/RPI-Lightgun-Tool.sh
-sudo chmod 755 /usr/local/bin/RPI-Lightgun-Tool
+chmod 777 $HOME/RetroPie/retropiemenu/RPI-Lightgun-Tool.sh
+sudo chmod 777 /usr/local/bin/RPI-Lightgun-Tool
+chmod 777 -R $HOME/Lightgun-Tool/
 }
 
 function info() {
