@@ -145,6 +145,7 @@ dialog  --sleep 1 --title "ATTENTION MESSAGE" --msgbox "
 }
 
 function ae-firm() {
+scho "SOON"
 }
 
 function ae-undo() {
