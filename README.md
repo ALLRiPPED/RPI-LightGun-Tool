@@ -10,7 +10,7 @@ GETTING CLOSER AND CLOSER. WE SEEM TO HAVE MOST IT WORKED OUT.
 
          This is a tool to make using Lightguns on Retropie as easy as possible.
          
-         Version:                BETA 1.01
+         Version:                BETA 1.02
          
          Last Update:            11/15/22
 
@@ -122,6 +122,21 @@ Sinden Credits
          https://github.com/SindenLightgun/SindenLightgunLinux
          
          
-Testing Credits
+# Testing Credits
 
          COMING SOON
+
+# CHANGELOG
+
+1.01 to 1.02
+
+- Added layout videos
+
+- About finished wii layouts
+
+- Starting outside testing
+
+- following tested working good with Dolphin Bar/Wii Mote
+         
+         - Genesis, Mastersystem, NES, SNES & SegaCD
+         
