@@ -380,11 +380,9 @@ dolhin-layout
 
 function ps1-wii() {
 if [ ! -d "/opt/retropie/configs/psx" ]; then emu-error; fi
-if [ ! -f "$HOME/RetroPie-Setup/scriptmodules/libretrocores/lr-pcsx-rearmed.sh" ]; then sudo wget https://raw.githubusercontent.com/Retro-Devils/RPI-LightGun-Tool/main/scriptmodules/multi-input/libretrocores/lr-pcsx-rearmed.sh  -P $HOME/RetroPie-Setup/scriptmodules/libretrocores/; fi
 if [ ! -f "$HOME/RetroPie-Setup/scriptmodules/libretrocores/lr-duckstation.sh" ]; then sudo wget https://raw.githubusercontent.com/Retro-Devils/RPI-LightGun-Tool/main/scriptmodules/multi-input/libretrocores/lr-swanstation.sh  -P $HOME/RetroPie-Setup/scriptmodules/libretrocores/; fi
 if [ ! -f "$HOME/RetroPie-Setup/scriptmodules/libretrocores/lr-swanstation.sh" ]; then sudo wget https://raw.githubusercontent.com/Retro-Devils/RPI-LightGun-Tool/main/scriptmodules/multi-input/libretrocores/lr-duckstation.sh  -P $HOME/RetroPie-Setup/scriptmodules/libretrocores/; fi
 cd $HOME/RetroPie-Setup
-sudo ./retropie_packages.sh lr-pcsx-rearmed
 sudo ./retropie_packages.sh lr-duckstation
 sudo ./retropie_packages.sh lr-swanstation
 sleep 1
