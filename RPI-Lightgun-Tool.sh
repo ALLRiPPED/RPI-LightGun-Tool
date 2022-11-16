@@ -178,24 +178,28 @@ function dolphin-bar() {
     choice=$(dialog --backtitle "$BACKTITLE" --title "DOLPHIN BAR/WII MOTE MENU " \
       --ok-label Select --cancel-label Back \
       --menu "PRESS A/ENTER TO SETUP" 40 60 40 \
-      1 "Apply Dreamcast Gun Config" \
-      2 "Apply Genesis Gun Config" \
-      3 "Apply NES Gun Config" \
-      4 "Apply Masterystem Gun Config" \
-      5 "Apply Model 3 Gun Config" \
-      6 "Apply Sega CD Gun Config" \
-      7 "Apply SNES Gun Config" \
+      1 "Apply---Arcade Config" \
+      2 "Apply---Dreamcast Config" \
+      3 "Apply---Genesis Config" \
+      4 "Apply---NES Config" \
+      5 "Apply----Masterystem Config" \
+      6 "Apply----Model 3 Config" \
+      7 "Apply----PS1 Config" \
+      8 "Apply----Sega CD Config" \
+      9 "Apply----SNES Config" \
       U "-----UNDO MENU-----" \
       2>&1 >/dev/tty)
 
     case "$choice" in
-    1) dreamcast-wii ;;
-    2) genesis-wii ;;
-    3) nes-wii ;;
-    4) mastersystem-wii ;;
-    5) model3 ;;
-    6) segacd-wii ;;
-    7) snes-wii ;;
+    1) arcade-wii ;;
+    2) dreamcast-wii ;;
+    3) genesis-wii ;;
+    4) nes-wii ;;
+    5) mastersystem-wii ;;
+    6) model3 ;;
+    7) ps1-wii ;;
+    8) segacd-wii ;;
+    9) snes-wii ;;
     U) dolphin-bar-undo ;;
     -) no ;;
      *) break ;;
