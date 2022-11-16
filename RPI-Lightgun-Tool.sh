@@ -184,7 +184,7 @@ function dolphin-bar() {
       2>&1 >/dev/tty)
 
     case "$choice" in
-    1) dreamcast-wii
+    1) dreamcast-wii ;;
     2) genesis-wii ;;
     3) nes-wii ;;
     4) mastersystem-wii ;;
