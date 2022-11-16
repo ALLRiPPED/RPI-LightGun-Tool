@@ -450,9 +450,10 @@ right  ------ right/load state
 trigger ----- a & shoot
 A ----------- b & reload 
 
-FOR EMULATION STATION
+
+FOR EMULATION STATION WE SUGGEST
 WII MOTE -----IN RETROPIE MENUS
-+  ---------- start
++  ---------- start/hotkey
 -  ---------- select
 1  ---------- A
 2  ---------- B
