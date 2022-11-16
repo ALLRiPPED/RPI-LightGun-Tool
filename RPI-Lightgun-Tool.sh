@@ -176,6 +176,7 @@ function dolphin-bar() {
       --menu "PRESS A/ENTER TO SETUP" 40 60 40 \
       1 "Apply NES Gun Config" \
       2 "Apply Model 3 Gun Config" \
+      3 "Apply SNES Gun Config" \
       U "-----UNDO MENU-----" \
       2>&1 >/dev/tty)
 
