@@ -16,6 +16,7 @@ local choice
       6 "Sinden Lightgun" \
       - "------------------------" \
       T1 "---ABOUT  RPI-LG-TOOL---" \
+      T2 "---DISPLAY GUN LAYOUTS--" \ 
       T2 "---REMOVE RPI-LG-TOOL---" \
       T3 "---UPDATE RPI-LG-TOOL---" \
       oo "------------------------" \
@@ -29,8 +30,9 @@ local choice
     5) soon ;;
     6) sinden-menu ;;
     T1) gun-help ;;
-    T2) remove-script ;;
-    T3) update-script ;;
+    T2) layouts ;;
+    T3) remove-script ;;
+    T4) update-script ;;
     oo) secret-menu ;;
      -) no ;;
      *) break ;;
@@ -78,11 +80,16 @@ sudo rm /usr/local/bin/RPI-Lightgun-Tool
 function update-script() {
 if [ -f "$HOME/RetroPie/retropiemenu/RPI-Lightgun-Tool.sh" ]; then sudo rm $HOME/RetroPie/retropiemenu/RPI-Lightgun-Tool.sh; fi
 if [ -f "/usr/local/bin/RPI-Lightgun-Tool" ]; then sudo rm /usr/local/bin/RPI-Lightgun-Tool; fi
-if [ ! -d "/$HOME/Lightgun-Tool/" ]; then mkdir /$HOME/Lightgun-Tool/; fi
+if [ ! -d "/$HOME/Lightgun-Tool/" ]; then mkdir $HOME/Lightgun-Tool/; fi
 wget https://raw.githubusercontent.com/Retro-Devils/RPI-LightGun-Tool/main/RPI-Lightgun-Tool.sh -P $HOME/RetroPie/retropiemenu/
-wget        WII LAYOUT PICS 
-wget        SETUP VIDEO 
-wget        IR MOUSE AND KEYBOARD PICs
+wget https://raw.githubusercontent.com/Retro-Devils/RPI-LightGun-Tool/main/Lightgun-Tool/ir-mouse-layout.sh -P $HOME/Lightgun-Tool/
+wget https://raw.githubusercontent.com/Retro-Devils/RPI-LightGun-Tool/main/Lightgun-Tool/wii-layout.sh -P $HOME/Lightgun-Tool/ 
+sleep 1
+sudo cp $HOME/RetroPie/retropiemenu/RPI-Lightgun-Tool.sh -f /usr/local/bin/RPI-Lightgun-Tool
+sleep 1
+chmod 777 $HOME/RetroPie/retropiemenu/RPI-Lightgun-Tool.sh
+sudo chmod 777 /usr/local/bin/RPI-Lightgun-Tool
+chmod 777 -R $HOME/Lightgun-Tool/
 sleep 1
 sudo cp $HOME/RetroPie/retropiemenu/RPI-Lightgun-Tool.sh -f /usr/local/bin/RPI-Lightgun-Tool
 sleep 1
@@ -90,6 +97,24 @@ chmod 755 $HOME/RetroPie/retropiemenu/RPI-Lightgun-Tool.sh
 sudo chmod 755 /usr/local/bin/RPI-Lightgun-Tool
 }
 
+function layouts() {
+local choice
+  while true; do
+    choice=$(dialog --backtitle "$BACKTITLE" --title "MAIN MENU" \
+      --ok-label Select --cancel-label Exit \
+      --menu "WHAT KIND OF GUN DO YOU HAVE?" 40 60 40 \
+      1 "Dolphin/WII Mote" \
+      2 "Infared Mouse Gun" \
+      2>&1 >/dev/tty)
+
+    case "$choice" in
+    1) bash $HOME/Lightgun-Tool/wii-layout.sh ;;
+    2) bash $HOME/Lightgun-Tool/ir-mouse-layout  ;;
+     -) no ;;
+     *) break ;;
+    esac
+   done
+}
 #--------------------------------------------------------------AIMTRACK---------------------------------------------------------------------------------------#
 function aimtrack() {
 dialog  --sleep 1 --title "AIMTRACK MESSAGE" --msgbox "
