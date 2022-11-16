@@ -115,6 +115,7 @@ local choice
     esac
    done
 }
+
 #--------------------------------------------------------------AIMTRACK---------------------------------------------------------------------------------------#
 function aimtrack() {
 dialog  --sleep 1 --title "AIMTRACK MESSAGE" --msgbox "
@@ -566,7 +567,7 @@ dialog  --sleep 1 --title "ATTENTION MESSAGE" --msgbox "
    done
 }
 
-function gun-firm() {
+function gun4ir-firm() {
 wget https://github.com/gobozgz/GUN4IR/archive/refs/tags/2.16.zip -P "$HOME"
 unzip "$HOME"/gun4ir-2.16.zip
 rm "$HOME"/gun4ir-2.16.zip
@@ -755,7 +756,7 @@ git pull
 fi
 }
 
-function sinden-consolesssssssssss() {
+function sinden-hold() {
   local choice
   while true; do
     choice=$(dialog --backtitle "$BACKTITLE" --title "SINDEN LIGHTGUN MENU " \
@@ -782,7 +783,7 @@ dialog  --sleep 1 --title "COMING SOON" --msgbox "
 - PLEASE WAIT LOL" 0 0
 }
 
-function SINDEN-undo() {
+function sinden-undo() {
   local choice
   while true; do
     choice=$(dialog --backtitle "$BACKTITLE" --title "SINDEN UNDO MENU " \
