@@ -358,7 +358,9 @@ sudo ./retropie_packages.sh lr-pcsx-rearmed
 sudo ./retropie_packages.sh lr-duckstation
 sudo ./retropie_packages.sh lr-swanstation
 sleep 1
-sudo wget https://raw.githubusercontent.com/Retro-Devils/RPI-LightGun-Tool/main/ra-configs/wii-mote/psx/retroarch-gun.cfg -P /opt/retropie/configs/psx/
+sudo wget https://raw.githubusercontent.com/Retro-Devils/RPI-LightGun-Tool/main/ra-configs/wii-mote/psx/retroarch-gun-duck.cfg -P /opt/retropie/configs/psx/
+sudo wget https://raw.githubusercontent.com/Retro-Devils/RPI-LightGun-Tool/main/ra-configs/wii-mote/psx/retroarch-gun-swan.cfg -P /opt/retropie/configs/psx/
+sudo wget https://raw.githubusercontent.com/Retro-Devils/RPI-LightGun-Tool/main/ra-configs/wii-mote/psx/retroarch-gun-rearmed.cfg -P /opt/retropie/configs/psx/
 sudo chmod 777 /opt/retropie/configs/psx/retroarch-gun.cfg
 if [ ! -d "$HOME/RetroPie/roms/psx/gun-games/" ]; then mkdir "$HOME/RetroPie/roms/psx/gun-games/"; fi
 sudo cp /opt/retropie/configs/psx/emulators.cfg /opt/retropie/configs/psx/emulators-cfg.backup
