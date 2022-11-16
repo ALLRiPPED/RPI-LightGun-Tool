@@ -418,9 +418,9 @@ if [ ! -d "/opt/retropie/configs/segacd" ]; then emu-error; fi
 sudo wget https://raw.githubusercontent.com/Retro-Devils/RPI-LightGun-Tool/main/ra-configs/wii-mote/segacd/retroarch-gun.cfg -P /opt/retropie/configs/segacd/
 sudo chmod 777 /opt/retropie/configs/segacd/retroarch-gun.cfg
 if [ ! -d "$HOME/RetroPie/roms/segacd/gun-games/" ]; then mkdir "$HOME/RetroPie/roms/segacd/gun-games/"; fi
-sudo cp /opt/retropie/configs/mastersytem/emulators.cfg /opt/retropie/configs/segacd/emulators-cfg.backup
+sudo cp /opt/retropie/configs/segacd/emulators.cfg /opt/retropie/configs/segacd/emulators-cfg.backup
 if [ ! -f "/opt/retropie/configs/segacd/confirm-gun" ] ; then
-sed -i '/default/a lightgun-segacd = "/opt/retropie/emulators/retroarch/bin/retroarch -L /opt/retropie/libretrocores/lr-segacd-plus-gx/genesis_plus_gx_libretro.so --config /opt/retropie/configs/genesis/retroarch-gun.cfg %ROM%"' /opt/retropie/configs/lightgun-segacd/emulators.cfg
+sed -i '/default/a lightgun-segacd = "/opt/retropie/emulators/retroarch/bin/retroarch -L /opt/retropie/libretrocores/lr-segacd-plus-gx/genesis_plus_gx_libretro.so --config /opt/retropie/configs/genesis/retroarch-gun.cfg %ROM%"' /opt/retropie/configs/segacd/emulators.cfg
 sudo wget https://raw.githubusercontent.com/Retro-Devils/RPI-LightGun-Tool/main/ra-configs/confirm-gun -P /opt/retropie/configs/segacd
 dialog  --sleep 1 --title "GUN CONFIG COMPLETE" --msgbox "
 - A FOLDER HAS BEEN MADE UNDER Home/Pi/RetroPie/roms/segacd/gun-games/ 
