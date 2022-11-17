@@ -281,22 +281,20 @@ if [ ! -f "$HOME/RetroPie-Setup/scriptmodules/libretrocores/lr-flycast.sh" ]; th
 if [ ! -f "$HOME/RetroPie-Setup/scriptmodules/libretrocores/lr-flyinghead.sh" ]; then sudo wget https://raw.githubusercontent.com/Retro-Devils/RPI-LightGun-Tool/main/scriptmodules/sinden/libretrocores/lr-flycast-flyinghead.sh -P $HOME/RetroPie-Setup/scriptmodules/libretrocores/ 7&& sudo ./retropie_packages.sh lr-flycast-flyinghead; fi
 cd
 sudo wget https://raw.githubusercontent.com/Retro-Devils/RPI-LightGun-Tool/main/ra-configs/wii-mote/dreamcast/retroarch-gun-flycast.cfg -P /opt/retropie/configs/dreamcast/
-sudo wget https://raw.githubusercontent.com/Retro-Devils/RPI-LightGun-Tool/main/ra-configs/wii-mote/dreamcast/retroarch-gun-mazan.cfg -P /opt/retropie/configs/dreamcast/
 sudo wget https://raw.githubusercontent.com/Retro-Devils/RPI-LightGun-Tool/main/ra-configs/wii-mote/dreamcast/retroarch-gun-flyinghead.cfg -P /opt/retropie/configs/dreamcast/
 sudo chmod 777 /opt/retropie/configs/dreamcast/retroarch-gun-flycast.cfg
-sudo chmod 777 /opt/retropie/configs/dreamcast/retroarch-gun-mazan.cfg
 sudo chmod 777 /opt/retropie/configs/dreamcast/retroarch-gun-flyinghead.cfg
 if [ ! -d "$HOME/RetroPie/roms/dreamcast/gun-games/" ]; then mkdir "$HOME/RetroPie/roms/dreamcast/gun-games/"; fi
 sudo cp /opt/retropie/configs/mastersytem/emulators.cfg /opt/retropie/configs/dreamcast/emulators-cfg.backup
 if [ ! -f "/opt/retropie/configs/dreamcast/confirm-gun" ] ; then
-sed -i '/default/a lightgun-flycast = "/opt/retropie/emulators/retroarch/bin/retroarch -L /opt/retropie/libretrocores/lr-flycast/flycast_libretro.so </dev/null --config /opt/retropie/configs/dreamcast/retroarch.cfg %ROM%"' /opt/retropie/configs/dreamcast/emulators.cfg
+sed -i '/default/a lightgun-flycast = "/opt/retropie/emulators/retroarch/bin/retroarch -L /opt/retropie/libretrocores/lr-flycast/flycast_libretro.so </dev/null --config /opt/retropie/configs/dreamcast/retroarch-gun-flycast.cfg %ROM%"' /opt/retropie/configs/dreamcast/emulators.cfg
 sleep 1
 sleep 1
-sed -i '/lightgun-flycast/a lightgun-flyinghead = "/opt/retropie/emulators/retroarch/bin/retroarch -L /opt/retropie/libretrocores/lr-flycast-flyinghead/flycast_libretro.so </dev/null --config /opt/retropie/configs/dreamcast/retroarch.cfg %ROM%"' /opt/retropie/configs/dreamcast/emulators.cfg
+sed -i '/lightgun-flycast/a lightgun-flyinghead = "/opt/retropie/emulators/retroarch/bin/retroarch -L /opt/retropie/libretrocores/lr-flycast-flyinghead/flycast_libretro.so </dev/null --config /opt/retropie/configs/dreamcast/retroarch-gun-flyinghead.cfg %ROM%"' /opt/retropie/configs/dreamcast/emulators.cfg
 sudo wget https://raw.githubusercontent.com/Retro-Devils/RPI-LightGun-Tool/main/ra-configs/confirm-gun -P /opt/retropie/configs/dreamcast
 dialog  --sleep 1 --title "GUN CONFIG COMPLETE" --msgbox "
 - A FOLDER HAS BEEN MADE UNDER Home/Pi/RetroPie/roms/arcade/gun-games/ 
-- New emus called lightgun-flycast, lightgun-mazan,and lightgun-flyinghead were added to emulators.cfg
+- New emus called lightgun-flycast and lightgun-flyinghead were added to emulators.cfg
 - lightgun-flycast is LR FLYCAST, lightgun-mazan is LR FLYCAST-MAZAN etc.
 - Most games you can use lightgun-flycast 
 - For Virtua Cop 2 and Ninja (Naomi) you will need to use Mazan or Flyinghead" 0 0
