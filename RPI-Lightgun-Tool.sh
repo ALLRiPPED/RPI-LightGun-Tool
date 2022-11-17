@@ -233,13 +233,9 @@ function dolphin-bar() {
 
 function arcade-wii() {
 if [ ! -d "/opt/retropie/configs/arcade" ]; then emu-error; fi
-if [ ! -f "$HOME/RetroPie-Setup/scriptmodules/libretrocores/lr-flycast.sh" ]; then sudo wget https://raw.githubusercontent.com/Retro-Devils/RPI-LightGun-Tool/main/scriptmodules/multi-input/libretrocores/lr-flycast.sh  -P $HOME/RetroPie-Setup/scriptmodules/libretrocores/; fi
-if [ ! -f "$HOME/RetroPie-Setup/scriptmodules/libretrocores/lr-mame-StormedBubbles.sh" ]; then sudo wget https://raw.githubusercontent.com/Retro-Devils/RPI-LightGun-Tool/main/scriptmodules/sinden/libretrocores/lr-mame-StormedBubbles.sh -P $HOME/RetroPie-Setup/scriptmodules/libretrocores/; fi
-if [ ! -f "$HOME/RetroPie-Setup/scriptmodules/libretrocores/lr-mame2015-StormedBubbles.sh" ]; then sudo wget https://raw.githubusercontent.com/Retro-Devils/RPI-LightGun-Tool/main/scriptmodules/sinden/libretrocores/lr-mame2015-StormedBubbles.sh -P $HOME/RetroPie-Setup/scriptmodules/libretrocores/; fi
-cd $HOME/RetroPie-Setup
-sudo ./retropie_packages.sh lr-mame-StormedBubbles
-sudo ./retropie_packages.sh lr-mame2015-StormedBubbles
-sudo ./retropie_packages.sh lr-flycast
+if [ ! -f "$HOME/RetroPie-Setup/scriptmodules/libretrocores/lr-flycast.sh" ]; then arcade-emu "lr-flycast"; fi
+if [ ! -f "$HOME/RetroPie-Setup/scriptmodules/libretrocores/lr-mame-StormedBubbles.sh" ]; then arcade-emu "lr-mame-StormedBubbles" ; fi
+if [ ! -f "$HOME/RetroPie-Setup/scriptmodules/libretrocores/lr-mame2015-StormedBubbles.sh" ]; then arcade-emu "lr-mame2015-StormedBubbles" ; fi
 sudo wget https://raw.githubusercontent.com/Retro-Devils/RPI-LightGun-Tool/main/ra-configs/wii-mote/arcade/retroarch-gun-2003plus.cfg -P /opt/retropie/configs/arcade/
 sudo wget https://raw.githubusercontent.com/Retro-Devils/RPI-LightGun-Tool/main/ra-configs/wii-mote/arcade/retroarch-gun-2003.cfg -P /opt/retropie/configs/arcade/
 sudo wget https://raw.githubusercontent.com/Retro-Devils/RPI-LightGun-Tool/main/ra-configs/wii-mote/arcade/retroarch-gun-2016.cfg -P /opt/retropie/configs/arcade/
@@ -275,11 +271,17 @@ fi
 dolphin-layout
 }
 
+function arcade-emu() {
+cd $HOME/RetroPie-Setup
+sudo wget https://raw.githubusercontent.com/Retro-Devils/RPI-LightGun-Tool/main/scriptmodules/multi-input/libretrocores/"$1".sh 
+git pull
+$HOME/RetroPie-Setup/scriptmodules/libretrocores/ && sudo ./retropie_packages.sh "$1"
+}
+
 function dreamcast-wii() {
 cd $HOME/RetroPie-Setup
-if [ ! -f "$HOME/RetroPie-Setup/scriptmodules/libretrocores/lr-flycast.sh" ]; then sudo wget https://raw.githubusercontent.com/Retro-Devils/RPI-LightGun-Tool/main/scriptmodules/multi-input/libretrocores/lr-flycast.sh  -P $HOME/RetroPie-Setup/scriptmodules/libretrocores/ && sudo ./retropie_packages.sh lr-flycast; fi
-if [ ! -f "$HOME/RetroPie-Setup/scriptmodules/libretrocores/lr-flyinghead.sh" ]; then sudo wget https://raw.githubusercontent.com/Retro-Devils/RPI-LightGun-Tool/main/scriptmodules/sinden/libretrocores/lr-flycast-flyinghead.sh -P $HOME/RetroPie-Setup/scriptmodules/libretrocores/ 7&& sudo ./retropie_packages.sh lr-flycast-flyinghead; fi
-cd
+if [ ! -f "$HOME/RetroPie-Setup/scriptmodules/libretrocores/lr-flycast.sh" ]; then  dreamcast-emu "lr-flycast" ; fi
+if [ ! -f "$HOME/RetroPie-Setup/scriptmodules/libretrocores/lr-flyinghead.sh" ]; then dremcast-emu "lr-flyinghead"; fi
 sudo wget https://raw.githubusercontent.com/Retro-Devils/RPI-LightGun-Tool/main/ra-configs/wii-mote/dreamcast/retroarch-gun-flycast.cfg -P /opt/retropie/configs/dreamcast/
 sudo wget https://raw.githubusercontent.com/Retro-Devils/RPI-LightGun-Tool/main/ra-configs/wii-mote/dreamcast/retroarch-gun-flyinghead.cfg -P /opt/retropie/configs/dreamcast/
 sudo chmod 777 /opt/retropie/configs/dreamcast/retroarch-gun-flycast.cfg
@@ -305,6 +307,14 @@ dialog  --sleep 1 --title "GUN ALREADY CONFIGURED" --msgbox "
 fi
 dolphin-layout
 }
+
+function dreamcast-emu() {
+cd $HOME/RetroPie-Setup
+sudo wget https://raw.githubusercontent.com/Retro-Devils/RPI-LightGun-Tool/main/scriptmodules/multi-input/libretrocores/"$1".sh 
+git pull
+$HOME/RetroPie-Setup/scriptmodules/libretrocores/ && sudo ./retropie_packages.sh "$1"
+}
+
 
 function genesis-wii() {
 if [ ! -d "/opt/retropie/configs/genesis" ]; then emu-error; fi
