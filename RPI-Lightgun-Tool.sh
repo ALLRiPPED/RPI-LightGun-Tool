@@ -382,26 +382,26 @@ dolhin-layout
 
 function ps1-wii() {
 if [ ! -d "/opt/retropie/configs/psx" ]; then emu-error; fi
-if [ ! -f "$HOME/RetroPie-Setup/scriptmodules/libretrocores/lr-swanstation.sh" ]; then sudo wget https://raw.githubusercontent.com/Retro-Devils/RPI-LightGun-Tool/main/scriptmodules/multi-input/libretrocores/lr-swanstation.sh  -P $HOME/RetroPie-Setup/scriptmodules/libretrocores/ && sudo ./retropie_packages.sh lr-swanstation; fi
-if [ ! -f "$HOME/RetroPie-Setup/scriptmodules/libretrocores/lr-duckstation.sh" ]; then sudo wget https://raw.githubusercontent.com/Retro-Devils/RPI-LightGun-Tool/main/scriptmodules/multi-input/libretrocores/lr-duckstation.sh  -P $HOME/RetroPie-Setup/scriptmodules/libretrocores/ && sudo ./retropie_packages.sh lr-duckstation; fi
 cd
 sleep 1
-sudo wget https://raw.githubusercontent.com/Retro-Devils/RPI-LightGun-Tool/main/ra-configs/wii-mote/psx/retroarch-gun-duck.cfg -P /opt/retropie/configs/psx/
-sudo wget https://raw.githubusercontent.com/Retro-Devils/RPI-LightGun-Tool/main/ra-configs/wii-mote/psx/retroarch-gun-swan.cfg -P /opt/retropie/configs/psx/
-sudo wget https://raw.githubusercontent.com/Retro-Devils/RPI-LightGun-Tool/main/ra-configs/wii-mote/psx/retroarch-gun-pcsx.cfg -P /opt/retropie/configs/psx/
+sudo wget https://raw.githubusercontent.com/Retro-Devils/RPI-LightGun-Tool/main/ra-configs/wii-mote/psx/retroarch-gun-mouse.cfg -P /opt/retropie/configs/psx/
+sudo wget https://raw.githubusercontent.com/Retro-Devils/RPI-LightGun-Tool/main/ra-configs/wii-mote/psx/retroarch-gun-gcon.cfg -P /opt/retropie/configs/psx/
+sudo wget https://raw.githubusercontent.com/Retro-Devils/RPI-LightGun-Tool/main/ra-configs/wii-mote/psx/retroarch-gun-ngun.cfg -P /opt/retropie/configs/psx/
 sudo chmod 777 /opt/retropie/configs/psx/retroarch-gun.cfg
 if [ ! -d "$HOME/RetroPie/roms/psx/gun-games/" ]; then mkdir "$HOME/RetroPie/roms/psx/gun-games/"; fi
 sudo cp /opt/retropie/configs/psx/emulators.cfg /opt/retropie/configs/psx/emulators-cfg.backup
 if [ ! -f "/opt/retropie/configs/psx/confirm-gun" ] ; then
-sed -i '/default/a lightgun-pcsx = "/opt/retropie/emulators/retroarch/bin/retroarch -L /opt/retropie/libretrocores/lr-pcsx-rearmed/pcsx_rearmed_libretro.so --config /opt/retropie/configs/psx/retroarch-gun-pcsx.cfg %ROM%"' /opt/retropie/configs/psx/emulators.cfg
+sed -i '/default/a lightgun-mouse = "/opt/retropie/emulators/retroarch/bin/retroarch -L /opt/retropie/libretrocores/lr-pcsx-rearmed/pcsx_rearmed_libretro.so --config /opt/retropie/configs/psx/retroarch-gun-mouse.cfg %ROM%"' /opt/retropie/configs/psx/emulators.cfg
 sleep 1
-sed -i '/default/a lightgun-duck = "/opt/retropie/emulators/retroarch/bin/retroarch -L /opt/retropie/libretrocores/lr-duckstation/duckstation_libretro.so </dev/null --config /opt/retropie/configs/psx/retroarch-duck.cfg %ROM%"' /opt/retropie/configs/psx/emulators.cfg
+sed -i '/default/a lightgun-guncon = "/opt/retropie/emulators/retroarch/bin/retroarch -L /opt/retropie/libretrocores/lr-pcsx-rearmed/pcsx_rearmed_libretro.so --config /opt/retropie/configs/psx/retroarch-gun-gcon.cfg %ROM%"' /opt/retropie/configs/psx/emulators.cfg
 sleep 1
-sed -i '/default/a lightgun-swan = "/opt/retropie/emulators/retroarch/bin/retroarch -L /opt/retropie/libretrocores/lr-swanstation/swanstation_libretro.so --config /opt/retropie/configs/psx/retroarch.cfg %ROM%"' /opt/retropie/configs/psx/emulators.cfg
+sed -i '/default/a lightgun-negun = "/opt/retropie/emulators/retroarch/bin/retroarch -L /opt/retropie/libretrocores/lr-pcsx-rearmed/pcsx_rearmed_libretro.so --config /opt/retropie/configs/psx/retroarch-gun-ngun.cfg %ROM%"' /opt/retropie/configs/psx/emulators.cfg
 sudo wget https://raw.githubusercontent.com/Retro-Devils/RPI-LightGun-Tool/main/ra-configs/confirm-gun -P /opt/retropie/configs/psx
 dialog  --sleep 1 --title "GUN CONFIG COMPLETE" --msgbox "
 - A FOLDER HAS BEEN MADE UNDER Home/Pi/RetroPie/roms/psx/gun-games/ 
-- A new emu called lightgun-psx was added to emulators.cfg
+- A new emu called lightgun-mouse was added to emulators.cfg
+- A new emu called lightgun-guncon was added to emulators.cfg
+- A new emu called lightgun-negun was added to emulators.cfg
 - WHEN YOU START A GUN GAME PRESS A WHILE LOADING CHANGE EMU TO lightgun-psx" 0 0
 else
 dialog  --sleep 1 --title "GUN ALREADY CONFIGURED" --msgbox "
