@@ -30,7 +30,7 @@ local choice
     4) soon  ;;
     5) soon ;;
     6) sinden-menu ;;
-    7) multi-guns-menu ;;
+    7) soon ;;
     T1) gun-help ;;
     T2) layouts ;;
     T3) remove-script ;;
@@ -197,6 +197,9 @@ function ae-undo() {
 #--------------------------------------------------------------DOLPHIN BAR---------------------------------------------------------------------------------------#
 
 function dolphin-bar() {
+if [ -f "$HOME/Lightgun-Tool/sinden-confirm" ]; then setup-error "wii-mote" ; fi
+if [ -f "$HOME/Lightgun-Tool/gun4ir-confirm" ]; then setup-error "gun4ir" ; fi
+if [ -f "$HOME/Lightgun-Tool/sinden-confirm" ]; then setup-error "sinden" ; fi
   local choice
   while true; do
     choice=$(dialog --backtitle "$BACKTITLE" --title "DOLPHIN BAR/WII MOTE MENU " \
@@ -698,6 +701,29 @@ dialog  --sleep 1 --title "EMULATOR ERROR" --msgbox "
 - TOOL CANT CONFIGURE A EMU NOT THIER
 - EXITING NOW" 0 0
 }
+
+function setup-error{} (
+dialog  --sleep 1 --title "SETUP ERROR" --msgbox "
+- "$1" IS ALREADY CONFIGURED ON THIS SYSTEM
+- A ERROR MENU WILL NOW LOAD " 0 0
+local choice
+  while true; do
+    choice=$(dialog --backtitle "$BACKTITLE" --title "SETUP ERROR MENU " \
+      --ok-label Select --cancel-label Back \
+      --menu "PLEASE SELECT A OPTION" 40 60 40 \
+      1 "UNDO "$1" SETUP" \
+      2 "EXIT " \
+      2>&1 >/dev/tty)
+
+    case "$choice" in
+    1)  undo-retroach "$1" ;;
+    2)  no ;;
+    -) no ;;
+     *) break ;;
+    esac
+   done
+}
+
 
 ####--------------------------------------------------------------------------------------------SINDEN------------------------------------------------------------------####
 
