@@ -14,7 +14,7 @@ local choice
       4 "Gun4IR Lightgun" \
       5 "Infared Mouse Gun" \
       6 "Sinden Lightgun" \
-      7 "2 Lightguns P1 & P2" \ 
+      7 "2 Lightguns P1 & P2" \
       - "------------------------" \
       T1 "---ABOUT  RPI-LG-TOOL---" \
       T2 "---DISPLAY GUN LAYOUTS--" \
