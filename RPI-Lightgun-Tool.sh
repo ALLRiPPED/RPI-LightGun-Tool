@@ -197,9 +197,6 @@ function ae-undo() {
 #--------------------------------------------------------------DOLPHIN BAR---------------------------------------------------------------------------------------#
 
 function dolphin-bar() {
-if [ -f "$HOME/Lightgun-Tool/sinden-confirm" ]; then setup-error "wii-mote" ; fi
-if [ -f "$HOME/Lightgun-Tool/gun4ir-confirm" ]; then setup-error "gun4ir" ; fi
-if [ -f "$HOME/Lightgun-Tool/sinden-confirm" ]; then setup-error "sinden" ; fi
   local choice
   while true; do
     choice=$(dialog --backtitle "$BACKTITLE" --title "DOLPHIN BAR/WII MOTE MENU " \
@@ -238,6 +235,8 @@ if [ -f "$HOME/Lightgun-Tool/sinden-confirm" ]; then setup-error "sinden" ; fi
 
 function arcade-wii() {
 if [ ! -d "/opt/retropie/configs/arcade" ]; then emu-error; fi
+if [ -f "$HOME/Lightgun-Tool/arcade/gun4ir-confirm" ]; then setup-error "gun4ir" ; fi
+if [ -f "$HOME/Lightgun-Tool/arcade/sinden-confirm" ]; then setup-error "sinden" ; fi
 if [ ! -f "$HOME/RetroPie-Setup/scriptmodules/libretrocores/lr-flycast.sh" ]; then arcade-emu "lr-flycast"; fi
 if [ ! -f "$HOME/RetroPie-Setup/scriptmodules/libretrocores/lr-mame-StormedBubbles.sh" ]; then arcade-emu "lr-mame-StormedBubbles" ; fi
 if [ ! -f "$HOME/RetroPie-Setup/scriptmodules/libretrocores/lr-mame2015-StormedBubbles.sh" ]; then arcade-emu "lr-mame2015-StormedBubbles" ; fi
@@ -255,14 +254,15 @@ sudo chmod 777 /opt/retropie/configs/arcade/retroarch-gun-2015stormbubb.cfg
 sudo chmod 777 /opt/retropie/configs/arcade/retroarch-gun-flycast.cfg
 if [ ! -d "$HOME/RetroPie/roms/arcade/gun-games/" ]; then mkdir "$HOME/RetroPie/roms/arcade/gun-games/"; fi
 sudo cp /opt/retropie/configs/mastersytem/emulators.cfg /opt/retropie/configs/arcade/emulators-cfg.backup
-if [ ! -f "/opt/retropie/configs/arcade/confirm-gun" ] ; then
+if [ ! -f "$HOME/Lightgun-Tool/arcade/wii-confirm" ] ; then
 sed -i '/default/a lightgun-2003+ = "/opt/retropie/emulators/retroarch/bin/retroarch -L /opt/retropie/libretrocores/lr-mame2003-plus/mame2003_plus_libretro.so --config /opt/retropie/configs/arcade/retroarch-gun-2003+.cfg %ROM%"' /opt/retropie/configs/arcade/emulators.cfg
 sleep 1
 sed -i '/lightgun-2003+/a lightgun-2003 = "/opt/retropie/emulators/retroarch/bin/retroarch -L /opt/retropie/libretrocores/lr-mame2003/mame2003_libretro.so --config /opt/retropie/configs/arcade/retroarch.cfg %ROM%"' /opt/retropie/configs/arcade/emulators.cfg
 sleep 1
 sed -i '/lightgun-2003/a lightgun-2016 = "/opt/retropie/emulators/retroarch/bin/retroarch -L /opt/retropie/libretrocores/lr-mame2016/mamearcade2016_libretro.so --config /opt/retropie/configs/arcade/retroarch.cfg %ROM%"' /opt/retropie/configs/arcade/emulators.cfg
 sleep 1
-sudo wget https://raw.githubusercontent.com/Retro-Devils/RPI-LightGun-Tool/main/ra-configs/confirm-gun -P /opt/retropie/configs/arcade
+mkdir "$HOME/Lightgun-Tool/arcade/"
+wget https://raw.githubusercontent.com/Retro-Devils/RPI-LightGun-Tool/main/ra-configs/wii-mote/wii-confirm -P $HOME/Lightgun-Tool/arcade/
 dialog  --sleep 1 --title "GUN CONFIG COMPLETE" --msgbox "
 - A FOLDER HAS BEEN MADE UNDER Home/Pi/RetroPie/roms/arcade/gun-games/ 
 - New emus called lightgun-2003, lightgun-2003+, lightgun 2016 were added to emulators.cfg
@@ -284,7 +284,8 @@ sudo ./retropie_packages.sh "$1"
 }
 
 function dreamcast-wii() {
-cd $HOME/RetroPie-Setup
+if [ -f "$HOME/Lightgun-Tool/dreamcast/gun4ir-confirm" ]; then setup-error "gun4ir" ; fi
+if [ -f "$HOME/Lightgun-Tool/dreamcast/sinden-confirm" ]; then setup-error "sinden" ; fi
 if [ ! -f "$HOME/RetroPie-Setup/scriptmodules/libretrocores/lr-flycast.sh" ]; then  dreamcast-emu "lr-flycast" ; fi
 if [ ! -f "$HOME/RetroPie-Setup/scriptmodules/libretrocores/lr-flyinghead.sh" ]; then dremcast-emu "lr-flyinghead"; fi
 sudo wget https://raw.githubusercontent.com/Retro-Devils/RPI-LightGun-Tool/main/ra-configs/wii-mote/dreamcast/retroarch-gun-flycast.cfg -P /opt/retropie/configs/dreamcast/
@@ -293,12 +294,12 @@ sudo chmod 777 /opt/retropie/configs/dreamcast/retroarch-gun-flycast.cfg
 sudo chmod 777 /opt/retropie/configs/dreamcast/retroarch-gun-flyinghead.cfg
 if [ ! -d "$HOME/RetroPie/roms/dreamcast/gun-games/" ]; then mkdir "$HOME/RetroPie/roms/dreamcast/gun-games/"; fi
 sudo cp /opt/retropie/configs/mastersytem/emulators.cfg /opt/retropie/configs/dreamcast/emulators-cfg.backup
-if [ ! -f "/opt/retropie/configs/dreamcast/confirm-gun" ] ; then
+if [ ! -f "$HOME/Lightgun-Tool/dreamcast/wii-confirm" ] ; then
 sed -i '/default/a lightgun-flycast = "/opt/retropie/emulators/retroarch/bin/retroarch -L /opt/retropie/libretrocores/lr-flycast/flycast_libretro.so </dev/null --config /opt/retropie/configs/dreamcast/retroarch-gun-flycast.cfg %ROM%"' /opt/retropie/configs/dreamcast/emulators.cfg
 sleep 1
-sleep 1
 sed -i '/lightgun-flycast/a lightgun-flyinghead = "/opt/retropie/emulators/retroarch/bin/retroarch -L /opt/retropie/libretrocores/lr-flycast-flyinghead/flycast_libretro.so </dev/null --config /opt/retropie/configs/dreamcast/retroarch-gun-flyinghead.cfg %ROM%"' /opt/retropie/configs/dreamcast/emulators.cfg
-sudo wget https://raw.githubusercontent.com/Retro-Devils/RPI-LightGun-Tool/main/ra-configs/confirm-gun -P /opt/retropie/configs/dreamcast
+mkdir "$HOME/Lightgun-Tool/dreamcast/"
+wget https://raw.githubusercontent.com/Retro-Devils/RPI-LightGun-Tool/main/ra-configs/wii-mote/wii-confirm -P $HOME/Lightgun-Tool/dreamcast/
 dialog  --sleep 1 --title "GUN CONFIG COMPLETE" --msgbox "
 - A FOLDER HAS BEEN MADE UNDER Home/Pi/RetroPie/roms/arcade/gun-games/ 
 - New emus called lightgun-flycast and lightgun-flyinghead were added to emulators.cfg
@@ -323,13 +324,16 @@ sudo ./retropie_packages.sh "$1"
 
 function genesis-wii() {
 if [ ! -d "/opt/retropie/configs/genesis" ]; then emu-error; fi
+if [ -f "$HOME/Lightgun-Tool/genesis/gun4ir-confirm" ]; then setup-error "gun4ir" ; fi
+if [ -f "$HOME/Lightgun-Tool/genesis/sinden-confirm" ]; then setup-error "sinden" ; fi
 sudo wget https://raw.githubusercontent.com/Retro-Devils/RPI-LightGun-Tool/main/ra-configs/wii-mote/genesis/retroarch-gun.cfg -P /opt/retropie/configs/genesis/
 sudo chmod 777 /opt/retropie/configs/genesis/retroarch-gun.cfg
 if [ ! -d "$HOME/RetroPie/roms/genesis/gun-games/" ]; then mkdir "$HOME/RetroPie/roms/genesis/gun-games/"; fi
 sudo cp /opt/retropie/configs/genesis/emulators.cfg /opt/retropie/configs/genesis/emulators-cfg.backup
-if [ ! -f "/opt/retropie/configs/genesis/confirm-gun" ] ; then
+if [ ! -f "$HOME/Lightgun-Tool/wii-confirm" ] ; then
 sed -i '/default/a lightgun-genesis = "/opt/retropie/emulators/retroarch/bin/retroarch -L /opt/retropie/libretrocores/lr-genesis-plus-gx/genesis_plus_gx_libretro.so --config /opt/retropie/configs/genesis/retroarch-gun.cfg %ROM%"' /opt/retropie/configs/genesis/emulators.cfg
-sudo wget https://raw.githubusercontent.com/Retro-Devils/RPI-LightGun-Tool/main/ra-configs/confirm-gun -P /opt/retropie/configs/genesis/
+mkdir "$HOME/Lightgun-Tool/genesis/"
+wget https://raw.githubusercontent.com/Retro-Devils/RPI-LightGun-Tool/main/ra-configs/wii-mote/wii-confirm -P $HOME/Lightgun-Tool/genesis/
 dialog  --sleep 1 --title "GUN CONFIG COMPLETE" --msgbox "
 - A FOLDER HAS BEEN MADE UNDER Home/Pi/RetroPie/roms/genesis/gun-games/ 
 - A new emu called lightgun-genesis was added to emulators.cfg
@@ -344,13 +348,16 @@ dolphin-layout
 
 function nes-wii() {
 if [ ! -d "/opt/retropie/configs/nes" ]; then emu-error; fi
+if [ -f "$HOME/Lightgun-Tool/nes/gun4ir-confirm" ]; then setup-error "gun4ir" ; fi
+if [ -f "$HOME/Lightgun-Tool/nes/sinden-confirm" ]; then setup-error "sinden" ; fi
 sudo wget https://raw.githubusercontent.com/Retro-Devils/RPI-LightGun-Tool/main/ra-configs/wii-mote/nes/retroarch-gun.cfg -P /opt/retropie/configs/nes/
 sudo chmod 777 /opt/retropie/configs/nes/retroarch-gun.cfg
 if [ ! -d "$HOME/RetroPie/roms/nes/gun-games/" ]; then mkdir "$HOME/RetroPie/roms/nes/gun-games/"; fi
 sudo cp /opt/retropie/configs/nes/emulators.cfg /opt/retropie/configs/nes/emulators-cfg.backup
-if [ ! -f "/opt/retropie/configs/nes/confirm-gun" ] ; then
+if [ ! -f "$HOME/Lightgun-Tool/sinden-confirm" ] ; then
 sed -i '/default/a lightgun-nes = "/opt/retropie/emulators/retroarch/bin/retroarch -L /opt/retropie/libretrocores/lr-fceumm/fceumm_libretro.so --config /opt/retropie/configs/nes/retroarch-gun.cfg %ROM%"' /opt/retropie/configs/nes/emulators.cfg
-sudo wget https://raw.githubusercontent.com/Retro-Devils/RPI-LightGun-Tool/main/ra-configs/confirm-gun -P /opt/retropie/configs/nes
+mkdir "$HOME/Lightgun-Tool/nes/"
+wget https://raw.githubusercontent.com/Retro-Devils/RPI-LightGun-Tool/main/ra-configs/wii-mote/wii-confirm -P $HOME/Lightgun-Tool/nes/
 dialog  --sleep 1 --title "GUN CONFIG COMPLETE" --msgbox "
 - A FOLDER HAS BEEN MADE UNDER Home/Pi/RetroPie/roms/nes/gun-games/ 
 - A new emu called lightgun-nes was added to emulators.cfg
@@ -365,13 +372,16 @@ dolhin-layout
 
 function mastersystem-wii() {
 if [ ! -d "/opt/retropie/configs/mastersystem" ]; then emu-error; fi
+if [ -f "$HOME/Lightgun-Tool/mastersystem/gun4ir-confirm" ]; then setup-error "gun4ir" ; fi
+if [ -f "$HOME/Lightgun-Tool/mastersystem/sinden-confirm" ]; then setup-error "sinden" ; fi
 sudo wget https://raw.githubusercontent.com/Retro-Devils/RPI-LightGun-Tool/main/ra-configs/wii-mote/mastersystem/retroarch-gun.cfg -P /opt/retropie/configs/mastersystem/
 sudo chmod 777 /opt/retropie/configs/mastersystem/retroarch-gun.cfg
 if [ ! -d "$HOME/RetroPie/roms/mastersytem/gun-games/" ]; then mkdir "$HOME/RetroPie/roms/mastersystem/gun-games/"; fi
 sudo cp /opt/retropie/configs/mastersytem/emulators.cfg /opt/retropie/configs/mastersystem/emulators-cfg.backup
-if [ ! -f "/opt/retropie/configs/mastersystem/confirm-gun" ] ; then
+if [ ! -f "$HOME/Lightgun-Tool/mastersystem/wii-confirm" ] ; then
 sed -i '/default/a lightgun-mastersystem = "/opt/retropie/emulators/retroarch/bin/retroarch -L /opt/retropie/libretrocores/lr-genesis-plus-gx/genesis_plus_gx_libretro.so --config /opt/retropie/configs/mastersystem/retroarch-gun.cfg %ROM%"' /opt/retropie/configs/mastersystem/emulators.cfg
-sudo wget https://raw.githubusercontent.com/Retro-Devils/RPI-LightGun-Tool/main/ra-configs/confirm-gun -P /opt/retropie/configs/mastersystem
+mkdir "$HOME/Lightgun-Tool/mastersystem/"
+wget https://raw.githubusercontent.com/Retro-Devils/RPI-LightGun-Tool/main/ra-configs/wii-mote/wii-confirm -P $HOME/Lightgun-Tool/mastersystem/
 dialog  --sleep 1 --title "GUN CONFIG COMPLETE" --msgbox "
 - A FOLDER HAS BEEN MADE UNDER Home/Pi/RetroPie/roms/mastersystem/gun-games/ 
 - A new emu called lightgun-mastersystem was added to emulators.cfg
@@ -387,21 +397,22 @@ dolhin-layout
 
 function ps1-wii() {
 if [ ! -d "/opt/retropie/configs/psx" ]; then emu-error; fi
-cd
-sleep 1
+if [ -f "$HOME/Lightgun-Tool/psx/gun4ir-confirm" ]; then setup-error "gun4ir" ; fi
+if [ -f "$HOME/Lightgun-Tool/psx/sinden-confirm" ]; then setup-error "sinden" ; fi
 sudo wget https://raw.githubusercontent.com/Retro-Devils/RPI-LightGun-Tool/main/ra-configs/wii-mote/psx/retroarch-gun-mouse.cfg -P /opt/retropie/configs/psx/
 sudo wget https://raw.githubusercontent.com/Retro-Devils/RPI-LightGun-Tool/main/ra-configs/wii-mote/psx/retroarch-gun-gcon.cfg -P /opt/retropie/configs/psx/
 sudo wget https://raw.githubusercontent.com/Retro-Devils/RPI-LightGun-Tool/main/ra-configs/wii-mote/psx/retroarch-gun-ngun.cfg -P /opt/retropie/configs/psx/
 sudo chmod 777 /opt/retropie/configs/psx/retroarch-gun.cfg
 if [ ! -d "$HOME/RetroPie/roms/psx/gun-games/" ]; then mkdir "$HOME/RetroPie/roms/psx/gun-games/"; fi
 sudo cp /opt/retropie/configs/psx/emulators.cfg /opt/retropie/configs/psx/emulators-cfg.backup
-if [ ! -f "/opt/retropie/configs/psx/confirm-gun" ] ; then
+if [ ! -f "$HOME/Lightgun-Tool/psx/wii-confirm" ] ; then
 sed -i '/default/a lightgun-mouse = "/opt/retropie/emulators/retroarch/bin/retroarch -L /opt/retropie/libretrocores/lr-pcsx-rearmed/pcsx_rearmed_libretro.so --config /opt/retropie/configs/psx/retroarch-gun-mouse.cfg %ROM%"' /opt/retropie/configs/psx/emulators.cfg
 sleep 1
 sed -i '/default/a lightgun-guncon = "/opt/retropie/emulators/retroarch/bin/retroarch -L /opt/retropie/libretrocores/lr-pcsx-rearmed/pcsx_rearmed_libretro.so --config /opt/retropie/configs/psx/retroarch-gun-gcon.cfg %ROM%"' /opt/retropie/configs/psx/emulators.cfg
 sleep 1
 sed -i '/default/a lightgun-negun = "/opt/retropie/emulators/retroarch/bin/retroarch -L /opt/retropie/libretrocores/lr-pcsx-rearmed/pcsx_rearmed_libretro.so --config /opt/retropie/configs/psx/retroarch-gun-ngun.cfg %ROM%"' /opt/retropie/configs/psx/emulators.cfg
-sudo wget https://raw.githubusercontent.com/Retro-Devils/RPI-LightGun-Tool/main/ra-configs/confirm-gun -P /opt/retropie/configs/psx
+mkdir "$HOME/Lightgun-Tool/psx/"
+wget https://raw.githubusercontent.com/Retro-Devils/RPI-LightGun-Tool/main/ra-configs/wii-mote/wii-confirm -P $HOME/Lightgun-Tool/psx/
 dialog  --sleep 1 --title "GUN CONFIG COMPLETE" --msgbox "
 - A FOLDER HAS BEEN MADE UNDER Home/Pi/RetroPie/roms/psx/gun-games/ 
 - A new emu called lightgun-mouse was added to emulators.cfg
@@ -418,13 +429,16 @@ dolphin-layout
 
 function segacd-wii() {
 if [ ! -d "/opt/retropie/configs/segacd" ]; then emu-error; fi
+if [ -f "$HOME/Lightgun-Tool/segacd/gun4ir-confirm" ]; then setup-error "gun4ir" ; fi
+if [ -f "$HOME/Lightgun-Tool/segacd/sinden-confirm" ]; then setup-error "sinden" ; fi
 sudo wget https://raw.githubusercontent.com/Retro-Devils/RPI-LightGun-Tool/main/ra-configs/wii-mote/segacd/retroarch-gun.cfg -P /opt/retropie/configs/segacd/
 sudo chmod 777 /opt/retropie/configs/segacd/retroarch-gun.cfg
 if [ ! -d "$HOME/RetroPie/roms/segacd/gun-games/" ]; then mkdir "$HOME/RetroPie/roms/segacd/gun-games/"; fi
 sudo cp /opt/retropie/configs/segacd/emulators.cfg /opt/retropie/configs/segacd/emulators-cfg.backup
-if [ ! -f "/opt/retropie/configs/segacd/confirm-gun" ] ; then
+if [ ! -f "$HOME/Lightgun-Tool/segacd/wii-confirm" ] ; then
 sed -i '/default/a lightgun-segacd = "/opt/retropie/emulators/retroarch/bin/retroarch -L /opt/retropie/libretrocores/lr-segacd-plus-gx/genesis_plus_gx_libretro.so --config /opt/retropie/configs/genesis/retroarch-gun.cfg %ROM%"' /opt/retropie/configs/segacd/emulators.cfg
-sudo wget https://raw.githubusercontent.com/Retro-Devils/RPI-LightGun-Tool/main/ra-configs/confirm-gun -P /opt/retropie/configs/segacd
+mkdir "$HOME/Lightgun-Tool/segacd/"
+wget https://raw.githubusercontent.com/Retro-Devils/RPI-LightGun-Tool/main/ra-configs/wii-mote/wii-confirm -P $HOME/Lightgun-Tool/segacd/
 dialog  --sleep 1 --title "GUN CONFIG COMPLETE" --msgbox "
 - A FOLDER HAS BEEN MADE UNDER Home/Pi/RetroPie/roms/segacd/gun-games/ 
 - A new emu called lightgun-segacd was added to emulators.cfg
@@ -440,13 +454,16 @@ dolphin-layout
 
 function snes-wii() {
 if [ ! -d "/opt/retropie/configs/snes" ]; then emu-error; fi
+if [ -f "$HOME/Lightgun-Tool/snes/gun4ir-confirm" ]; then setup-error "gun4ir" ; fi
+if [ -f "$HOME/Lightgun-Tool/snes/sinden-confirm" ]; then setup-error "sinden" ; fi
 sudo wget https://raw.githubusercontent.com/Retro-Devils/RPI-LightGun-Tool/main/ra-configs/wii-mote/snes/retroarch-gun.cfg -P /opt/retropie/configs/snes/
 sudo chmod 777 /opt/retropie/configs/snes/retroarch-gun.cfg
 if [ ! -d "$HOME/RetroPie/roms/snes/gun-games/" ]; then mkdir "$HOME/RetroPie/roms/snes/gun-games/"; fi
 sudo cp /opt/retropie/configs/snes/emulators.cfg /opt/retropie/configs/snes/emulators-cfg.backup
-if [ ! -f "/opt/retropie/configs/snes/confirm-gun" ] ; then
+if [ ! -f "$HOME/Lightgun-Tool/snes/wii-confirm" ] ; then
 sed -i '/default/a lightgun-snes = "/opt/retropie/emulators/retroarch/bin/retroarch -L /opt/retropie/libretrocores/lr-snes9x/snes9x_libretro.so --config /opt/retropie/configs/snes/retroarch-gun.cfg %ROM%"' /opt/retropie/configs/snes/emulators.cfg
-sudo wget https://raw.githubusercontent.com/Retro-Devils/RPI-LightGun-Tool/main/ra-configs/confirm-gun -P /opt/retropie/configs/snes
+mkdir "$HOME/Lightgun-Tool/snes/"
+wget https://raw.githubusercontent.com/Retro-Devils/RPI-LightGun-Tool/main/ra-configs/wii-mote/wii-confirm -P $HOME/Lightgun-Tool/snes/
 dialog  --sleep 1 --title "GUN CONFIG COMPLETE" --msgbox "
 - A FOLDER HAS BEEN MADE UNDER Home/Pi/RetroPie/roms/snes/gun-games/ 
 - A new emu called lightgun-snes was added to emulators.cfg
@@ -467,11 +484,25 @@ function dolphin-bar-undo() {
     choice=$(dialog --backtitle "$BACKTITLE" --title "WII MOTE UNDO MENU " \
       --ok-label Select --cancel-label Back \
       --menu "PRESS A/ENTER TO UNDO" 40 60 40 \
-      1 "Undo NES Gun Config" \
+      1 "Undo Arcade Gun Config" \
+      2 "Undo Dreamcast Gun Config" \
+      3 "Undo Genesis Gun Config" \
+      4 "Undo NES Gun Config" \
+      5 "Undo Mastersystem Gun Config" \
+      6 "Undo PS1 Gun Config" \
+      7 "Undo SegaCd Gun Config" \
+      8 "Undo SNES Gun Config" \ 
       2>&1 >/dev/tty)
 
     case "$choice" in
-    1) undo-retroarch "nes" ;;
+    1) undo-retroarch "arcade" ;;
+    2) undo-retroarch "dreamcast" ;;
+    3) undo-retroarch "genesis" ;;
+    4) undo-retroarch "nes" ;;
+    5) undo-retroarch "mastersystem" ;;
+    6) undo-retroarch "psx" ;;
+    7) undo-retroarch "segacd" ;;
+    8) undo-retroarch "snes" ;;
     -) no ;;
      *) break ;;
     esac
