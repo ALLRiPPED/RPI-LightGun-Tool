@@ -14,6 +14,7 @@ local choice
       4 "Gun4IR Lightgun" \
       5 "Infared Mouse Gun" \
       6 "Sinden Lightgun" \
+      7 "2 Lightguns P1 & P2" \ 
       - "------------------------" \
       T1 "---ABOUT  RPI-LG-TOOL---" \
       T2 "---DISPLAY GUN LAYOUTS--" \
@@ -29,6 +30,7 @@ local choice
     4) soon  ;;
     5) soon ;;
     6) sinden-menu ;;
+    7) multi-guns-menu ;;
     T1) gun-help ;;
     T2) layouts ;;
     T3) remove-script ;;
