@@ -109,7 +109,7 @@ local choice
 
     case "$choice" in
     1) bash $HOME/Lightgun-Tool/wii-layout.sh ;;
-    2) bash $HOME/Lightgun-Tool/ir-mouse-layout  ;;
+    2) bash $HOME/Lightgun-Tool/ir-mouse-layout.sh  ;;
      -) no ;;
      *) break ;;
     esac
