@@ -278,9 +278,9 @@ dolphin-layout
 
 function arcade-emu() {
 cd $HOME/RetroPie-Setup
-sudo wget https://raw.githubusercontent.com/Retro-Devils/RPI-LightGun-Tool/main/scriptmodules/multi-input/libretrocores/"$1".sh 
+sudo wget https://raw.githubusercontent.com/Retro-Devils/RPI-LightGun-Tool/main/scriptmodules/multi-input/libretrocores/"$1".sh -P $HOME/RetroPie-Setup/scriptmodules/libretrocores/
 git pull
-$HOME/RetroPie-Setup/scriptmodules/libretrocores/ && sudo ./retropie_packages.sh "$1"
+sudo ./retropie_packages.sh "$1"
 }
 
 function dreamcast-wii() {
@@ -315,9 +315,9 @@ dolphin-layout
 
 function dreamcast-emu() {
 cd $HOME/RetroPie-Setup
-sudo wget https://raw.githubusercontent.com/Retro-Devils/RPI-LightGun-Tool/main/scriptmodules/multi-input/libretrocores/"$1".sh 
+sudo wget https://raw.githubusercontent.com/Retro-Devils/RPI-LightGun-Tool/main/scriptmodules/multi-input/libretrocores/"$1".sh -P $HOME/RetroPie-Setup/scriptmodules/libretrocores/
 git pull
-$HOME/RetroPie-Setup/scriptmodules/libretrocores/ && sudo ./retropie_packages.sh "$1"
+sudo ./retropie_packages.sh "$1"
 }
 
 
