@@ -733,7 +733,7 @@ dialog  --sleep 1 --title "EMULATOR ERROR" --msgbox "
 - EXITING NOW" 0 0
 }
 
-function setup-error{} (
+function setup-error() (
 dialog  --sleep 1 --title "SETUP ERROR" --msgbox "
 - "$1" IS ALREADY CONFIGURED ON THIS SYSTEM
 - A ERROR MENU WILL NOW LOAD " 0 0
