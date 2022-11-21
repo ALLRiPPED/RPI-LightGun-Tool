@@ -491,7 +491,7 @@ function dolphin-bar-undo() {
       5 "Undo Mastersystem Gun Config" \
       6 "Undo PS1 Gun Config" \
       7 "Undo SegaCd Gun Config" \
-      8 "Undo SNES Gun Config" \ 
+      8 "Undo SNES Gun Config" \
       2>&1 >/dev/tty)
 
     case "$choice" in
