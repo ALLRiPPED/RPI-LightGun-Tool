@@ -14,7 +14,6 @@ local choice
       4 "Gun4IR Lightgun" \
       5 "Infared Mouse Gun" \
       6 "Sinden Lightgun" \
-      7 "2 Lightguns P1 & P2" \
       - "----------<><><>---------" \
       T1 "---ABOUT  RPI-LG-TOOL---" \
       T2 "---DISPLAY GUN LAYOUTS--" \
@@ -167,7 +166,7 @@ function ae-menu() {
    done
 }
 
-function arcade-wii() {
+function arcade-ae() {
 if [ ! -d "/opt/retropie/configs/arcade" ]; then emu-error; fi
 if [ -f "$HOME/Lightgun-Tool/arcade/gun4ir-confirm" ]; then setup-error "gun4ir" ; fi
 if [ -f "$HOME/Lightgun-Tool/arcade/sinden-confirm" ]; then setup-error "sinden" ; fi
@@ -211,7 +210,7 @@ ae-layout
 }
 
 
-function dreamcast-wii() {
+function dreamcast-ae() {
 if [ -f "$HOME/Lightgun-Tool/dreamcast/gun4ir-confirm" ]; then setup-error "gun4ir" ; fi
 if [ -f "$HOME/Lightgun-Tool/dreamcast/sinden-confirm" ]; then setup-error "sinden" ; fi
 if [ ! -f "$HOME/RetroPie-Setup/scriptmodules/libretrocores/lr-flycast.sh" ]; then  dreamcast-emu "lr-flycast" ; fi
