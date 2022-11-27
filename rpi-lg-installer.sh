@@ -41,6 +41,7 @@ sleep 1
 chmod 777 $HOME/RetroPie/retropiemenu/RPI-Lightgun-Tool.sh
 sudo chmod 777 /usr/local/bin/RPI-Lightgun-Tool
 chmod 777 -R $HOME/Lightgun-Tool/
+wget https://github.com/Retro-Devils/RPI-LightGun-Tool/blob/main/Lightgun-Tool/lg-tool -P /usr/local/bin/
 }
 
 function info() {
@@ -94,7 +95,7 @@ How do I undo the changes the script made?
    - Open RPI Lightgun Tool
    - Click Gun Type   
    - Click on ---UNDO MENU---   
-   - Select system youd like to undo" 0 0
+   - Select system youd like to undo" 0 0   
 }
 
 
